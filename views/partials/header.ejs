@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="UniPick connects students with top universities, offering expert guidance for a smooth admission process and career success." />
-    <title><%= title %></title>
-        <link rel="icon" type="image/png" href="/images/unipick-favicon.png">
+    <meta name="robots" content="index, follow">
+    <% if (typeof req !== 'undefined') { %>
+    <link rel="canonical" href="https://www.unipick.org<%= req.path %>">
+    <% } %>
+    <meta name="description"
+        content="UniPick connects students with top universities, offering expert guidance for a smooth admission process and career success." />
+    <title>
+        <%= title %>
+    </title>
+    <link rel="icon" type="image/png" href="/images/unipick-favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/chat-widget.css">
     <link rel="stylesheet" href="/css/callback-widget.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
-          crossorigin=""/>
+    <style>
+        /* Fix for View All button underline */
+        a.view-all,
+        a.view-all:hover,
+        a.view-all:focus {
+            text-decoration: none !important;
+        }
+
+        /* Remove hover underline effect for view-all button */
+        nav ul li a.view-all::after {
+            display: none !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
-    
-    <!-- Import Academic Fonts - Same as index page -->
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Import Academic Fonts - Rubik -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-<style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Rubik:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
         /* ========================================
            ACADEMIC THEME VARIABLES - MATCHING INDEX PAGE
         ========================================= */
-        
+
         :root {
             /* Academic Color Palette */
             --bg-primary: #F7F8FA;
@@ -34,20 +55,21 @@
             --text-primary: #1B1F24;
             --text-body: #4B5563;
             --text-muted: #6B7280;
-            --accent-primary: #2C5F8D;
-            --accent-hover: #1E4364;
-            --accent-light: rgba(44, 95, 141, 0.08);
-            
+            /* Academic Blue Accent - BRAND STANDARD */
+            --accent-primary: #007BFF;
+            --accent-hover: #0056b3;
+            --accent-light: rgba(0, 123, 255, 0.08);
+
             /* Typography */
-            --font-heading: 'Libre Baskerville', Georgia, serif;
-            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-            
+            --font-heading: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
+
             /* Shadows */
             --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.04);
             --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.06);
             --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
-        
+
         /* ========================================
            REMOVE HEADER SHADOW - ALL BREAKPOINTS
         ========================================= */
@@ -55,13 +77,16 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
             border-bottom: none !important;
         }
-        
+
         /* ========================================
            RESPONSIVE HEADER STYLES - REFINED
         ========================================= */
-        
+
         /* Desktop Navigation Refinements */
-        nav ul li a {
+        nav>ul>li>a {
+            display: inline-flex;
+            align-items: center;
+            height: 100%;
             font-family: var(--font-body) !important;
             font-size: 0.9rem !important;
             font-weight: 500;
@@ -71,31 +96,42 @@
             transition: color 0.2s ease;
             color: var(--text-primary);
         }
-        
-        nav ul li a:hover {
+
+        nav ul li a:hover,
+        nav ul li a.active,
+        .dropdown-toggle.active {
             color: var(--accent-primary);
         }
-        
+
+        nav ul li a.active::after,
+        .dropdown-toggle.active::after {
+            width: 100%;
+        }
+
         /* Dropdown icon styling - subtle */
+        .dropdown-toggle {
+            gap: 4px;
+        }
+
         .dropdown-toggle i {
             font-size: 0.7rem !important;
             margin-left: 4px;
             transition: transform 0.2s ease;
         }
-        
+
         .dropdown:hover .dropdown-toggle i {
             transform: rotate(180deg);
         }
-        
+
         /* ========================================
            REDESIGNED DROPDOWN MENU - ACADEMIC STYLE (DESKTOP ONLY)
         ========================================= */
-        
+
         .dropdown-menu {
             position: absolute;
             top: 100%;
             left: 50%;
-            transform: translateX(-65%) translateY(10px);
+            transform: translateX(-50%) translateY(10px);
             background: var(--bg-surface);
             border: none !important;
             border-radius: 8px;
@@ -108,13 +144,13 @@
             width: 850px;
             margin-top: 8px;
         }
-        
+
         .dropdown:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-65%) translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
-        
+
         /* Dropdown grid layout */
         .dropdown-grid {
             display: grid;
@@ -122,17 +158,17 @@
             gap: 0;
             padding: 0;
         }
-        
+
         /* Dropdown columns */
         .dropdown-column {
             padding: 24px 20px;
             border-right: 1px solid rgba(0, 0, 0, 0.06);
         }
-        
+
         .dropdown-column:last-child {
             border-right: none;
         }
-        
+
         /* Column headers */
         .dropdown-column h4 {
             font-family: var(--font-heading) !important;
@@ -143,7 +179,7 @@
             letter-spacing: -0.01em;
             text-transform: none;
         }
-        
+
         /* Dropdown links - FIXED: Consistent border width matching header nav */
         .dropdown-column a {
             display: block;
@@ -179,7 +215,7 @@
         .dropdown-column a:hover::after {
             width: 100%;
         }
-        
+
         /* Dropdown footer - CENTERED BUTTON */
         .dropdown-footer {
             background: var(--bg-primary);
@@ -190,7 +226,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         /* View All Button - Academic Theme Style */
         .dropdown-footer .view-all {
             display: inline-flex;
@@ -202,26 +238,26 @@
             font-weight: 600;
             color: #FFFFFF;
             background: var(--accent-primary);
-            text-decoration: none;
+            text-decoration: none !important;
             transition: all 0.25s ease;
             white-space: nowrap;
             padding: 10px 24px;
             border-radius: 25px;
             border: none;
-            box-shadow: 0 2px 6px rgba(44, 95, 141, 0.2);
+            box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
         }
-        
+
         .dropdown-footer .view-all:hover {
             background: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(44, 95, 141, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
         }
-        
+
         .dropdown-footer .view-all i {
             font-size: 1rem;
             flex-shrink: 0;
         }
-        
+
         /* Menu toggle button - clean, no border */
         .menu-toggle {
             display: none !important;
@@ -239,85 +275,88 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .menu-toggle:hover {
             color: var(--accent-primary);
             transform: none !important;
             box-shadow: none !important;
         }
-        
+
         @media (max-width: 1024px) {
+
             /* Remove header shadow on tablet */
             header {
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
                 border-bottom: none !important;
             }
-            
+
             nav ul li {
                 margin-left: 20px;
             }
-            
+
             nav ul li a {
                 font-size: 0.85rem !important;
             }
-            
+
             .dropdown-menu {
                 width: 700px;
                 transform: translateX(-60%) translateY(10px);
             }
-            
+
             .dropdown:hover .dropdown-menu {
                 transform: translateX(-60%) translateY(0);
             }
-            
+
             .dropdown-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0;
             }
-            
+
             .dropdown-column {
                 padding: 20px 16px;
             }
         }
-        
+
         @media (max-width: 900px) {
+
             /* Remove header shadow on smaller tablets */
             header {
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
                 border-bottom: none !important;
             }
-            
+
             .dropdown-menu {
                 transform: translateX(-55%) translateY(10px);
             }
-            
+
             .dropdown:hover .dropdown-menu {
                 transform: translateX(-55%) translateY(0);
             }
         }
-        
+
         @media (max-width: 768px) {
+
             /* Remove header shadow on mobile - LIGHT SUBTLE SHADOW */
             header {
                 padding: 12px 0;
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
                 border-bottom: none !important;
             }
-            
+
             /* Show menu toggle button */
             .menu-toggle {
                 display: flex !important;
             }
-            
+
             /* Hide desktop navigation */
             nav {
                 display: none !important;
             }
-            
+
             .nav-container {
                 width: 95%;
             }
-            
+
             /* Mobile menu container - RIGHT ALIGNED */
             .mobile-menu {
                 display: flex;
@@ -336,11 +375,11 @@
                 justify-content: flex-start;
                 align-items: stretch;
             }
-            
+
             .mobile-menu.active {
                 right: 0;
             }
-            
+
             /* Mobile menu overlay */
             .mobile-menu-overlay {
                 display: none;
@@ -354,12 +393,12 @@
                 opacity: 0;
                 transition: opacity 0.3s ease;
             }
-            
+
             .mobile-menu-overlay.active {
                 display: block;
                 opacity: 1;
             }
-            
+
             /* Mobile menu items - LEFT ALIGNED */
             .mobile-menu ul {
                 list-style: none;
@@ -368,7 +407,7 @@
                 padding: 0;
                 text-align: left;
             }
-            
+
             .mobile-menu ul li {
                 margin: 0;
                 padding: 0;
@@ -378,14 +417,14 @@
                 transition-delay: calc(var(--index) * 0.08s);
                 text-align: left;
             }
-            
+
             .mobile-menu.active ul li {
                 opacity: 1;
                 transform: translateX(0);
             }
-            
+
             /* Regular menu items */
-            .mobile-menu ul li > a {
+            .mobile-menu ul li>a {
                 display: block;
                 padding: 14px 0;
                 color: var(--text-primary);
@@ -400,17 +439,17 @@
                 text-align: left;
                 width: 100%;
             }
-            
-            .mobile-menu ul li > a:hover {
+
+            .mobile-menu ul li>a:hover {
                 color: var(--accent-primary);
                 padding-left: 10px;
             }
-            
+
             /* Mobile dropdown wrapper - stays in position */
             .mobile-menu ul li.has-dropdown {
                 position: relative;
             }
-            
+
             /* Mobile dropdown toggle - First Level (Courses) */
             .mobile-dropdown-toggle {
                 display: flex;
@@ -432,20 +471,20 @@
                 border: none;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             }
-            
+
             .mobile-dropdown-toggle:hover {
                 color: var(--accent-primary);
             }
-            
+
             .mobile-dropdown-toggle i {
                 font-size: 0.8rem;
                 transition: transform 0.2s ease;
             }
-            
+
             .mobile-dropdown-toggle.active i {
                 transform: rotate(180deg);
             }
-            
+
             /* Mobile dropdown content - First Level - Expands below, pushes content */
             .mobile-dropdown-content {
                 max-height: 0;
@@ -453,11 +492,11 @@
                 transition: max-height 0.4s ease;
                 background: var(--bg-primary);
             }
-            
+
             .mobile-dropdown-content.show {
                 max-height: 1000px;
             }
-            
+
             /* Category buttons - Second Level */
             .mobile-category-toggle {
                 display: flex;
@@ -478,21 +517,21 @@
                 border: none;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             }
-            
+
             .mobile-category-toggle:hover {
                 color: var(--accent-primary);
-                background: rgba(44, 95, 141, 0.05);
+                background: rgba(0, 123, 255, 0.05);
             }
-            
+
             .mobile-category-toggle i {
                 font-size: 0.7rem;
                 transition: transform 0.2s ease;
             }
-            
+
             .mobile-category-toggle.active i {
                 transform: rotate(180deg);
             }
-            
+
             /* Programs content - Third Level */
             .mobile-programs-content {
                 max-height: 0;
@@ -500,11 +539,11 @@
                 transition: max-height 0.4s ease;
                 background: var(--bg-surface);
             }
-            
+
             .mobile-programs-content.show {
                 max-height: 500px;
             }
-            
+
             /* Program links - SMALLER TEXT, MORE INDENT */
             .mobile-programs-content a {
                 display: block;
@@ -520,66 +559,66 @@
                 transition: all 0.2s ease;
                 text-align: left;
             }
-            
+
             .mobile-programs-content a:hover {
                 color: var(--accent-primary);
                 padding-left: 32px;
-                background: rgba(44, 95, 141, 0.03);
+                background: rgba(0, 123, 255, 0.03);
             }
-            
+
             .mobile-programs-content a:last-child {
                 border-bottom: none;
             }
-            
+
             /* Mobile View All Button Container */
-/* Mobile View All Button Container */
-.mobile-view-all-container {
-    padding: 16px 12px 12px;
-    background: var(--bg-primary);
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+            /* Mobile View All Button Container */
+            .mobile-view-all-container {
+                padding: 16px 12px 12px;
+                background: var(--bg-primary);
+                border-top: 1px solid rgba(0, 0, 0, 0.08);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
-/* Mobile View All Button - CENTERED TEXT */
-.mobile-view-all-btn {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    font-family: var(--font-body) !important;
-    font-size: 0.8rem !important;
-    font-weight: 500;
-    color: #FFFFFF !important;
-    background: var(--accent-primary);
-    text-decoration: none !important;
-    transition: all 0.25s ease;
-    padding: 11px 12px;
-    border-radius: 4px;
-    border: none;
-    box-shadow: 0 2px 6px rgba(44, 95, 141, 0.2);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    width: 100%;
-    text-align: center !important;
-    line-height: 1.2;
-}
+            /* Mobile View All Button - CENTERED TEXT */
+            .mobile-view-all-btn {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                font-family: var(--font-body) !important;
+                font-size: 0.8rem !important;
+                font-weight: 500;
+                color: #FFFFFF !important;
+                background: var(--accent-primary);
+                text-decoration: none !important;
+                transition: all 0.25s ease;
+                padding: 11px 12px;
+                border-radius: 4px;
+                border: none;
+                box-shadow: 0 2px 6px rgba(0, 123, 255, 0.2);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                width: 100%;
+                text-align: center !important;
+                line-height: 1.2;
+            }
 
-.mobile-view-all-btn:hover {
-    background: var(--accent-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(44, 95, 141, 0.3);
-    color: #FFFFFF !important;
-}
+            .mobile-view-all-btn:hover {
+                background: var(--accent-hover);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+                color: #FFFFFF !important;
+            }
 
-.mobile-view-all-btn i {
-    font-size: 0.8rem;
-    flex-shrink: 0;
-    line-height: 1;
-    margin: 0;
-}
-            
+            .mobile-view-all-btn i {
+                font-size: 0.8rem;
+                flex-shrink: 0;
+                line-height: 1;
+                margin: 0;
+            }
+
             /* Mobile menu close button */
             .mobile-menu-close {
                 position: absolute;
@@ -600,98 +639,99 @@
                 transition: all 0.2s ease;
                 z-index: 1101;
             }
-            
+
             .mobile-menu-close:hover {
                 color: var(--accent-primary);
                 transform: none !important;
                 background-color: transparent !important;
             }
-            
+
             /* Adjust logo for mobile */
             .logo-img {
                 height: 36px !important;
             }
         }
-        
+
         @media (max-width: 480px) {
+
             /* Remove header shadow on small mobile - LIGHT SUBTLE SHADOW */
             header {
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
                 border-bottom: none !important;
             }
-            
+
             .mobile-menu {
                 width: 260px;
                 padding: 65px 15px 25px;
             }
-            
-            .mobile-menu ul li > a {
+
+            .mobile-menu ul li>a {
                 font-size: 0.9rem !important;
                 padding: 12px 0;
             }
-            
+
             .mobile-dropdown-toggle {
                 font-size: 0.9rem !important;
                 padding: 12px 0;
             }
-            
+
             .mobile-category-toggle {
                 font-size: 0.75rem !important;
                 padding: 10px 10px;
             }
-            
+
             .mobile-programs-content a {
                 font-size: 0.65rem !important;
                 font-weight: 300;
                 padding: 7px 10px 7px 20px;
             }
-            
+
             .mobile-programs-content a:hover {
                 padding-left: 28px;
             }
-            
+
             /* Mobile View All Button - Smaller screens */
             .mobile-view-all-container {
                 padding: 14px 10px 10px;
             }
-            
+
             .mobile-view-all-btn {
                 font-size: 0.75rem !important;
                 padding: 9px 18px;
                 width: 95%;
             }
-            
+
             .mobile-view-all-btn i {
                 font-size: 0.85rem;
             }
-            
+
             .logo-img {
                 height: 32px !important;
             }
-            
+
             .menu-toggle {
                 width: 36px;
                 height: 36px;
                 font-size: 1.3rem;
             }
-            
+
             .mobile-menu-close {
                 font-size: 1.3rem;
                 width: 34px;
                 height: 34px;
             }
         }
-        
+
         /* Prevent body scroll when mobile menu is open */
         body.mobile-menu-open {
             overflow: hidden;
         }
-        
+
         /* Underline animation for desktop nav */
         nav ul li a {
             position: relative;
         }
-        
+
         nav ul li a::after {
             content: '';
             position: absolute;
@@ -702,23 +742,24 @@
             bottom: 0;
             transition: width 0.2s ease;
         }
-        
+
         nav ul li a:hover::after {
             width: 100%;
         }
     </style>
 
 </head>
+
 <body>
-<script>
-// Show loading ONLY first time per browser
-if (localStorage.getItem('hasSeenLoading') !== 'true') {
-  localStorage.setItem('hasSeenLoading', 'true');
-  // Redirect to loading with current URL as return path
-  const currentUrl = window.location.pathname + window.location.search;
-  window.location.href = `/loading?redirect=${encodeURIComponent(currentUrl)}`;
-}
-</script>
+    <script>
+        // Show loading ONLY first time per browser
+        if (localStorage.getItem('hasSeenLoading') !== 'true') {
+            localStorage.setItem('hasSeenLoading', 'true');
+            // Redirect to loading with current URL as return path
+            const currentUrl = window.location.pathname + window.location.search;
+            window.location.href = `/loading?redirect=${encodeURIComponent(currentUrl)}`;
+        }
+    </script>
 
     <!-- Header -->
     <header>
@@ -782,7 +823,7 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                     <li><a href="/contact">Contact</a></li>
                 </ul>
             </nav>
-            
+
             <!-- Mobile Menu Toggle Button -->
             <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
                 <i class="fas fa-bars"></i>
@@ -798,12 +839,12 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
         <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close mobile menu">
             <i class="fas fa-times"></i>
         </button>
-        
+
         <ul>
             <li style="--index: 0">
                 <a href="/" onclick="closeMobileMenu()">Home</a>
             </li>
-            
+
             <!-- Courses Dropdown -->
             <li class="has-dropdown" style="--index: 1">
                 <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this, event)">
@@ -818,14 +859,15 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="mobile-programs-content">
-                            <a href="/courses/engineering/computer-science" onclick="closeMobileMenu()">Computer Science</a>
+                            <a href="/courses/engineering/computer-science" onclick="closeMobileMenu()">Computer
+                                Science</a>
                             <a href="/courses/engineering/mechanical" onclick="closeMobileMenu()">Mechanical</a>
                             <a href="/courses/engineering/civil" onclick="closeMobileMenu()">Civil</a>
                             <a href="/courses/engineering/electrical" onclick="closeMobileMenu()">Electrical</a>
                             <a href="/courses/engineering/electronics" onclick="closeMobileMenu()">Electronics</a>
                         </div>
                     </div>
-                    
+
                     <!-- Management Category -->
                     <div class="mobile-category">
                         <button class="mobile-category-toggle" onclick="toggleMobileCategory(this, event)">
@@ -834,13 +876,15 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                         </button>
                         <div class="mobile-programs-content">
                             <a href="/courses/management/mba" onclick="closeMobileMenu()">MBA</a>
-                            <a href="/courses/management/business-administration" onclick="closeMobileMenu()">Business Administration</a>
+                            <a href="/courses/management/business-administration" onclick="closeMobileMenu()">Business
+                                Administration</a>
                             <a href="/courses/management/finance" onclick="closeMobileMenu()">Finance</a>
                             <a href="/courses/management/marketing" onclick="closeMobileMenu()">Marketing</a>
-                            <a href="/courses/management/human-resources" onclick="closeMobileMenu()">Human Resources</a>
+                            <a href="/courses/management/human-resources" onclick="closeMobileMenu()">Human
+                                Resources</a>
                         </div>
                     </div>
-                    
+
                     <!-- Science & Arts Category -->
                     <div class="mobile-category">
                         <button class="mobile-category-toggle" onclick="toggleMobileCategory(this, event)">
@@ -848,14 +892,15 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="mobile-programs-content">
-                            <a href="/courses/science/computer-applications" onclick="closeMobileMenu()">Computer Applications</a>
+                            <a href="/courses/science/computer-applications" onclick="closeMobileMenu()">Computer
+                                Applications</a>
                             <a href="/courses/arts/literature" onclick="closeMobileMenu()">Literature</a>
                             <a href="/courses/arts/psychology" onclick="closeMobileMenu()">Psychology</a>
                             <a href="/courses/science/mathematics" onclick="closeMobileMenu()">Mathematics</a>
                             <a href="/courses/science/physics" onclick="closeMobileMenu()">Physics</a>
                         </div>
                     </div>
-                    
+
                     <!-- Health & Commerce Category -->
                     <div class="mobile-category">
                         <button class="mobile-category-toggle" onclick="toggleMobileCategory(this, event)">
@@ -866,11 +911,12 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                             <a href="/courses/health/medicine" onclick="closeMobileMenu()">Medicine</a>
                             <a href="/courses/health/pharmacy" onclick="closeMobileMenu()">Pharmacy</a>
                             <a href="/courses/commerce/accounting" onclick="closeMobileMenu()">Accounting</a>
-                            <a href="/courses/commerce/banking-finance" onclick="closeMobileMenu()">Banking & Finance</a>
+                            <a href="/courses/commerce/banking-finance" onclick="closeMobileMenu()">Banking &
+                                Finance</a>
                             <a href="/courses/diploma/certificate" onclick="closeMobileMenu()">Diploma Programs</a>
                         </div>
                     </div>
-                    
+
                     <!-- View All Courses Button -->
                     <div class="mobile-view-all-container">
                         <a href="/courses" class="mobile-view-all-btn" onclick="closeMobileMenu()">
@@ -879,19 +925,19 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                     </div>
                 </div>
             </li>
-            
+
             <li style="--index: 2">
                 <a href="/universities" onclick="closeMobileMenu()">Universities</a>
             </li>
-            
+
             <li style="--index: 3">
                 <a href="/quiz" onclick="closeMobileMenu()">Career Quiz</a>
             </li>
-            
+
             <li style="--index: 4">
                 <a href="/about" onclick="closeMobileMenu()">About</a>
             </li>
-            
+
             <li style="--index: 5">
                 <a href="/contact" onclick="closeMobileMenu()">Contact</a>
             </li>
@@ -901,7 +947,8 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
     <!-- Floating Contact Widget -->
     <div class="floating-contact-widget">
         <div class="contact-options">
-            <button class="contact-option whatsapp" onclick="window.open('https://wa.me/<%= process.env.CA_WHATSAPP %>', '_blank')">
+            <button class="contact-option whatsapp"
+                onclick="window.open('https://wa.me/<%= process.env.CA_WHATSAPP %>', '_blank')">
                 <i class="fab fa-whatsapp"></i>
             </button>
             <button class="contact-option phone" onclick="window.location.href='tel:<%= process.env.CA_PHONE %>'">
@@ -919,14 +966,14 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
     <script>
         // Mobile menu functions
         let isMobileMenuOpen = false;
-        
+
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
             const body = document.body;
-            
+
             isMobileMenuOpen = !isMobileMenuOpen;
-            
+
             if (isMobileMenuOpen) {
                 mobileMenu.classList.add('active');
                 mobileMenuOverlay.classList.add('active');
@@ -935,24 +982,24 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                 mobileMenu.classList.remove('active');
                 mobileMenuOverlay.classList.remove('active');
                 body.classList.remove('mobile-menu-open');
-                
+
                 // Close all dropdowns
                 const allDropdowns = mobileMenu.querySelectorAll('.mobile-dropdown-content');
                 allDropdowns.forEach(dropdown => dropdown.classList.remove('show'));
-                
+
                 const allCategories = mobileMenu.querySelectorAll('.mobile-programs-content');
                 allCategories.forEach(category => category.classList.remove('show'));
-                
+
                 const allToggles = mobileMenu.querySelectorAll('.mobile-dropdown-toggle, .mobile-category-toggle');
                 allToggles.forEach(toggle => toggle.classList.remove('active'));
             }
         }
-        
+
         function toggleMobileDropdown(element, event) {
             event.stopPropagation();
             const dropdownContent = element.nextElementSibling;
             const isCurrentlyOpen = dropdownContent.classList.contains('show');
-            
+
             // Close all other first-level dropdowns
             const allDropdowns = document.querySelectorAll('.mobile-dropdown-content');
             allDropdowns.forEach(dropdown => {
@@ -960,15 +1007,15 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                     dropdown.classList.remove('show');
                 }
             });
-            
+
             // Close all category dropdowns
             const allCategories = document.querySelectorAll('.mobile-programs-content');
             allCategories.forEach(category => category.classList.remove('show'));
-            
+
             // Toggle current dropdown
             dropdownContent.classList.toggle('show');
             element.classList.toggle('active');
-            
+
             // Reset all other toggles
             const allToggles = document.querySelectorAll('.mobile-dropdown-toggle');
             allToggles.forEach(toggle => {
@@ -976,15 +1023,15 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                     toggle.classList.remove('active');
                 }
             });
-            
+
             const allCategoryToggles = document.querySelectorAll('.mobile-category-toggle');
             allCategoryToggles.forEach(toggle => toggle.classList.remove('active'));
         }
-        
+
         function toggleMobileCategory(element, event) {
             event.stopPropagation();
             const programsContent = element.nextElementSibling;
-            
+
             // Close all other category dropdowns
             const allPrograms = document.querySelectorAll('.mobile-programs-content');
             allPrograms.forEach(programs => {
@@ -992,11 +1039,11 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                     programs.classList.remove('show');
                 }
             });
-            
+
             // Toggle current category
             programsContent.classList.toggle('show');
             element.classList.toggle('active');
-            
+
             // Reset all other category toggles
             const allCategoryToggles = document.querySelectorAll('.mobile-category-toggle');
             allCategoryToggles.forEach(toggle => {
@@ -1005,46 +1052,76 @@ if (localStorage.getItem('hasSeenLoading') !== 'true') {
                 }
             });
         }
-        
+
         function closeMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
             const body = document.body;
-            
+
             mobileMenu.classList.remove('active');
             mobileMenuOverlay.classList.remove('active');
             body.classList.remove('mobile-menu-open');
             isMobileMenuOpen = false;
-            
+
             // Close all dropdowns
             const allDropdowns = mobileMenu.querySelectorAll('.mobile-dropdown-content');
             allDropdowns.forEach(dropdown => dropdown.classList.remove('show'));
-            
+
             const allCategories = mobileMenu.querySelectorAll('.mobile-programs-content');
             allCategories.forEach(category => category.classList.remove('show'));
-            
+
             const allToggles = mobileMenu.querySelectorAll('.mobile-dropdown-toggle, .mobile-category-toggle');
             allToggles.forEach(toggle => toggle.classList.remove('active'));
         }
-        
+
         // Close menu when clicking overlay
         document.addEventListener('click', (event) => {
             const mobileMenu = document.getElementById('mobileMenu');
             const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
             const menuToggle = document.querySelector('.menu-toggle');
-            
-            if (isMobileMenuOpen && 
-                !mobileMenu.contains(event.target) && 
+
+            if (isMobileMenuOpen &&
+                !mobileMenu.contains(event.target) &&
                 !menuToggle.contains(event.target) &&
                 mobileMenuOverlay.contains(event.target)) {
                 closeMobileMenu();
             }
         });
-        
+
         // Close menu on Escape key
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && isMobileMenuOpen) {
                 closeMobileMenu();
             }
+        });
+
+
+        // ========================================
+        // ACTIVE LINK HIGHLIGHT
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('nav ul li a, .mobile-menu a');
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                // Exact match or sub-path for courses
+                if (href === currentPath || (href !== '/' && currentPath.startsWith(href))) {
+                    link.classList.add('active');
+
+                    // Activate parent dropdown if applicable
+                    const dropdown = link.closest('.dropdown');
+                    if (dropdown) {
+                        dropdown.querySelector('.dropdown-toggle').classList.add('active');
+                    }
+
+                    // Activate mobile dropdown parent
+                    const mobileDropdown = link.closest('.has-dropdown');
+                    if (mobileDropdown) {
+                        const toggle = mobileDropdown.querySelector('.mobile-dropdown-toggle');
+                        if (toggle) toggle.classList.add('active');
+                    }
+                }
+            });
         });
     </script>

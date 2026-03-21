@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const universitySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    slug: {
+        type: String,
+        unique: true,
+        index: true
     },
     location: {
         type: String,
@@ -62,30 +68,10 @@ const universitySchema = new mongoose.Schema({
             'pharmacy',
             'design',
             'education',
-            'commerce'
+            'commerce',
+            'dental'
         ]
     }],
-    
-    // Programs as array of objects
-// In models/University.js, update the programmes enum:
-programmes: [{
-    type: String,
-    enum: [
-        'engineering',
-        'management',
-        'computer',
-        'law',
-        'medical',
-        'sciences',
-        'arts',
-        'architecture',
-        'pharmacy',
-        'design',
-        'education',
-        'commerce',
-        'dental'  // ADD THIS LINE
-    ]
-}],
     
     // Facilities as array of strings
     facilities: [String],
@@ -119,6 +105,14 @@ programmes: [{
         lng: Number
     },
     address: String
+});
+
+// Generate slug before saving
+universitySchema.pre('save', function(next) {
+    if (this.isModified('name')) {
+        this.slug = slugify(this.name, { lower: true, strict: true });
+    }
+    next();
 });
 
 module.exports = mongoose.model('University', universitySchema);

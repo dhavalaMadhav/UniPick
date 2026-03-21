@@ -1,904 +1,912 @@
 <%- include('partials/header') %>
 
-<!-- SEO Meta Tags -->
-<meta name="description" content="Explore the details of <%= course.name %> including duration, degree, and top universities offering this program. Find the perfect fit for your academic goals with UniPick.">
-<meta name="keywords" content="<%= course.name %> program details, top universities for <%= course.name %>, <%= course.name %> degree and duration, <%= course.name %> admission, best <%= course.name %> colleges">
-<meta property="og:title" content="<%= course.name %> - Program Details & Top Universities | UniPick">
-<meta property="og:description" content="Explore the details of <%= course.name %> including duration, degree, and top universities offering this program. Find the perfect fit for your academic goals with UniPick.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://unipick.org/courses/<%= course.slug %>.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="<%= course.name %> - Program Details & Top Universities">
-<meta name="twitter:description" content="Explore the details of <%= course.name %> including duration, degree, and top universities offering this program. Find the perfect fit for your academic goals with UniPick.">
-
-<!-- Import Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-
-<style>
-    /* Course Detail Page - Academic Theme with Background Image Hero */
-
-    html, body {
-        overflow-x: hidden;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-
-    ::-webkit-scrollbar {
-        display: none;
-    }
-
-
-    /* Hero Section - Background Image with Black Overlay - IMPROVED */
-    .course-hero {
-        position: relative;
-        width: 100%;
-        min-height: 400px;
-        overflow: hidden;
-        background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
-        padding: 120px 5% 60px;
-        display: flex;
-        align-items: center;
-        border-bottom: 2px solid #000000;
-    }
-
-
-    /* Background Image - Multiple fallbacks */
-    .course-hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&q=80');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        z-index: 0;
-    }
-
-
-    /* Black Overlay - Darker for better text contrast */
-    .course-hero::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.7) 0%,
-            rgba(0, 0, 0, 0.75) 100%
-        );
-        z-index: 1;
-    }
-
-
-    /* Remove the grid background */
-    .course-hero-grid {
-        display: none !important;
-    }
-
-
-    .course-hero-content {
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
-        position: relative;
-        z-index: 2;
-        text-align: left;
-    }
-
-
-    /* Elevated Breadcrumb with Rounded Box and Full-Height Dividers - FIXED */
-    .breadcrumb {
-        display: inline-flex;
-        align-items: stretch;
-        gap: 0;
-        margin-bottom: 2rem;
-        font-size: 0.75rem;
-        color: rgba(255, 255, 255, 0.9);
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        border-radius: 50px;
-        padding: 10px 20px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-weight: 500;
-        min-height: 40px;
-        position: relative;
-        z-index: 2;
-    }
-
-
-    .breadcrumb a,
-    .breadcrumb span {
-        color: rgba(255, 255, 255, 0.9);
-        text-decoration: none;
-        transition: all 0.2s ease;
-        padding: 0 15px;
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
-
-
-    .breadcrumb a:hover {
-        color: #FFFFFF;
-    }
-
-
-    /* Full-height vertical divider lines - Add to ALL items */
-    .breadcrumb a::after,
-    .breadcrumb span::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.3);
-    }
-
-
-    /* Remove line after the LAST item only (span) */
-    .breadcrumb span::after {
-        display: none;
-    }
-
-
-    .breadcrumb span {
-        font-weight: 600;
-        color: #FFFFFF;
-    }
-
-
-    /* Hero Title - No underline, left-aligned */
-    .course-hero h1 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 2.4rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #FFFFFF;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-        position: relative;
-        display: block;
-        padding-bottom: 0;
-        text-align: left;
-        text-decoration: none;
-        z-index: 2;
-    }
-
-
-    /* Remove all decorative elements */
-    .course-hero h1::after,
-    .course-hero h1::before {
-        display: none !important;
-    }
-
-
-    .course-hero p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 1rem;
-        line-height: 1.6;
-        font-weight: 400;
-        margin-bottom: 30px;
-        text-align: left;
-        color: rgba(255, 255, 255, 0.85);
-        max-width: 800px;
-        position: relative;
-        z-index: 2;
-    }
-
-
-    .course-meta {
-        display: flex;
-        justify-content: flex-start;
-        gap: 40px;
-        margin-top: 30px;
-        flex-wrap: nowrap;
-        align-items: center;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        position: relative;
-        z-index: 2;
-    }
-
-
-    .course-meta::-webkit-scrollbar {
-        display: none;
-    }
-
-
-    .course-meta-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.9);
-        white-space: nowrap;
-        flex-shrink: 0;
-    }
-
-
-    .course-meta-item i {
-        font-size: 1.3rem;
-        color: rgba(255, 255, 255, 0.8);
-    }
-
-
-    /* Universities Section */
-    .universities-section {
-        padding: 60px 5%;
-        background: #F7F8FA;
-    }
-
-
-    .section-title {
-        text-align: center;
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #1B1F24;
-        margin-bottom: 40px;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-        text-decoration: none;
-        position: relative;
-        display: block;
-        padding-bottom: 0;
-    }
-
-
-    /* Remove underline and circle decoration */
-    .section-title::after,
-    .section-title::before {
-        display: none !important;
-    }
-
-
-    /* Top Pick Card Styling - SMALLER SIZE */
-    .top-picks-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-
-
-    .top-pick-card {
-        background: #FFFFFF;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 10px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        overflow: hidden;
-        position: relative;
-    }
-
-
-    .top-pick-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-
-
-    .top-pick-image {
-        width: 100%;
-        height: 150px;
-        overflow: hidden;
-        position: relative;
-        background: #F1F3F6;
-    }
-
-
-    .top-pick-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-
-
-    .top-pick-card:hover .top-pick-image img {
-        transform: scale(1.05);
-    }
-
-
-    .top-pick-content {
-        padding: 20px;
-        position: relative;
-    }
-
-
-    .top-pick-rank-number {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 3rem;
-        font-weight: 700;
-        color: #E5E7EB;
-        line-height: 1;
-        opacity: 0.7;
-        z-index: 1;
-    }
-
-
-    .top-pick-name {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #1B1F24;
-        margin-bottom: 8px;
-        line-height: 1.3;
-        position: relative;
-        z-index: 2;
-    }
-
-
-    .top-pick-location {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.7rem;
-        color: #6B7280;
-        margin-bottom: 12px;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        position: relative;
-        z-index: 2;
-    }
-
-
-    .top-pick-location i {
-        color: #2C5F8D;
-        font-size: 0.75rem;
-    }
-
-
-    .top-pick-highlight {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.7rem;
-        color: #2C5F8D;
-        font-weight: 600;
-        margin-top: 12px;
-        padding-top: 12px;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        position: relative;
-        z-index: 2;
-    }
-
-
-    .top-pick-highlight i {
-        font-size: 0.75rem;
-    }
-
-
-    .top-pick-stats {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 12px;
-        position: relative;
-        z-index: 2;
-    }
-
-
-    .top-pick-stat {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-    }
-
-
-    .top-pick-stat-icon {
-        font-size: 1.1rem;
-        color: #2C5F8D;
-    }
-
-
-    .top-pick-stat-value {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: #1B1F24;
-    }
-
-
-    .top-pick-stat-label {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.65rem;
-        color: #6B7280;
-        font-weight: 500;
-    }
-
-
-    .featured-badge {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: #22C55E;
-        color: #FFFFFF;
-        padding: 5px 10px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.6rem;
-        font-weight: 700;
-        border-radius: 16px;
-        z-index: 3;
-    }
-
-
-    /* CTA Section */
-    .cta-section {
-        background: #FFFFFF;
-        padding: 60px 5%;
-        text-align: center;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-
-    .cta-content h2 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.6rem;
-        font-weight: 600;
-        color: #1B1F24;
-        margin-bottom: 16px;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-        text-decoration: none;
-        position: relative;
-        display: inline-block;
-        padding-bottom: 0;
-    }
-
-
-    /* Remove decorative elements */
-    .cta-content h2::after,
-    .cta-content h2::before {
-        display: none !important;
-    }
-
-
-    .cta-content p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.9rem;
-        margin-bottom: 30px;
-        color: #4B5563;
-    }
-
-
-    .cta-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-
-
-    .cta-btn-primary, .cta-btn-secondary {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.85rem 1.8rem;
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        border-radius: 24px;
-        border: none;
-    }
-
-
-    .cta-btn-primary {
-        background-color: #2C5F8D;
-        color: #FFFFFF;
-    }
-
-
-    .cta-btn-secondary {
-        background-color: transparent;
-        color: #2C5F8D;
-        border: 2px solid #2C5F8D;
-    }
-
-
-    .cta-btn-primary:hover {
-        background-color: #1E4364;
-        transform: translateY(-2px);
-        text-decoration: none;
-    }
-
-
-    .cta-btn-secondary:hover {
-        background-color: rgba(44, 95, 141, 0.08);
-        transform: translateY(-2px);
-        text-decoration: none;
-    }
-
-
-    .cta-btn-primary i, .cta-btn-secondary i {
-        margin-right: 8px;
-        font-size: 0.85rem;
-    }
-
-
-    /* Empty State */
-    .no-universities {
-        text-align: center;
-        padding: 60px 30px;
-        background: #FFFFFF;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 10px;
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-
-    .no-universities i {
-        font-size: 3.5rem;
-        color: #E5E7EB;
-        margin-bottom: 16px;
-    }
-
-
-    .no-universities h3 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: #1B1F24;
-        margin-bottom: 12px;
-    }
-
-
-    .no-universities p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.85rem;
-        color: #4B5563;
-        margin-bottom: 24px;
-    }
-
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Explore the details of <%= course.name %> including duration, degree, and top universities offering this program. Find the perfect fit for your academic goals with UniPick.">
+    <meta name="keywords"
+        content="<%= course.name %> program details, top universities for <%= course.name %>, <%= course.name %> degree and duration, <%= course.name %> admission, best <%= course.name %> colleges">
+    <meta property="og:title" content="<%= course.name %> - Program Details & Top Universities | UniPick">
+    <meta property="og:description"
+        content="Explore the details of <%= course.name %> including duration, degree, and top universities offering this program. Find the perfect fit for your academic goals with UniPick.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://unipick.org/courses/<%= course.slug %>.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= course.name %> - Program Details & Top Universities">
+    <meta name="twitter:description"
+        content="Explore the details of <%= course.name %> including duration, degree, and top universities offering this program. Find the perfect fit for your academic goals with UniPick.">
+
+    <!-- Fonts imported in header.ejs -->
+
+
+    <style>
+        /* Course Detail Page - Academic Theme with Background Image Hero */
+
+        html,
+        body {
+            overflow-x: hidden;
+            /* Scrollbar restored */
+        }
+
+
+        /* Hero Section - Background Image with Black Overlay - IMPROVED */
         .course-hero {
-            padding: 100px 5% 40px;
-            min-height: 350px;
+            position: relative;
+            width: 100%;
+            min-height: 400px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
+            padding: 120px 5% 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #000000;
         }
 
 
-        .course-hero h1 {
-            font-size: 1.9rem;
+        /* Background Image - Multiple fallbacks */
+        .course-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            z-index: 0;
         }
 
 
-        .course-hero p {
-            font-size: 0.9rem;
+        /* Black Overlay - Darker for better text contrast */
+        .course-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.7) 0%,
+                    rgba(0, 0, 0, 0.75) 100%);
+            z-index: 1;
         }
 
 
-        /* Smaller breadcrumb on mobile */
+        /* Remove the grid background */
+        .course-hero-grid {
+            display: none !important;
+        }
+
+
+        .course-hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: left;
+        }
+
+
+        /* Elevated Breadcrumb with Rounded Box and Full-Height Dividers - FIXED */
         .breadcrumb {
-            font-size: 0.65rem;
-            padding: 8px 14px;
-            min-height: 32px;
+            display: inline-flex;
+            align-items: stretch;
+            gap: 0;
+            margin-bottom: 2rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-family: var(--font-body);
+            font-weight: 500;
+            min-height: 40px;
+            position: relative;
+            z-index: 2;
         }
 
 
         .breadcrumb a,
         .breadcrumb span {
-            padding: 0 10px;
-        }
-
-
-        .course-meta {
-            gap: 20px;
-            flex-wrap: nowrap;
-        }
-
-
-        .course-meta-item {
-            font-size: 0.75rem;
-        }
-
-
-        .course-meta-item i {
-            font-size: 1.1rem;
-        }
-
-
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-        }
-
-
-        .top-picks-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-
-        .universities-section {
-            padding: 50px 5%;
-        }
-
-
-        .cta-section {
-            padding: 50px 5%;
-        }
-
-
-        .cta-content h2 {
-            font-size: 1.4rem;
-        }
-
-
-        .cta-content p {
-            font-size: 0.85rem;
-        }
-
-
-        .cta-buttons {
-            flex-direction: column;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            padding: 0 15px;
+            position: relative;
+            display: flex;
             align-items: center;
         }
 
 
-        .cta-btn-primary, .cta-btn-secondary {
-            width: 100%;
-            max-width: 280px;
-        }
-    }
-
-
-    @media (max-width: 600px) {
-        .course-hero {
-            padding: 80px 5% 30px;
-            min-height: 300px;
+        .breadcrumb a:hover {
+            color: #FFFFFF;
         }
 
 
+        /* Full-height vertical divider lines - Add to ALL items */
+        .breadcrumb a::after,
+        .breadcrumb span::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+
+        /* Remove line after the LAST item only (span) */
+        .breadcrumb span::after {
+            display: none;
+        }
+
+
+        .breadcrumb span {
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+
+
+        /* Hero Title - No underline, left-aligned */
         .course-hero h1 {
-            font-size: 1.6rem;
+            font-family: var(--font-heading);
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            position: relative;
+            display: block;
+            padding-bottom: 0;
+            text-align: left;
+            text-decoration: none;
+            z-index: 2;
+        }
+
+
+        /* Remove all decorative elements */
+        .course-hero h1::after,
+        .course-hero h1::before {
+            display: none !important;
         }
 
 
         .course-hero p {
-            font-size: 0.85rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 30px;
+            text-align: left;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
         }
 
 
-        /* Extra small breadcrumb on very small screens */
-        .breadcrumb {
-            font-size: 0.6rem;
-            padding: 6px 12px;
-            min-height: 28px;
-        }
-
-
-        .breadcrumb a,
-        .breadcrumb span {
-            padding: 0 8px;
-        }
-
-
-        /* Keep meta items in one line */
         .course-meta {
-            gap: 15px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 40px;
+            margin-top: 30px;
             flex-wrap: nowrap;
+            align-items: center;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .course-meta::-webkit-scrollbar {
+            display: none;
         }
 
 
         .course-meta-item {
-            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
 
         .course-meta-item i {
-            font-size: 1rem;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+
+        /* Universities Section */
+        .universities-section {
+            padding: 60px 5%;
+            background: #F7F8FA;
         }
 
 
         .section-title {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
+            text-align: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1B1F24;
+            margin-bottom: 40px;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+            position: relative;
+            display: block;
+            padding-bottom: 0;
+        }
+
+
+        /* Remove underline and circle decoration */
+        .section-title::after,
+        .section-title::before {
+            display: none !important;
+        }
+
+
+        /* Top Pick Card Styling - SMALLER SIZE */
+        .top-picks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
 
         .top-pick-card {
-            border-radius: 8px;
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            position: relative;
         }
 
 
-        .top-pick-content {
-            padding: 16px;
-        }
-
-
-        .top-pick-name {
-            font-size: 1rem;
-        }
-
-
-        .top-pick-rank-number {
-            font-size: 2.5rem;
+        .top-pick-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
 
 
         .top-pick-image {
-            height: 130px;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+            background: #F1F3F6;
         }
 
 
+        .top-pick-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+
+        .top-pick-card:hover .top-pick-image img {
+            transform: scale(1.05);
+        }
+
+
+        .top-pick-content {
+            padding: 20px;
+            position: relative;
+        }
+
+
+        .top-pick-rank-number {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #E5E7EB;
+            line-height: 1;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+
+        .top-pick-name {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1B1F24;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .top-pick-location {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.7rem;
+            color: #6B7280;
+            margin-bottom: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .top-pick-location i {
+            color: #2C5F8D;
+            font-size: 0.75rem;
+        }
+
+
+        .top-pick-highlight {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.7rem;
+            color: #2C5F8D;
+            font-weight: 600;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .top-pick-highlight i {
+            font-size: 0.75rem;
+        }
+
+
+        .top-pick-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .top-pick-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+
+        .top-pick-stat-icon {
+            font-size: 1.1rem;
+            color: #007BFF;
+        }
+
+
+        .top-pick-stat-value {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1B1F24;
+        }
+
+
+        .top-pick-stat-label {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.65rem;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+
+        .featured-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #22C55E;
+            color: #FFFFFF;
+            padding: 5px 10px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            border-radius: 16px;
+            z-index: 3;
+        }
+
+
+        /* CTA Section */
+        .cta-section {
+            background: #FFFFFF;
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+
+        .cta-content h2 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1B1F24;
+            margin-bottom: 16px;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0;
+        }
+
+
+        /* Remove decorative elements */
+        .cta-content h2::after,
+        .cta-content h2::before {
+            display: none !important;
+        }
+
+
+        .cta-content p {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            color: #4B5563;
+        }
+
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+
+        .cta-btn-primary,
+        .cta-btn-secondary {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-radius: 24px;
+            border: none;
+        }
+
+
+        .cta-btn-primary {
+            background-color: #007BFF;
+            color: #FFFFFF;
+        }
+
+
+        .cta-btn-secondary {
+            background-color: transparent;
+            color: #007BFF;
+            border: 2px solid #007BFF;
+        }
+
+
+        .cta-btn-primary:hover {
+            background-color: #1E4364;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+
+        .cta-btn-secondary:hover {
+            background-color: rgba(44, 95, 141, 0.08);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+
+        .cta-btn-primary i,
+        .cta-btn-secondary i {
+            margin-right: 8px;
+            font-size: 0.85rem;
+        }
+
+
+        /* Empty State */
         .no-universities {
-            padding: 50px 25px;
-        }
-
-
-        .no-universities h3 {
-            font-size: 1.2rem;
+            text-align: center;
+            padding: 60px 30px;
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
 
         .no-universities i {
-            font-size: 3rem;
+            font-size: 3.5rem;
+            color: #E5E7EB;
+            margin-bottom: 16px;
         }
-    }
-</style>
 
 
-<!-- Hero Section with Schema.org Course markup -->
-<section class="course-hero" itemscope itemtype="http://schema.org/Course">
-    <div class="course-hero-content">
-        <div class="breadcrumb">
-            <a href="/">Home</a>
-            <a href="/courses">Courses</a>
-            <a href="/courses/<%= category %>"><%= categoryName %></a>
-            <span><%= course.name %></span>
-        </div>
-
-        <h1 itemprop="name"><%= course.name %> Program Details - Top Universities & Degree Information</h1>
-        <p itemprop="description"><%= course.description %></p>
-
-        <div class="course-meta">
-            <div class="course-meta-item">
-                <i class="fas fa-clock"></i>
-                <span itemprop="timeRequired"><%= course.duration %></span>
-            </div>
-            <div class="course-meta-item">
-                <i class="fas fa-graduation-cap"></i>
-                <span itemprop="educationalCredentialAwarded"><%= course.degree %></span>
-            </div>
-            <div class="course-meta-item">
-                <i class="fas fa-university"></i>
-                <span><%= universities.length %>+ Universities</span>
-            </div>
-        </div>
-
-        <!-- Hidden Schema.org properties -->
-        <meta itemprop="courseCode" content="<%= course.code || course.name.replace(/\s+/g, '-').toUpperCase() %>">
-        <meta itemprop="educationalLevel" content="<%= course.level || 'Undergraduate' %>">
-    </div>
-</section>
+        .no-universities h3 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1B1F24;
+            margin-bottom: 12px;
+        }
 
 
-<!-- Universities Section -->
-<section class="universities-section">
-    <h2 class="section-title">Top Universities for <%= course.name %> - Find the Best <%= course.degree %> Programs</h2>
+        .no-universities p {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.85rem;
+            color: #4B5563;
+            margin-bottom: 24px;
+        }
 
-    <% if (universities && universities.length > 0) { %>
-        <div class="top-picks-grid">
-            <% universities.forEach((university, index) => { %>
-                <div class="top-pick-card" onclick="window.location.href='/university/<%= university._id %>'" itemscope itemtype="http://schema.org/EducationalOrganization">
-                    <div class="top-pick-image">
-                        <img src="<%= university.bannerImage || 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&h=600&fit=crop&auto=format' %>" 
-                             alt="<%= university.name %> Campus - Top University for <%= course.name %> Degree and <%= course.duration %> Duration" 
-                             itemprop="image">
-                        <% if (university.featured) { %>
-                            <div class="featured-badge">Featured</div>
-                        <% } %>
-                    </div>
 
-                    <div class="top-pick-content">
-                        <div class="top-pick-rank-number"><%= index + 1 %></div>
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .course-hero {
+                padding: 100px 5% 40px;
+                min-height: 350px;
+            }
 
-                        <h3 class="top-pick-name" itemprop="name"><%= university.name %></h3>
 
-                        <div class="top-pick-location" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span itemprop="addressLocality"><%= university.location %></span>, 
-                            <span itemprop="addressRegion"><%= university.state %></span>
-                        </div>
+            .course-hero h1 {
+                font-size: 1.9rem;
+            }
 
-                        <div class="top-pick-highlight">
-                            <i class="fas fa-university"></i>
-                            <%= university.type || 'Private' %> University
-                        </div>
 
-                        <div class="top-pick-stats">
-                            <div class="top-pick-stat">
-                                <i class="fas fa-globe-asia top-pick-stat-icon"></i>
-                                <div class="top-pick-stat-value">#<%= university.globalRanking || Math.floor(Math.random() * 200) + 1 %></div>
-                                <div class="top-pick-stat-label">Global Rank</div>
-                            </div>
+            .course-hero p {
+                font-size: 0.9rem;
+            }
 
-                            <div class="top-pick-stat">
-                                <i class="fas fa-star top-pick-stat-icon"></i>
-                                <div class="top-pick-stat-value" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                                    <span itemprop="ratingValue"><%= university.rating || 4.0 %></span>
-                                    <meta itemprop="bestRating" content="5">
-                                </div>
-                                <div class="top-pick-stat-label">Rating</div>
-                            </div>
 
-                            <div class="top-pick-stat">
-                                <i class="fas fa-rupee-sign top-pick-stat-icon"></i>
-                                <div class="top-pick-stat-value">
-                                    <% if (university.fee) { %>
-                                        ₹<%= (university.fee/100000).toFixed(1) %>L
-                                    <% } else { %>
-                                        <%= university.feeRange ? university.feeRange.split('-')[0] : '₹2L' %>
-                                    <% } %>
-                                </div>
-                                <div class="top-pick-stat-label">Fees</div>
-                            </div>
-                        </div>
+            /* Smaller breadcrumb on mobile */
+            /* Breadcrumb styles removed - using global style.css */
 
-                        <!-- Hidden Schema.org properties -->
-                        <meta itemprop="url" content="https://unipick.org/university/<%= university._id %>">
-                        <link itemprop="provider" href="http://schema.org/EducationalOrganization">
-                    </div>
+
+            .course-meta {
+                gap: 20px;
+                flex-wrap: nowrap;
+            }
+
+
+            .course-meta-item {
+                font-size: 0.75rem;
+            }
+
+
+            .course-meta-item i {
+                font-size: 1.1rem;
+            }
+
+
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 30px;
+            }
+
+
+            .top-picks-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+
+            .universities-section {
+                padding: 50px 5%;
+            }
+
+
+            .cta-section {
+                padding: 50px 5%;
+            }
+
+
+            .cta-content h2 {
+                font-size: 1.4rem;
+            }
+
+
+            .cta-content p {
+                font-size: 0.85rem;
+            }
+
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+
+            .cta-btn-primary,
+            .cta-btn-secondary {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+            .course-hero {
+                padding: 80px 5% 30px;
+                min-height: 300px;
+            }
+
+
+            .course-hero h1 {
+                font-size: 1.6rem;
+            }
+
+
+            .course-hero p {
+                font-size: 0.85rem;
+            }
+
+
+            /* Extra small breadcrumb on very small screens */
+            /* Mobile breadcrumb styles removed - using global style.css */
+
+
+            /* Keep meta items in one line */
+            .course-meta {
+                gap: 15px;
+                flex-wrap: nowrap;
+            }
+
+
+            .course-meta-item {
+                font-size: 0.7rem;
+            }
+
+
+            .course-meta-item i {
+                font-size: 1rem;
+            }
+
+
+            .section-title {
+                font-size: 1.2rem;
+                margin-bottom: 25px;
+            }
+
+
+            .top-pick-card {
+                border-radius: 8px;
+            }
+
+
+            .top-pick-content {
+                padding: 16px;
+            }
+
+
+            .top-pick-name {
+                font-size: 1rem;
+            }
+
+
+            .top-pick-rank-number {
+                font-size: 2.5rem;
+            }
+
+
+            .top-pick-image {
+                height: 130px;
+            }
+
+
+            .no-universities {
+                padding: 50px 25px;
+            }
+
+
+            .no-universities h3 {
+                font-size: 1.2rem;
+            }
+
+
+            .no-universities i {
+                font-size: 3rem;
+            }
+        }
+    </style>
+
+
+    <!-- Hero Section with Schema.org Course markup -->
+    <section class="course-hero" itemscope itemtype="http://schema.org/Course">
+        <div class="course-hero-content">
+            <% const breadcrumbs = [
+                { name: 'Home', url: '/' },
+                { name: 'Courses', url: '/courses' },
+                { name: categoryName, url: `/courses/${category}` },
+                { name: course.name, url: '' }
+            ]; %>
+            <%- include('partials/breadcrumbs', { breadcrumbs: breadcrumbs }) %>
+
+            <h1 itemprop="name">
+                <%= course.name %>
+            </h1>
+            <p itemprop="description">
+                <%= course.description %>
+            </p>
+
+            <div class="course-meta">
+                <div class="course-meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span itemprop="timeRequired">
+                        <%= course.duration %>
+                    </span>
                 </div>
-            <% }) %>
+                <div class="course-meta-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span itemprop="educationalCredentialAwarded">
+                        <%= course.degree %>
+                    </span>
+                </div>
+                <div class="course-meta-item">
+                    <i class="fas fa-university"></i>
+                    <span>
+                        <%= universities.length %>+ Universities
+                    </span>
+                </div>
+            </div>
+
+            <!-- Hidden Schema.org properties -->
+            <meta itemprop="courseCode" content="<%= course.code || course.name.replace(/\s+/g, '-').toUpperCase() %>">
+            <meta itemprop="educationalLevel" content="<%= course.level || 'Undergraduate' %>">
         </div>
-    <% } else { %>
-        <div class="no-universities">
-            <i class="fas fa-university"></i>
-            <h3>No Universities Available for <%= course.name %></h3>
-            <p>We're currently updating our database with top universities offering <%= course.name %> programs with <%= course.duration %> duration. Check back soon!</p>
-            <a href="/contact" class="cta-btn-primary">
-                <i class="fas fa-phone"></i> Contact Us for More Information
-            </a>
+    </section>
+
+
+    <section class="universities-section">
+        <h2 class="section-title">Top Universities for <%= course.name %>
+        </h2>
+
+        <% if (universities && universities.length> 0) { %>
+            <div class="top-picks-grid">
+                <% universities.forEach((university, index)=> { %>
+                    <div class="top-pick-card" onclick="window.location.href='/university/<%= university._id %>'"
+                        itemscope itemtype="http://schema.org/EducationalOrganization">
+                        <div class="top-pick-image">
+                            <img src="<%= university.bannerImage || 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&h=600&fit=crop&auto=format' %>"
+                                alt="<%= university.name %> Campus - Top University for <%= course.name %> Degree and <%= course.duration %> Duration"
+                                itemprop="image">
+                            <% if (university.featured) { %>
+                                <div class="featured-badge">Featured</div>
+                                <% } %>
+                        </div>
+
+                        <div class="top-pick-content">
+                            <div class="top-pick-rank-number">
+                                <%= index + 1 %>
+                            </div>
+
+                            <h3 class="top-pick-name" itemprop="name">
+                                <%= university.name %>
+                            </h3>
+
+                            <div class="top-pick-location" itemprop="address" itemscope
+                                itemtype="http://schema.org/PostalAddress">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span itemprop="addressLocality">
+                                    <%= university.location %>
+                                </span>,
+                                <span itemprop="addressRegion">
+                                    <%= university.state %>
+                                </span>
+                            </div>
+
+                            <div class="top-pick-highlight">
+                                <i class="fas fa-university"></i>
+                                <%= university.type || 'Private' %> University
+                            </div>
+
+                            <div class="top-pick-stats">
+                                <div class="top-pick-stat">
+                                    <i class="fas fa-globe-asia top-pick-stat-icon"></i>
+                                    <div class="top-pick-stat-value">#<%= university.globalRanking ||
+                                            Math.floor(Math.random() * 200) + 1 %>
+                                    </div>
+                                    <div class="top-pick-stat-label">Global Rank</div>
+                                </div>
+
+                                <div class="top-pick-stat">
+                                    <i class="fas fa-star top-pick-stat-icon"></i>
+                                    <div class="top-pick-stat-value" itemprop="aggregateRating" itemscope
+                                        itemtype="http://schema.org/AggregateRating">
+                                        <span itemprop="ratingValue">
+                                            <%= university.rating || 4.0 %>
+                                        </span>
+                                        <meta itemprop="bestRating" content="5">
+                                    </div>
+                                    <div class="top-pick-stat-label">Rating</div>
+                                </div>
+
+                                <div class="top-pick-stat">
+                                    <i class="fas fa-rupee-sign top-pick-stat-icon"></i>
+                                    <div class="top-pick-stat-value">
+                                        <% if (university.fee) { %>
+                                            ₹<%= (university.fee/100000).toFixed(1) %>L
+                                                <% } else { %>
+                                                    <%= university.feeRange ? university.feeRange.split('-')[0] : '₹2L'
+                                                        %>
+                                                        <% } %>
+                                    </div>
+                                    <div class="top-pick-stat-label">Fees</div>
+                                </div>
+                            </div>
+
+                            <!-- Hidden Schema.org properties -->
+                            <meta itemprop="url" content="https://unipick.org/university/<%= university._id %>">
+                            <link itemprop="provider" href="http://schema.org/EducationalOrganization">
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } else { %>
+                <div class="no-universities">
+                    <i class="fas fa-university"></i>
+                    <h3>No Universities Available for <%= course.name %>
+                    </h3>
+                    <p>We're currently updating our database with top universities offering <%= course.name %> programs
+                            with <%= course.duration %> duration. Check back soon!</p>
+                    <a href="/contact" class="cta-btn-primary">
+                        <i class="fas fa-phone"></i> Contact Us for More Information
+                    </a>
+                </div>
+                <% } %>
+    </section>
+
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Pursue <%= course.name %> Degree?</h2>
+            <p>Get expert guidance on <%= course.name %>, top universities, and requirements to find the best university
+                    for your <%= course.duration %>
+                        <%= course.degree %>.</p>
+            <div class="cta-buttons">
+                <a href="/quiz" class="cta-btn-primary">
+                    <i class="fas fa-clipboard-list"></i> Take Career Quiz
+                </a>
+                <a href="/contact" class="cta-btn-secondary">
+                    <i class="fas fa-phone"></i> Talk to Counsellor
+                </a>
+            </div>
         </div>
-    <% } %>
-</section>
+    </section>
 
 
-<!-- CTA Section -->
-<section class="cta-section">
-    <div class="cta-content">
-        <h2>Ready to Pursue <%= course.name %> Degree?</h2>
-        <p>Get personalized guidance on <%= course.name %> program details, top universities, and degree requirements from our expert counsellors to find the best university for your <%= course.duration %> <%= course.degree %> program</p>
-        <div class="cta-buttons">
-            <a href="/quiz" class="cta-btn-primary">
-                <i class="fas fa-clipboard-list"></i> Take Career Quiz
-            </a>
-            <a href="/contact" class="cta-btn-secondary">
-                <i class="fas fa-phone"></i> Talk to Counsellor
-            </a>
-        </div>
-    </div>
-</section>
-
-
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>

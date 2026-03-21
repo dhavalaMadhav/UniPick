@@ -1,9 +1,7 @@
 <%- include('partials/header') %>
-
 <!-- Import Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -15,9 +13,9 @@
        ======================================== */
 
     :root {
-        --primary: #2C5F8D;
-        --primary-dark: #1E4364;
-        --primary-light: rgba(44, 95, 141, 0.1);
+        --primary: #007BFF;
+        --primary-dark: #0056b3;
+        --primary-light: rgba(0, 123, 255, 0.1);
         --black: #1B1F24;
         --gray-800: #4B5563;
         --gray-700: #6B7280;
@@ -34,7 +32,7 @@
         margin: 0;
         padding: 0;
         overflow-x: hidden;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
         color: var(--black);
         background: #FFFFFF;
     }
@@ -46,10 +44,10 @@
         min-height: 180px;
         overflow: hidden;
         background: #000000;
-        padding: 60px 5% 40px;
+        padding: 40px 5% 40px;
         display: flex;
         align-items: center;
-        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #007BFF;
     }
 
     .university-hero::before {
@@ -87,7 +85,7 @@
     }
 
     .hero-overlay h1 {
-        font-family: 'Libre Baskerville', Georgia, serif;
+        font-family: var(--font-heading);
         font-size: 2.4rem;
         font-weight: 700;
         margin-bottom: 20px;
@@ -98,7 +96,7 @@
     }
 
     .hero-overlay p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
         font-size: 1rem;
         line-height: 1.6;
         font-weight: 400;
@@ -123,7 +121,7 @@
         border-radius: 50px;
         z-index: 10;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     /* Mobile Breadcrumb */
@@ -146,7 +144,7 @@
         padding: 10px 20px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         border: 1px solid rgba(0, 0, 0, 0.08);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
         font-weight: 500;
         min-height: 40px;
     }
@@ -163,7 +161,7 @@
     }
 
     .mobile-breadcrumb a:hover {
-        color: #2C5F8D;
+        color: #007BFF;
     }
 
     .mobile-breadcrumb a::after {
@@ -183,7 +181,7 @@
 
     .mobile-breadcrumb span {
         font-weight: 600;
-        color: #2C5F8D;
+        color: #007BFF;
     }
 
     /* Content Section */
@@ -244,7 +242,7 @@
         font-size: 0.95rem;
         line-height: 1.6;
         color: var(--gray-800);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     /* Programs Grid - UPDATED */
@@ -298,7 +296,7 @@
         text-transform: uppercase;
         letter-spacing: 0.05em;
         margin-bottom: 12px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .program-detail {
@@ -308,7 +306,7 @@
         margin: 8px 0;
         font-size: 0.85rem;
         color: var(--gray-700);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .program-detail i {
@@ -337,7 +335,7 @@
         border-radius: 8px;
         transition: all 0.2s ease;
         cursor: pointer;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .facility-box:hover {
@@ -404,14 +402,14 @@
         color: var(--gray-700);
         font-weight: 500;
         font-size: 0.875rem;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .info-value {
         color: var(--primary);
         font-weight: 600;
         font-size: 0.875rem;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .sidebar-charts {
@@ -450,7 +448,7 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     /* Placements Section */
@@ -514,7 +512,7 @@
         margin-bottom: 8px;
         line-height: 1;
         color: #FFFFFF;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .placement-label {
@@ -523,7 +521,7 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     /* Recruiters Carousel - FIXED */
@@ -568,7 +566,7 @@
         border-radius: 8px;
         transition: all 0.2s ease;
         box-shadow: 0 2px 8px rgba(44, 95, 141, 0.1);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .company-item:hover {
@@ -894,7 +892,7 @@
     }
 
     .apply-cta-subtitle {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
         font-size: 0.9rem;
         margin-bottom: 30px;
         color: var(--gray-700);
@@ -905,7 +903,7 @@
     }
 
     .apply-button-large {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -1002,7 +1000,7 @@
     }
 
     .distance-calculator-box h3 {
-        font-family: 'Libre Baskerville', Georgia, serif;
+        font-family: var(--font-heading);
         font-size: 1.25rem;
         color: var(--black);
         margin-bottom: 20px;
@@ -1024,7 +1022,7 @@
         border: 1px solid rgba(0, 0, 0, 0.12);
         background: #FFFFFF;
         color: var(--black);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
         transition: all 0.2s ease;
         border-radius: 4px;
     }
@@ -1047,7 +1045,7 @@
         font-size: 0.875rem;
         cursor: pointer;
         transition: all 0.2s ease;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -1085,7 +1083,7 @@
         font-weight: 700;
         line-height: 1;
         color: var(--primary);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .distance-text h4 {
@@ -1093,14 +1091,14 @@
         margin-bottom: 8px;
         font-weight: 600;
         color: var(--black);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .distance-text p {
         font-size: 0.875rem;
         margin: 0;
         color: var(--gray-700);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .travel-time {
@@ -1125,7 +1123,7 @@
         font-weight: 700;
         margin-bottom: 5px;
         color: var(--black);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .travel-option .label {
@@ -1134,7 +1132,7 @@
         color: var(--gray-700);
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .university-detail-map {
@@ -1173,7 +1171,7 @@
         margin-bottom: 24px;
         line-height: 1.6;
         color: var(--gray-800);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .map-actions-buttons {
@@ -1217,7 +1215,7 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         border: 1px solid var(--primary);
         border-radius: 4px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: var(--font-body);
     }
 
     .user-location-marker {
@@ -1530,19 +1528,19 @@
 
 
 <div class="university-detail-container">
-    <!-- Mobile Breadcrumb Section -->
-    <section class="mobile-breadcrumb-section">
-        <div class="mobile-breadcrumb">
-            <a href="/">Home</a>
-            <a href="/universities">Universities</a>
-            <span><%= university.name %></span>
-        </div>
-    </section>
 
     <!-- Hero Banner -->
     <div class="university-hero">
         <div class="type-badge"><%= university.type || 'Private' %> University</div>
         <div class="hero-overlay">
+            <% const breadcrumbs = [
+                { name: 'Home', url: '/' },
+                { name: 'Universities', url: '/universities' },
+                { name: university.name, url: '' }
+            ]; %>
+            <div style="margin-bottom: 25px;">
+                <%- include('partials/breadcrumbs', { breadcrumbs: breadcrumbs }) %>
+            </div>
             <h1><%= university.name %></h1>
             <p><i class="fas fa-map-marker-alt"></i> <%= university.location %></p>
         </div>
@@ -1723,7 +1721,7 @@
             </div>
 
             <% if (university.placements.topRecruiters && university.placements.topRecruiters.length > 0) { %>
-            <h3 style="text-align: center; margin: 40px 0 30px; color: var(--black); font-size: 1.5rem; font-weight: 600; font-family: 'Libre Baskerville', Georgia, serif;">
+            <h3 style="text-align: center; margin: 40px 0 30px; color: var(--black); font-size: 1.5rem; font-weight: 600; font-family: var(--font-heading);">
                 <i class="fas fa-star"></i> Top Recruiters
             </h3>
             
@@ -1756,43 +1754,43 @@
                 <div class="gallery-slides-container" id="galleryContainer">
                     <div class="gallery-slide">
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800" alt="Campus courtyard">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800" alt="Campus courtyard" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800" alt="Modern campus building">
+                            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800" alt="Modern campus building" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1460518451285-97b6aa326961?w=800" alt="Campus pathway">
+                            <img src="https://images.unsplash.com/photo-1460518451285-97b6aa326961?w=800" alt="Campus pathway" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800" alt="Campus aerial">
+                            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800" alt="Campus aerial" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1562774053-5693f49e8e26?w=800" alt="Lecture hall">
+                            <img src="https://images.unsplash.com/photo-1562774053-5693f49e8e26?w=800" alt="Lecture hall" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?w=800" alt="Students studying">
+                            <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?w=800" alt="Students studying" loading="lazy">
                         </div>
                     </div>
 
                     <div class="gallery-slide">
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=800" alt="Library interior">
+                            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=800" alt="Library interior" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800" alt="Library desk">
+                            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800" alt="Library desk" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800" alt="Computer lab">
+                            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800" alt="Computer lab" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=800" alt="Science lab">
+                            <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=800" alt="Science lab" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1523580846011-5c0b99bc1c87?w=800" alt="Students collaboration">
+                            <img src="https://images.unsplash.com/photo-1523580846011-5c0b99bc1c87?w=800" alt="Students collaboration" loading="lazy">
                         </div>
                         <div class="gallery-cell" onclick="openImageModal(this)">
-                            <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800" alt="Classroom view">
+                            <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800" alt="Classroom view" loading="lazy">
                         </div>
                     </div>
 
@@ -2537,7 +2535,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     label: 'Students',
                     data: [800, 950, 1200, 1500, 1800, 2100],
-                    borderColor: '#2C5F8D',
+                    borderColor: '#007BFF',
                     backgroundColor: 'rgba(44, 95, 141, 0.1)',
                     borderWidth: 3,
                     fill: true,

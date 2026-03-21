@@ -40,6 +40,7 @@ router.get('/', async (req, res) => {
         ];
         
         res.render('index', { 
+            req,
             universities,
             testimonials,
             title: 'UniPick - Your Trusted University Admissions Consultant'
@@ -53,6 +54,7 @@ router.get('/', async (req, res) => {
 // Quiz page
 router.get('/quiz', (req, res) => {
     res.render('quiz', {
+        req,
         title: 'Career Assessment Quiz - UniPick'
     });
 });
@@ -69,6 +71,7 @@ router.get('/quiz-results', async (req, res) => {
         console.log(`📊 Fetched ${universities.length} universities for quiz results`);
         
         res.render('quiz-results', {
+            req,
             title: 'Your Career Guidance Results - UniPick',
             universities: universities
         });
@@ -90,6 +93,7 @@ router.get('/universities', async (req, res) => {
         console.log(`📚 Fetched ${universities.length} universities from database`);
         
         res.render('universities', {
+            req,
             title: 'Universities - UniPick',
             universities: universities
         });
@@ -103,9 +107,9 @@ router.get('/universities', async (req, res) => {
 });
 
 // University detail page
-router.get('/university/:id', async (req, res) => {
+router.get('/university/:slug', async (req, res) => {
     try {
-        const university = await University.findById(req.params.id);
+        const university = await University.findOne({ slug: req.params.slug });
         
         if (!university) {
             return res.status(404).render('error', {
@@ -117,6 +121,7 @@ router.get('/university/:id', async (req, res) => {
         console.log('✅ Loaded university:', university.name);
         
         res.render('university-detail', {
+            req,
             title: university.name,
             university: university
         });
@@ -132,13 +137,14 @@ router.get('/university/:id', async (req, res) => {
 // GET /about - About Page
 router.get('/about', (req, res) => {
     res.render('about', { 
+        req,
         title: 'About -Ravi Vajendla | CA & Admission Consultant',
         page: 'about'
     });
 });
 
 router.get('/loading', (req, res) => {
-    res.render('loading');
+    res.render('loading', { req });
 });
 
 // Contact page
@@ -151,6 +157,7 @@ router.get('/contact', (req, res) => {
 // Admin login page
 router.get('/admin', checkAuthenticated, (req, res) => {
     res.render('admin/login', {
+        req,
         title: 'Admin Login - UniPick',
         error: null
     });
@@ -172,6 +179,7 @@ router.get('/admin/dashboard', authenticateToken, async (req, res) => {
         };
         
         res.render('admin/dashboard', {
+            req,
             title: 'Admin Dashboard - UniPick',
             leads,
             stats
@@ -186,6 +194,47 @@ router.get('/admin/dashboard', authenticateToken, async (req, res) => {
 router.get('/admin/logout', (req, res) => {
     res.clearCookie('adminToken');
     res.redirect('/admin');
+});
+
+// Dynamic Sitemap
+router.get('/sitemap.xml', async (req, res) => {
+    try {
+        const universities = await University.find({}, 'slug updatedAt');
+        const baseUrl = 'https://www.unipick.org';
+        
+        let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+        xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+        
+        // Static pages
+        const staticPages = ['', '/universities', '/about', '/contact', '/quiz'];
+        staticPages.forEach(page => {
+            xml += '  <url>\n';
+            xml += `    <loc>${baseUrl}${page}</loc>\n`;
+            xml += `    <changefreq>weekly</changefreq>\n`;
+            xml += `    <priority>${page === '' ? '1.0' : '0.8'}</priority>\n`;
+            xml += '  </url>\n';
+        });
+        
+        // Dynamic university pages
+        universities.forEach(uni => {
+            if (uni.slug) {
+                xml += '  <url>\n';
+                xml += `    <loc>${baseUrl}/university/${uni.slug}</loc>\n`;
+                xml += `    <lastmod>${uni.updatedAt ? uni.updatedAt.toISOString().split('T')[0] : new Date().toISOString().split('T')[0]}</lastmod>\n`;
+                xml += `    <changefreq>monthly</changefreq>\n`;
+                xml += `    <priority>0.7</priority>\n`;
+                xml += '  </url>\n';
+            }
+        });
+        
+        xml += '</urlset>';
+        
+        res.header('Content-Type', 'application/xml');
+        res.send(xml);
+    } catch (error) {
+        console.error('Sitemap error:', error);
+        res.status(500).end();
+    }
 });
 
 module.exports = router;

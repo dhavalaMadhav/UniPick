@@ -1,818 +1,993 @@
 <%- include('partials/header') %>
 
-<!-- SEO Meta Tags -->
-<meta name="description" content="Explore a wide range of undergraduate and postgraduate courses in India, including Engineering, Management, Science, Arts, Health, and Commerce. Get expert admission guidance with UniPick.">
-<meta name="keywords" content="university courses in India, engineering courses in India, MBA programs, management courses, science courses, arts courses, medical courses, commerce courses, admission guidance for courses">
-<meta property="og:title" content="University Courses in India | Engineering, MBA, Science & More – UniPick">
-<meta property="og:description" content="Explore a wide range of undergraduate and postgraduate courses in India, including Engineering, Management, Science, Arts, Health, and Commerce. Get expert admission guidance with UniPick.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://unipick.org/courses-preview.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="University Courses in India | Engineering, MBA, Science & More">
-<meta name="twitter:description" content="Explore a wide range of undergraduate and postgraduate courses in India, including Engineering, Management, Science, Arts, Health, and Commerce. Get expert admission guidance with UniPick.">
-<title>University Courses in India | Engineering, MBA, Science & More – UniPick</title>
-
-<style>
-/* Courses Page - Academic Theme with Tabs */
-
-
-/* Global Scrollbar Hide */
-html, body {
-    overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-
-::-webkit-scrollbar {
-    display: none;
-}
-
-
-/* Hero Section - Matching Quiz Page Style */
-.courses-hero {
-    position: relative;
-    width: 100%;
-    min-height: 200px;
-    overflow: hidden;
-    background: #000000;
-    padding: 80px 5% 50px;
-    display: flex;
-    align-items: center;
-    border-bottom: none;
-}
-
-
-/* Background Image */
-.courses-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
-}
-
-
-/* Black Overlay */
-.courses-hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.70);
-    z-index: 1;
-}
-
-
-.courses-hero-content {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    text-align: left;
-}
-
-
-.courses-hero h1 {
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 0;
-    color: #FFFFFF;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-}
-
-
-/* Category Tabs Section - ALWAYS STICKY */
-.category-tabs-section {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: #FFFFFF;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    padding: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-
-.category-tabs-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 5%;
-}
-
-
-.category-tabs {
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-
-.category-tabs::-webkit-scrollbar {
-    display: none;
-}
-
-
-.category-tab {
-    flex: 1;
-    min-width: 200px;
-    padding: 24px 32px;
-    background: transparent;
-    border: none;
-    border-bottom: 3px solid transparent;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #6B7280;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-
-.category-tab:hover {
-    color: #2C5F8D;
-    background: rgba(44, 95, 141, 0.05);
-}
-
-
-.category-tab.active {
-    color: #2C5F8D;
-    border-bottom-color: #2C5F8D;
-    background: transparent;
-}
-
-
-.category-tab i {
-    font-size: 1.2rem;
-}
-
-
-/* Courses List Section */
-.courses-list-section {
-    padding: 60px 5%;
-    background: #FFFFFF;
-    min-height: 500px;
-}
-
-
-.courses-list-container {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-
-.courses-list {
-    display: none;
-}
-
-
-.courses-list.active {
-    display: block;
-}
-
-
-.course-item {
-    padding: 24px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-
-.course-item:first-child {
-    padding-top: 0;
-}
-
-
-.course-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-
-/* Narrow border at ends */
-.course-item::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 5%;
-    right: 5%;
-    height: 1px;
-    background: rgba(0, 0, 0, 0.08);
-}
-
-
-.course-item:last-child::after {
-    display: none;
-}
-
-
-.course-item:hover {
-    padding-left: 12px;
-}
-
-
-.course-item:hover .course-item-title {
-    color: #2C5F8D;
-}
-
-
-.course-item-title {
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #1B1F24;
-    margin-bottom: 8px;
-    transition: color 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
-.course-item-title i {
-    font-size: 1rem;
-    color: #6B7280;
-    transition: all 0.2s ease;
-}
-
-
-.course-item:hover .course-item-title i {
-    color: #2C5F8D;
-    transform: translateX(5px);
-}
-
-
-.course-item-description {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 0.9rem;
-    color: #4B5563;
-    line-height: 1.6;
-}
-
-
-/* Empty State */
-.empty-state {
-    text-align: center;
-    padding: 80px 20px;
-}
-
-
-.empty-state i {
-    font-size: 4rem;
-    color: #E5E7EB;
-    margin-bottom: 20px;
-}
-
-
-.empty-state h3 {
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #6B7280;
-    margin-bottom: 12px;
-}
-
-
-.empty-state p {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 0.95rem;
-    color: #9CA3AF;
-}
-
-
-/* Responsive */
-@media (max-width: 768px) {
-    .courses-hero {
-        min-height: 120px;
-        padding: 40px 5% 30px;
+    <!-- SEO Meta Tags - OPTIMIZED FOR INDEXING -->
+    <title>University Courses in India | Engineering, MBA, Science & Arts – UniPick</title>
+    <meta name="description"
+        content="Discover top university courses in India including Engineering, Management, Science, and Arts. Get expert admission guidance, course insights, and career outcomes with UniPick. Explore undergraduate and postgraduate programs today.">
+    <meta name="keywords"
+        content="university courses in India, best degree courses, engineering programs, MBA admissions, science and technology courses, higher education guidance India">
+    <meta property="og:title" content="Explore University Courses in India | Engineering, Business & More – UniPick">
+    <meta property="og:description"
+        content="Find your ideal career path with UniPick's guide to university courses. Detailed insights into programs, universities, and career outcomes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://unipick.org/courses">
+    <meta name="robots" content="index, follow">
+
+    <!-- Breadcrumb Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://unipick.org/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Courses",
+        "item": "https://unipick.org/courses"
+      }]
     }
+    </script>
+
+    <style>
+        /* Courses Page - Academic Theme with Tabs */
+
+
+        /* Global Scrollbar Hide */
+        html,
+        body {
+            overflow-x: hidden;
+            /* Scrollbar restored */
+        }
+
+
+        /* Hero Section - Matching Quiz Page Style */
+        .courses-hero {
+            position: relative;
+            width: 100%;
+            min-height: 200px;
+            overflow: hidden;
+            background: #000000;
+            padding: 80px 5% 50px;
+            display: flex;
+            align-items: center;
+            border-bottom: none;
+        }
+
+
+        /* Background Image */
+        .courses-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+
+        /* Black Overlay */
+        .courses-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.70);
+            z-index: 1;
+        }
+
+
+        .courses-hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: left;
+        }
+
+        /* SEO Content Style */
+        .courses-overview-section {
+            padding: 60px 5%;
+            background: #FFFFFF;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .courses-overview-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            color: #4B5563;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .courses-overview-container h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: #1B1F24;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .courses-overview-container h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: #1E4364;
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        .courses-overview-container p {
+            margin-bottom: 20px;
+        }
+
+        .courses-overview-container ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .courses-overview-container li {
+            margin-bottom: 10px;
+        }
+
+
+        .courses-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0;
+            color: #FFFFFF;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+        }
+
+
+        /* Category Tabs Section - ALWAYS STICKY */
+        .category-tabs-section {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+
+        .category-tabs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
 
 
-    .courses-hero h1 {
-        font-size: 1.6rem;
-    }
+        .category-tabs {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .category-tab {
+            flex: 1;
+            min-width: 200px;
+            padding: 24px 32px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+
+        .category-tab:hover {
+            color: #007BFF;
+            background: rgba(0, 123, 255, 0.05);
+        }
 
 
-    /* Tabs remain sticky on mobile with 2x2 grid */
-    .category-tabs-section {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: #FFFFFF;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        padding: 0;
-    }
+        .category-tab.active {
+            color: #007BFF;
+            border-bottom-color: #007BFF;
+            background: transparent;
+        }
 
 
-    .category-tabs-container {
-        padding: 0;
-    }
+        .category-tab i {
+            font-size: 1.2rem;
+        }
 
 
-    .category-tabs {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 0;
-    }
+        /* Courses List Section */
+        .courses-list-section {
+            padding: 60px 5%;
+            background: #FFFFFF;
+            min-height: 500px;
+        }
 
 
-    .category-tab {
-        min-width: auto;
-        padding: 16px 12px;
-        border: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        border-right: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 0;
-        justify-content: flex-start;
-        text-align: left;
-        font-size: 0.65rem;
-        gap: 10px;
-        background: #FFFFFF;
-        border-left: 3px solid transparent;
-        line-height: 1.2;
-        letter-spacing: 0.03em;
-    }
+        .courses-list-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
 
-    .category-tab span {
-        white-space: normal;
-        word-break: break-word;
-    }
+        .courses-list {
+            display: none;
+        }
 
 
-    /* Remove right border on last column */
-    .category-tab:nth-child(2),
-    .category-tab:nth-child(4) {
-        border-right: none;
-    }
+        .courses-list.active {
+            display: block;
+        }
 
 
-    /* Remove bottom border on last row */
-    .category-tab:nth-child(3),
-    .category-tab:nth-child(4) {
-        border-bottom: none;
-    }
+        .course-item {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
 
 
-    .category-tab i {
-        font-size: 1.1rem;
-        color: #6B7280;
-        flex-shrink: 0;
-    }
+        .course-item:first-child {
+            padding-top: 0;
+        }
 
 
-    .category-tab.active {
-        background: #F7F8FA;
-        border-left-color: #2C5F8D;
-        color: #2C5F8D;
-    }
+        .course-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
 
 
-    .category-tab.active i {
-        color: #2C5F8D;
-    }
+        /* Narrow border at ends */
+        .course-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            right: 5%;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.08);
+        }
 
 
-    .category-tab:hover {
-        background: #F7F8FA;
-    }
+        .course-item:last-child::after {
+            display: none;
+        }
 
 
-    .courses-list-section {
-        padding: 40px 5%;
-    }
+        .course-item:hover {
+            padding-left: 12px;
+        }
 
 
-    .course-item-title {
-        font-size: 1.1rem;
-    }
-
-
-    .course-item-description {
-        font-size: 0.85rem;
-    }
-}
-
-
-@media (max-width: 600px) {
-    .courses-hero {
-        min-height: 100px;
-        padding: 35px 5% 25px;
-    }
-
-
-    .courses-hero h1 {
-        font-size: 1.4rem;
-    }
-
-
-    .category-tab {
-        font-size: 0.6rem;
-        padding: 14px 10px;
-        gap: 8px;
-    }
-
-
-    .category-tab i {
-        font-size: 1rem;
-    }
-
-
-    .course-item {
-        padding: 20px 0;
-    }
-
-
-    .course-item-title {
-        font-size: 1rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-}
-</style>
-
-
-<!-- Hero Section -->
-<section class="courses-hero">
-    <div class="courses-hero-content">
-        <h1>Explore University Courses in India</h1>
-    </div>
-</section>
-
-
-<!-- Category Tabs -->
-<section class="category-tabs-section">
-    <div class="category-tabs-container">
-        <div class="category-tabs" role="tablist" aria-label="Course categories">
-            <button class="category-tab active" data-category="engineering" role="tab" aria-selected="true" aria-controls="engineering-courses" aria-label="Engineering courses in India">
-                <i class="fas fa-cogs"></i>
-                <span>Engineering</span>
-            </button>
-            <button class="category-tab" data-category="management" role="tab" aria-selected="false" aria-controls="management-courses" aria-label="MBA programs and management courses">
-                <i class="fas fa-briefcase"></i>
-                <span>Management</span>
-            </button>
-            <button class="category-tab" data-category="science-arts" role="tab" aria-selected="false" aria-controls="science-arts-courses" aria-label="Science and arts courses in India">
-                <i class="fas fa-flask"></i>
-                <span>Science & Arts</span>
-            </button>
-            <button class="category-tab" data-category="health-commerce" role="tab" aria-selected="false" aria-controls="health-commerce-courses" aria-label="Medical and commerce courses">
-                <i class="fas fa-heartbeat"></i>
-                <span>Health & Commerce</span>
-            </button>
-        </div>
-    </div>
-</section>
-
-
-<!-- Courses List with Schema.org CollectionPage markup -->
-<section class="courses-list-section" itemscope itemtype="https://schema.org/CollectionPage">
-    <meta itemprop="name" content="University Courses in India">
-    <meta itemprop="description" content="Explore a wide range of undergraduate and postgraduate courses in India, including Engineering, Management, Science, Arts, Health, and Commerce with expert admission guidance.">
-
-    <div class="courses-list-container">
-
-        <!-- Engineering Courses in India -->
-        <div class="courses-list active" data-category="engineering" id="engineering-courses" role="tabpanel" aria-labelledby="engineering-tab">
-            <h2 style="position: absolute; left: -9999px;">Engineering Courses in India</h2>
-
-            <div class="course-item" onclick="window.location.href='/courses/engineering/computer-science'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Computer Science Engineering Course Details</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Master software development, artificial intelligence, and cutting-edge computing technologies with expert admission guidance for computer science engineering courses in India
-                </div>
-                <meta itemprop="courseCode" content="CSE">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/engineering/mechanical'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Mechanical Engineering</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Design, analyze, and manufacture mechanical systems and machinery with top mechanical engineering programs in India
-                </div>
-                <meta itemprop="courseCode" content="ME">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/engineering/civil'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Civil Engineering</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Build infrastructure, roads, bridges, and shape the physical world around us with civil engineering courses in India
-                </div>
-                <meta itemprop="courseCode" content="CE">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/engineering/electrical'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Electrical Engineering</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Power the future with electrical systems, circuits, and energy technology through leading electrical engineering programs
-                </div>
-                <meta itemprop="courseCode" content="EE">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/engineering/electronics'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Electronics Engineering</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Innovate with electronic circuits, embedded systems, and communication technology in top electronics engineering courses
-                </div>
-                <meta itemprop="courseCode" content="ECE">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-        </div>
-
-
-        <!-- MBA Programs and Management Courses -->
-        <div class="courses-list" data-category="management" id="management-courses" role="tabpanel" aria-labelledby="management-tab">
-            <h2 style="position: absolute; left: -9999px;">MBA Programs and Management Courses in India</h2>
-
-            <div class="course-item" onclick="window.location.href='/courses/management/mba'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">MBA Admission Guidance - Master of Business Administration</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Master business administration, strategic leadership, and advanced management principles with top MBA programs in India
-                </div>
-                <meta itemprop="courseCode" content="MBA">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/management/business'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Business Administration</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Learn core business principles, operations management, and entrepreneurship with business administration courses in India
-                </div>
-                <meta itemprop="courseCode" content="BBA">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/management/finance'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Finance Management</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Master financial analysis, investment strategies, and wealth management with finance management courses and admission guidance
-                </div>
-                <meta itemprop="courseCode" content="FIN">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/management/marketing'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Marketing Management</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Create impactful marketing campaigns and drive business growth through strategic marketing management courses in India
-                </div>
-                <meta itemprop="courseCode" content="MKT">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/management/hr'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Human Resources Management</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Build strong teams, manage organizational talent, and develop workplace culture with HR management courses and admission guidance
-                </div>
-                <meta itemprop="courseCode" content="HRM">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-        </div>
-
-
-        <!-- Science and Arts Courses -->
-        <div class="courses-list" data-category="science-arts" id="science-arts-courses" role="tabpanel" aria-labelledby="science-arts-tab">
-            <h2 style="position: absolute; left: -9999px;">Science and Arts Courses in India</h2>
-
-            <div class="course-item" onclick="window.location.href='/courses/science/computer-applications'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Computer Applications</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Apply computing solutions to solve real-world problems and business challenges with computer applications courses in India
-                </div>
-                <meta itemprop="courseCode" content="BCA">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/arts/literature'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Literature</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Explore the world of language, creative writing, and literary analysis with arts and literature courses
-                </div>
-                <meta itemprop="courseCode" content="LIT">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/arts/psychology'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Psychology</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Understand human behavior, mental processes, and cognitive science with psychology courses and admission guidance
-                </div>
-                <meta itemprop="courseCode" content="PSY">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/science/mathematics'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Mathematics</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Master mathematical theory, analytical thinking, and problem-solving with science and mathematics courses in India
-                </div>
-                <meta itemprop="courseCode" content="MATH">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/science/physics'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Physics</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Explore the fundamental laws of nature, matter, energy, and the universe with science courses and physics programs
-                </div>
-                <meta itemprop="courseCode" content="PHY">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-        </div>
-
-
-        <!-- Medical and Commerce Courses -->
-        <div class="courses-list" data-category="health-commerce" id="health-commerce-courses" role="tabpanel" aria-labelledby="health-commerce-tab">
-            <h2 style="position: absolute; left: -9999px;">Medical and Commerce Courses in India</h2>
-
-            <div class="course-item" onclick="window.location.href='/courses/health/medicine'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Medicine (MBBS)</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Train to become a healthcare professional, diagnose diseases, and save lives with medical courses and MBBS admission guidance in India
-                </div>
-                <meta itemprop="courseCode" content="MBBS">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/health/pharmacy'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Pharmacy</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Study pharmaceuticals, drug development, and medication management with pharmacy courses and admission guidance
-                </div>
-                <meta itemprop="courseCode" content="PHARM">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/commerce/accounting'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Accounting</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Master financial reporting, auditing practices, and taxation with commerce courses and accounting programs in India
-                </div>
-                <meta itemprop="courseCode" content="ACC">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/commerce/banking'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Banking & Finance</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Learn banking operations, financial services, and investment management with commerce and banking courses in India
-                </div>
-                <meta itemprop="courseCode" content="BNK">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-
-
-            <div class="course-item" onclick="window.location.href='/courses/diploma/certificate'" itemscope itemtype="https://schema.org/Course">
-                <div class="course-item-title">
-                    <h3 itemprop="name" style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">Diploma Programs</h3>
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-                <div class="course-item-description" itemprop="description">
-                    Short-term specialized certification and professional development programs with admission guidance for courses in India
-                </div>
-                <meta itemprop="courseCode" content="DIP">
-                <meta itemprop="provider" content="UniPick Partner Universities">
-            </div>
-        </div>
-
-
-    </div>
-</section>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const categoryTabs = document.querySelectorAll('.category-tab');
-    const coursesLists = document.querySelectorAll('.courses-list');
-
-    categoryTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            // Remove active class from all tabs
-            categoryTabs.forEach(t => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-            });
-
-            // Add active class to clicked tab
-            this.classList.add('active');
-            this.setAttribute('aria-selected', 'true');
-
-            // Get category
-            const category = this.dataset.category;
-
-            // Hide all course lists
-            coursesLists.forEach(list => list.classList.remove('active'));
-
-            // Show selected course list
-            const selectedList = document.querySelector(`.courses-list[data-category="${category}"]`);
-            if (selectedList) {
-                selectedList.classList.add('active');
+        .course-item:hover .course-item-title {
+            color: #007BFF;
+        }
+
+
+        .course-item-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1B1F24;
+            margin-bottom: 8px;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        .course-item-title i {
+            font-size: 1rem;
+            color: #6B7280;
+            transition: all 0.2s ease;
+        }
+
+
+        .course-item:hover .course-item-title i {
+            color: #007BFF;
+            transform: translateX(5px);
+        }
+
+
+        .course-item-description {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: #4B5563;
+            line-height: 1.6;
+        }
+
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #E5E7EB;
+            margin-bottom: 20px;
+        }
+
+
+        .empty-state h3 {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #6B7280;
+            margin-bottom: 12px;
+        }
+
+
+        .empty-state p {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: #9CA3AF;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .courses-hero {
+                min-height: 120px;
+                padding: 40px 5% 30px;
             }
+
+
+            .courses-hero h1 {
+                font-size: 1.6rem;
+            }
+
+
+            /* Tabs remain sticky on mobile with 2x2 grid */
+            .category-tabs-section {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                background: #FFFFFF;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                padding: 0;
+            }
+
+
+            .category-tabs-container {
+                padding: 0;
+            }
+
+
+            .category-tabs {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                gap: 0;
+            }
+
+
+            .category-tab {
+                min-width: auto;
+                padding: 16px 12px;
+                border: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+                border-right: 1px solid rgba(0, 0, 0, 0.08);
+                border-radius: 0;
+                justify-content: flex-start;
+                text-align: left;
+                font-size: 0.65rem;
+                gap: 10px;
+                background: #FFFFFF;
+                border-left: 3px solid transparent;
+                line-height: 1.2;
+                letter-spacing: 0.03em;
+            }
+
+
+            .category-tab span {
+                white-space: normal;
+                word-break: break-word;
+            }
+
+
+            /* Remove right border on last column */
+            .category-tab:nth-child(2),
+            .category-tab:nth-child(4) {
+                border-right: none;
+            }
+
+
+            /* Remove bottom border on last row */
+            .category-tab:nth-child(3),
+            .category-tab:nth-child(4) {
+                border-bottom: none;
+            }
+
+
+            .category-tab i {
+                font-size: 1.1rem;
+                color: #6B7280;
+                flex-shrink: 0;
+            }
+
+
+            .category-tab.active {
+                background: #F7F8FA;
+                border-left-color: #007BFF;
+                color: #007BFF;
+            }
+
+
+            .category-tab.active i {
+                color: #007BFF;
+            }
+
+
+            .category-tab:hover {
+                background: #F7F8FA;
+            }
+
+
+            .courses-list-section {
+                padding: 40px 5%;
+            }
+
+
+            .course-item-title {
+                font-size: 1.1rem;
+            }
+
+
+            .course-item-description {
+                font-size: 0.85rem;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+            .courses-hero {
+                min-height: 100px;
+                padding: 35px 5% 25px;
+            }
+
+
+            .courses-hero h1 {
+                font-size: 1.4rem;
+            }
+
+
+            .category-tab {
+                font-size: 0.6rem;
+                padding: 14px 10px;
+                gap: 8px;
+            }
+
+
+            .category-tab i {
+                font-size: 1rem;
+            }
+
+
+            .course-item {
+                padding: 20px 0;
+            }
+
+
+            .course-item-title {
+                font-size: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+
+
+    <section class="courses-hero">
+        <div class="courses-hero-content">
+            <% const breadcrumbs=[ { name: 'Home' , url: '/' }, { name: 'Courses' , url: '' } ]; %>
+                <%- include('partials/breadcrumbs', { breadcrumbs: breadcrumbs }) %>
+
+                    <h1>Explore Undergraduate & Postgraduate Courses in India</h1>
+        </div>
+    </section>
+
+    <!-- UNIQUE SEO CONTENT SECTION - 500+ WORDS -->
+    <section class="courses-overview-section">
+        <div class="courses-overview-container">
+            <h2>Comprehensive Guide to Higher Education Courses in India</h2>
+            <p>Choosing the right academic path is one of the most significant decisions a student makes. In India's rapidly evolving educational landscape, the diversity of undergraduate and postgraduate courses offers both immense opportunities and complex challenges. At UniPick, we understand that finding a program that aligns with your passions, skills, and career goals is essential for long-term success. Our platform is designed to provide you with expert admission guidance and a clear roadmap through the various streams of higher education. If you are unsure which path to take, our <a href="/quiz">Career Quiz</a> can help you identify your strengths.</p>
+
+            <h3>The Evolving Landscape of Professional Education</h3>
+            <p>Education in India has moved beyond traditional boundaries, incorporating interdisciplinary approaches and industry-aligned curricula. Whether you are interested in the technical rigors of Engineering, the strategic depths of Management, the creative horizons of Arts, or the foundational insights of Science, there is a program tailored for you. Modern universities are now focusing on holistic development, ensuring that students are not just degree-holders but industry-ready professionals. You can explore our <a href="/universities">Partner Universities</a> to see where these programs are offered.</p>
+
+            <h3>Key Academic Streams and Career Outcomes</h3>
+            <ul>
+                <li><strong>Engineering & Technology:</strong> From Computer Science to Mechanical and Civil Engineering, technical programs continue to be the backbone of industrial growth. With the rise of AI and Automation, specializations in CSE are seeing unprecedented demand.</li>
+                <li><strong>Management & Business:</strong> An MBA or BBA is no longer just about learning business theories; it's about developing leadership, strategic thinking, and emotional intelligence. Top management courses in India prepare you for global roles in finance, marketing, and operations.</li>
+                <li><strong>Foundational Sciences:</strong> Pursuing pure or applied sciences leads to careers in research, data analysis, and biotechnology. These programs are vital for innovation and sustainable development.</li>
+                <li><strong>Humanities & Arts:</strong> The creative economy is booming. Courses in design, psychology, and literature are producing thinkers and innovators who shape culture and society.</li>
+            </ul>
+
+            <h3>Why Expert Admission Guidance Matters</h3>
+            <p>With thousands of colleges and varying entrance criteria, the admission process can be overwhelming. Expert guidance helps you navigate through eligibility requirements, entrance exams, and portfolio submissions. At UniPick, we bridge the gap between students and premier universities, offering personalized counseling that considers your unique profile. We help you compare programs, understand fee structures, and evaluate placement records, ensuring you make an informed choice. Our team is ready to provide <a href="/contact">University Admissions Help</a> whenever you need it.</p>
+
+            <h3>Shaping Your Future with the Right Choice</h3>
+            <p>Your educational journey is more than just attending lectures; it's about building a network, gaining practical exposure, and discovering your niche. By exploring the comprehensive list of courses on this page, you are taking the first step toward a fulfilling career. We encourage you to delve into the details of each category, from Engineering to Health and Commerce, and <a href="/contact">reach out to our advisors</a> for a deeper understanding of how these choices will impact your professional future.</p>
+        </div>
+    </section>
+
+
+    <!-- Category Tabs -->
+    <section class="category-tabs-section">
+        <div class="category-tabs-container">
+            <div class="category-tabs" role="tablist" aria-label="Course categories">
+                <button class="category-tab active" data-category="engineering" role="tab" aria-selected="true"
+                    aria-controls="engineering-courses" aria-label="Engineering courses in India">
+                    <i class="fas fa-cogs"></i>
+                    <span>Engineering</span>
+                </button>
+                <button class="category-tab" data-category="management" role="tab" aria-selected="false"
+                    aria-controls="management-courses" aria-label="MBA programs and management courses">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Management</span>
+                </button>
+                <button class="category-tab" data-category="science-arts" role="tab" aria-selected="false"
+                    aria-controls="science-arts-courses" aria-label="Science and arts courses in India">
+                    <i class="fas fa-flask"></i>
+                    <span>Science & Arts</span>
+                </button>
+                <button class="category-tab" data-category="health-commerce" role="tab" aria-selected="false"
+                    aria-controls="health-commerce-courses" aria-label="Medical and commerce courses">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>Health & Commerce</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Courses List with Schema.org CollectionPage markup -->
+    <section class="courses-list-section" itemscope itemtype="https://schema.org/CollectionPage">
+        <meta itemprop="name" content="University Courses in India">
+        <meta itemprop="description"
+            content="Explore a wide range of undergraduate and postgraduate courses in India, including Engineering, Management, Science, Arts, Health, and Commerce with expert admission guidance.">
+
+        <div class="courses-list-container">
+
+            <!-- Engineering Courses in India -->
+            <div class="courses-list active" data-category="engineering" id="engineering-courses" role="tabpanel"
+                aria-labelledby="engineering-tab">
+                <h2 style="position: absolute; left: -9999px;">Engineering Courses in India</h2>
+
+                <div class="course-item" onclick="window.location.href='/courses/engineering/computer-science'"
+                    itemscope itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Computer Science Engineering Course Details</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Master software development, artificial intelligence, and cutting-edge computing technologies
+                        with expert admission guidance for computer science engineering courses in India
+                    </div>
+                    <meta itemprop="courseCode" content="CSE">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/engineering/mechanical'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Mechanical Engineering</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Design, analyze, and manufacture mechanical systems and machinery with top mechanical
+                        engineering programs in India
+                    </div>
+                    <meta itemprop="courseCode" content="ME">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/engineering/civil'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Civil Engineering</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Build infrastructure, roads, bridges, and shape the physical world around us with civil
+                        engineering courses in India
+                    </div>
+                    <meta itemprop="courseCode" content="CE">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/engineering/electrical'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Electrical Engineering</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Power the future with electrical systems, circuits, and energy technology through leading
+                        electrical engineering programs
+                    </div>
+                    <meta itemprop="courseCode" content="EE">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/engineering/electronics'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Electronics Engineering</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Innovate with electronic circuits, embedded systems, and communication technology in top
+                        electronics engineering courses
+                    </div>
+                    <meta itemprop="courseCode" content="ECE">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+            </div>
+
+
+            <!-- MBA Programs and Management Courses -->
+            <div class="courses-list" data-category="management" id="management-courses" role="tabpanel"
+                aria-labelledby="management-tab">
+                <h2 style="position: absolute; left: -9999px;">MBA Programs and Management Courses in India</h2>
+
+                <div class="course-item" onclick="window.location.href='/courses/management/mba'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            MBA Admission Guidance - Master of Business Administration</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Master business administration, strategic leadership, and advanced management principles with
+                        top MBA programs in India
+                    </div>
+                    <meta itemprop="courseCode" content="MBA">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/management/business'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Business Administration</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Learn core business principles, operations management, and entrepreneurship with business
+                        administration courses in India
+                    </div>
+                    <meta itemprop="courseCode" content="BBA">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/management/finance'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Finance Management</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Master financial analysis, investment strategies, and wealth management with finance management
+                        courses and admission guidance
+                    </div>
+                    <meta itemprop="courseCode" content="FIN">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/management/marketing'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Marketing Management</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Create impactful marketing campaigns and drive business growth through strategic marketing
+                        management courses in India
+                    </div>
+                    <meta itemprop="courseCode" content="MKT">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/management/hr'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Human Resources Management</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Build strong teams, manage organizational talent, and develop workplace culture with HR
+                        management courses and admission guidance
+                    </div>
+                    <meta itemprop="courseCode" content="HRM">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+            </div>
+
+
+            <!-- Science and Arts Courses -->
+            <div class="courses-list" data-category="science-arts" id="science-arts-courses" role="tabpanel"
+                aria-labelledby="science-arts-tab">
+                <h2 style="position: absolute; left: -9999px;">Science and Arts Courses in India</h2>
+
+                <div class="course-item" onclick="window.location.href='/courses/science/computer-applications'"
+                    itemscope itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Computer Applications</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Apply computing solutions to solve real-world problems and business challenges with computer
+                        applications courses in India
+                    </div>
+                    <meta itemprop="courseCode" content="BCA">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/arts/literature'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Literature</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Explore the world of language, creative writing, and literary analysis with arts and literature
+                        courses
+                    </div>
+                    <meta itemprop="courseCode" content="LIT">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/arts/psychology'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Psychology</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Understand human behavior, mental processes, and cognitive science with psychology courses and
+                        admission guidance
+                    </div>
+                    <meta itemprop="courseCode" content="PSY">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/science/mathematics'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Mathematics</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Master mathematical theory, analytical thinking, and problem-solving with science and
+                        mathematics courses in India
+                    </div>
+                    <meta itemprop="courseCode" content="MATH">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/science/physics'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Physics</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Explore the fundamental laws of nature, matter, energy, and the universe with science courses
+                        and physics programs
+                    </div>
+                    <meta itemprop="courseCode" content="PHY">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+            </div>
+
+
+            <!-- Medical and Commerce Courses -->
+            <div class="courses-list" data-category="health-commerce" id="health-commerce-courses" role="tabpanel"
+                aria-labelledby="health-commerce-tab">
+                <h2 style="position: absolute; left: -9999px;">Medical and Commerce Courses in India</h2>
+
+                <div class="course-item" onclick="window.location.href='/courses/health/medicine'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Medicine (MBBS)</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Train to become a healthcare professional, diagnose diseases, and save lives with medical
+                        courses and MBBS admission guidance in India
+                    </div>
+                    <meta itemprop="courseCode" content="MBBS">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/health/pharmacy'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Pharmacy</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Study pharmaceuticals, drug development, and medication management with pharmacy courses and
+                        admission guidance
+                    </div>
+                    <meta itemprop="courseCode" content="PHARM">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/commerce/accounting'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Accounting</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Master financial reporting, auditing practices, and taxation with commerce courses and
+                        accounting programs in India
+                    </div>
+                    <meta itemprop="courseCode" content="ACC">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/commerce/banking'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Banking & Finance</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Learn banking operations, financial services, and investment management with commerce and
+                        banking courses in India
+                    </div>
+                    <meta itemprop="courseCode" content="BNK">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+
+
+                <div class="course-item" onclick="window.location.href='/courses/diploma/certificate'" itemscope
+                    itemtype="https://schema.org/Course">
+                    <div class="course-item-title">
+                        <h3 itemprop="name"
+                            style="margin: 0; font-size: inherit; font-weight: inherit; color: inherit; font-family: inherit;">
+                            Diploma Programs</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="course-item-description" itemprop="description">
+                        Short-term specialized certification and professional development programs with admission
+                        guidance for courses in India
+                    </div>
+                    <meta itemprop="courseCode" content="DIP">
+                    <meta itemprop="provider" content="UniPick Partner Universities">
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const coursesLists = document.querySelectorAll('.courses-list');
+
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    // Remove active class from all tabs
+                    categoryTabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    this.setAttribute('aria-selected', 'true');
+
+                    // Get category
+                    const category = this.dataset.category;
+
+                    // Hide all course lists
+                    coursesLists.forEach(list => list.classList.remove('active'));
+
+                    // Show selected course list
+                    const selectedList = document.querySelector(`.courses-list[data-category="${category}"]`);
+                    if (selectedList) {
+                        selectedList.classList.add('active');
+                    }
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
 
 
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>

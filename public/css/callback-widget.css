@@ -14,10 +14,13 @@
 .callback-button {
     width: 70px;
     height: 70px;
-    background: #2C5F8D; /* Academic blue */
+    background: #007BFF;
+    /* Academic blue */
     border: none;
-    border-radius: 50%; /* Circular */
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    border-radius: 50%;
+    /* Circular */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    /* Enhanced shadow */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -29,14 +32,24 @@
 }
 
 .callback-button:hover {
-    background: #1E4364; /* Darker blue on hover */
-    transform: none; /* Remove displacement */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
+    background: #0056b3;
+    /* Darker blue on hover */
+    transform: none;
+    /* Remove displacement */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    /* Stronger shadow on hover */
 }
 
 @keyframes pulse {
-    0%, 100% { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
-    50% { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+
+    0%,
+    100% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
 }
 
 .callback-button {
@@ -72,6 +85,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -79,7 +93,7 @@
 }
 
 .callback-popup-header {
-    background: #2C5F8D;
+    background: #007BFF;
     color: #FFFFFF;
     padding: 10px 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -150,7 +164,7 @@
 }
 
 .callback-popup-body::-webkit-scrollbar-thumb {
-    background: #2C5F8D;
+    background: #007BFF;
     border-radius: 2px;
 }
 
@@ -193,14 +207,14 @@
 .callback-form-group input:focus,
 .callback-form-group select:focus {
     outline: none;
-    border-color: #2C5F8D;
+    border-color: #007BFF;
     box-shadow: 0 0 0 3px rgba(44, 95, 141, 0.1);
 }
 
 .callback-submit-btn {
     width: 100%;
     padding: 12px;
-    background: #2C5F8D;
+    background: #007BFF;
     color: #FFFFFF;
     border: none;
     border-radius: 20px;
@@ -215,7 +229,7 @@
 }
 
 .callback-submit-btn:hover {
-    background: #1E4364;
+    background: #0056b3;
     transform: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -227,7 +241,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
 }
 
@@ -254,12 +268,12 @@
     letter-spacing: 0.05em;
     background: transparent;
     border: none;
-    color: #22C55E;
+    color: #007BFF;
     border-radius: 4px;
 }
 
 .callback-success {
-    color: #22C55E;
+    color: #007BFF;
 }
 
 .callback-error {
@@ -295,7 +309,7 @@
         transform: translate(-50%, -50%);
         z-index: 10002;
     }
-    
+
     .callback-popup-body {
         padding: 15px;
     }
@@ -306,13 +320,13 @@
         bottom: 80px;
         right: 15px;
     }
-    
+
     .callback-button {
         width: 50px;
         height: 50px;
         font-size: 1.2rem;
     }
-    
+
     .callback-popup {
         width: calc(100vw - 30px);
         height: 440px;
@@ -324,7 +338,7 @@
         transform: translate(-50%, -50%);
         z-index: 10002;
     }
-    
+
     .callback-popup-body {
         padding: 15px;
     }

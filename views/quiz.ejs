@@ -1,948 +1,953 @@
 <%- include('partials/header') %>
 
-<!-- Import Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts imported in header.ejs -->
 
-<style>
-    /* ========================================
+    <style>
+        /* ========================================
        QUIZ PAGE - ACADEMIC THEME
     ======================================== */
-    
-    /* Global Scrollbar Hide */
-    html, body {
-        overflow-x: hidden;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
-    
-    /* Hero Section - Matching About Page */
-    .quiz-hero {
-        position: relative;
-        width: 100%;
-        min-height: 200px;
-        overflow: hidden;
-        background: #000000;
-        padding: 80px 5% 50px;
-        display: flex;
-        align-items: center;
-        border-bottom: none;
-    }
-
-    /* Background Image */
-    .quiz-hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1920&q=80');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        z-index: 0;
-    }
-
-    /* Black Overlay */
-    .quiz-hero::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.70);
-        z-index: 1;
-    }
-
-    .quiz-hero-content {
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
-        position: relative;
-        z-index: 2;
-        text-align: left;
-    }
-
-    .quiz-hero h1 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 2.8rem;
-        font-weight: 700;
-        margin-bottom: 0;
-        color: #FFFFFF;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-        text-decoration: none;
-    }
-
-    /* Quiz Container */
-    .quiz-page-container {
-        width: 90%;
-        max-width: 1200px;
-        margin: 60px auto 120px;
-        background: #FFFFFF;
-        padding: 0;
-        position: relative;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    /* Quiz Progress */
-    .quiz-progress {
-        height: 6px;
-        background: #E5E7EB;
-        position: relative;
-    }
-
-    .quiz-progress-bar {
-        height: 100%;
-        background: #2C5F8D;
-        width: 0%;
-        transition: width 0.3s ease;
-    }
-
-    /* Quiz Steps */
-    .quiz-step {
-        padding: 50px;
-        display: none;
-    }
-
-    .quiz-step.active {
-        display: block;
-        animation: fadeIn 0.2s ease;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(5px);
+        /* Global Scrollbar Hide */
+        html,
+        body {
+            overflow-x: hidden;
+            /* Scrollbar restored */
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 
-    .quiz-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-
-    .quiz-header h2 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: #1B1F24;
-        margin-bottom: 12px;
-        letter-spacing: -0.01em;
-    }
-
-    .quiz-header p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.9rem;
-        color: #4B5563;
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.6;
-    }
-
-    /* ========================================
-       STREAM SELECTION - 2x2 GRID
-    ======================================== */
-    #streamStep {
-        padding: 40px 50px 50px;
-        background-color: #F7F8FA;
-    }
-
-    .stream-options-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 20px;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    .stream-option-card {
-        background: #FFFFFF;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 8px;
-        padding: 35px 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        position: relative;
-    }
-
-    .stream-option-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        border-color: #2C5F8D;
-    }
-
-    .stream-option-card.selected {
-        background: linear-gradient(135deg, #2C5F8D 0%, #1E4364 100%);
-        border-color: #2C5F8D;
-        box-shadow: 0 8px 24px rgba(44, 95, 141, 0.3);
-    }
-
-    .stream-option-card i {
-        font-size: 3rem;
-        color: #2C5F8D;
-        margin-bottom: 15px;
-        transition: all 0.25s ease;
-    }
-
-    .stream-option-card:hover i {
-        transform: scale(1.1);
-    }
-
-    .stream-option-card.selected i {
-        color: #FFFFFF;
-    }
-
-    .stream-option-title {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: #1B1F24;
-        margin-bottom: 8px;
-        letter-spacing: -0.01em;
-        line-height: 1.3;
-    }
-
-    .stream-option-card.selected .stream-option-title {
-        color: #FFFFFF;
-    }
-
-    .stream-option-subtitle {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.8rem;
-        color: #6B7280;
-        font-weight: 400;
-        line-height: 1.5;
-    }
-
-    .stream-option-card.selected .stream-option-subtitle {
-        color: rgba(255, 255, 255, 0.85);
-    }
-
-    /* ========================================
-       QUESTION OPTIONS - VERTICAL LAYOUT
-    ======================================== */
-    .question-container {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-    .question-card {
-        background: #F7F8FA;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 8px;
-        padding: 35px;
-        margin-bottom: 30px;
-        position: relative;
-    }
-
-    .question-number {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: #2C5F8D;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 12px;
-        display: inline-block;
-        padding: 5px 12px;
-        background: rgba(44, 95, 141, 0.1);
-        border-radius: 4px;
-    }
-
-    .question-text {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: #1B1F24;
-        margin-bottom: 28px;
-        line-height: 1.4;
-        letter-spacing: -0.01em;
-    }
-
-    .answer-options {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .question-option {
-        display: flex;
-        align-items: center;
-        padding: 16px 20px;
-        background: #FFFFFF;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: left;
-        position: relative;
-    }
-
-    .question-option:hover {
-        border-color: #2C5F8D;
-        background: rgba(44, 95, 141, 0.05);
-        transform: translateX(8px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .question-option.selected {
-        background: #2C5F8D;
-        border-color: #2C5F8D;
-        transform: translateX(10px);
-        box-shadow: 0 6px 16px rgba(44, 95, 141, 0.3);
-    }
-
-    .question-option.selected:hover {
-        transform: translateX(10px);
-    }
-
-    .option-number {
-        width: 36px;
-        height: 36px;
-        border: 2px solid #2C5F8D;
-        border-radius: 50%;
-        margin-right: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        color: #2C5F8D;
-        flex-shrink: 0;
-        background: #FFFFFF;
-        transition: all 0.2s ease;
-    }
-
-    .question-option:hover .option-number {
-        background: #2C5F8D;
-        color: #FFFFFF;
-        transform: scale(1.1);
-    }
-
-    .question-option.selected .option-number {
-        background: #FFFFFF;
-        color: #2C5F8D;
-        border-color: #FFFFFF;
-    }
-
-    .option-text {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 1rem;
-        font-weight: 500;
-        color: #1B1F24;
-        flex: 1;
-        line-height: 1.5;
-        transition: all 0.2s ease;
-    }
-
-    .question-option.selected .option-text {
-        color: #FFFFFF;
-        font-weight: 600;
-    }
-
-    /* Quiz Navigation */
-    .quiz-navigation {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        max-width: 900px;
-        margin: 0 auto;
-        padding-top: 25px;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    /* Quiz Buttons */
-    .quiz-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 24px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.85rem;
-        font-weight: 600;
-        text-decoration: none;
-        border: none;
-        background-color: #2C5F8D;
-        color: #FFFFFF;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border-radius: 50px;
-        box-shadow: 0 2px 8px rgba(44, 95, 141, 0.3);
-    }
-
-    .quiz-btn:hover:not(:disabled) {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(44, 95, 141, 0.4);
-        background: #1E4364;
-    }
-
-    .quiz-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    .quiz-btn.accent {
-        background-color: #2C5F8D;
-        box-shadow: 0 4px 12px rgba(44, 95, 141, 0.3);
-    }
-
-    .quiz-btn i {
-        margin-right: 8px;
-    }
-
-    /* Student Info Form */
-    .student-info-form {
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-bottom: 20px;
-    }
-
-    .form-group {
-        margin-bottom: 18px;
-    }
-
-    .form-group label {
-        display: block;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: #1B1F24;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .form-group label .required {
-        color: #DC2626;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 12px 14px;
-        font-size: 0.95rem;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border-radius: 6px;
-        background: #FFFFFF;
-        color: #1B1F24;
-        transition: all 0.2s ease;
-    }
-
-    .form-control:focus {
-        outline: none;
-        border-color: #2C5F8D;
-        box-shadow: 0 0 0 3px rgba(44, 95, 141, 0.1);
-    }
-
-    /* Loading State */
-    .loading-container {
-        text-align: center;
-        padding: 70px 20px;
-    }
-
-    .loader {
-        border: 6px solid #E5E7EB;
-        border-top: 6px solid #2C5F8D;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        animation: spin 1s linear infinite;
-        margin: 0 auto;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    .loading-container h2 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        margin-top: 25px;
-        color: #1B1F24;
-        font-weight: 600;
-        font-size: 1.4rem;
-        letter-spacing: -0.01em;
-    }
-
-    .loading-container p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        color: #6B7280;
-        font-size: 0.95rem;
-        font-weight: 400;
-        margin-top: 10px;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-        .quiz-page-container {
-            width: 95%;
-        }
-    }
-
-    @media (max-width: 768px) {
+        /* Hero Section - Matching About Page */
         .quiz-hero {
-            min-height: 120px;
-            padding: 40px 5% 30px;
-        }
-        
-        .quiz-hero h1 {
-            font-size: 1.6rem;
-        }
-        
-        .quiz-step {
-            padding: 30px 20px;
+            position: relative;
+            width: 100%;
+            min-height: 200px;
+            overflow: hidden;
+            background: #000000;
+            padding: 80px 5% 50px;
+            display: flex;
+            align-items: center;
+            border-bottom: none;
         }
 
-        #streamStep {
-            padding: 30px 20px 35px;
+        /* Background Image */
+        .quiz-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        /* Black Overlay */
+        .quiz-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.70);
+            z-index: 1;
+        }
+
+        .quiz-hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: left;
+        }
+
+        .quiz-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0;
+            color: #FFFFFF;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            text-decoration: none;
+        }
+
+        /* Quiz Container */
+        .quiz-page-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 60px auto 120px;
+            background: #FFFFFF;
+            padding: 0;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Quiz Progress */
+        .quiz-progress {
+            height: 6px;
+            background: #E5E7EB;
+            position: relative;
+        }
+
+        .quiz-progress-bar {
+            height: 100%;
+            background: #007BFF;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Quiz Steps */
+        .quiz-step {
+            padding: 50px;
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .quiz-header {
-            margin-bottom: 30px;
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .quiz-header h2 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1B1F24;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
         }
 
         .quiz-header p {
-            font-size: 0.85rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: #4B5563;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
-        
+
+        /* ========================================
+       STREAM SELECTION - 2x2 GRID
+    ======================================== */
+        #streamStep {
+            padding: 40px 50px 50px;
+            background-color: #F7F8FA;
+        }
+
         .stream-options-grid {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .stream-option-card {
-            padding: 30px 20px;
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            padding: 35px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+
+        .stream-option-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-color: #007BFF;
+        }
+
+        .stream-option-card.selected {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            border-color: #007BFF;
+            box-shadow: 0 8px 24px rgba(0, 123, 255, 0.3);
         }
 
         .stream-option-card i {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
+            font-size: 3rem;
+            color: #007BFF;
+            margin-bottom: 15px;
+            transition: all 0.25s ease;
+        }
+
+        .stream-option-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .stream-option-card.selected i {
+            color: #FFFFFF;
         }
 
         .stream-option-title {
-            font-size: 1.1rem;
-            margin-bottom: 6px;
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1B1F24;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+
+        .stream-option-card.selected .stream-option-title {
+            color: #FFFFFF;
         }
 
         .stream-option-subtitle {
-            font-size: 0.75rem;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: #6B7280;
+            font-weight: 400;
+            line-height: 1.5;
         }
-        
-        .form-row {
-            grid-template-columns: 1fr;
+
+        .stream-option-card.selected .stream-option-subtitle {
+            color: rgba(255, 255, 255, 0.85);
         }
-        
+
+        /* ========================================
+       QUESTION OPTIONS - VERTICAL LAYOUT
+    ======================================== */
+        .question-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         .question-card {
-            padding: 25px 20px;
-            margin-bottom: 25px;
+            background: #F7F8FA;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            padding: 35px;
+            margin-bottom: 30px;
+            position: relative;
         }
 
         .question-number {
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            margin-bottom: 10px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #007BFF;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(0, 123, 255, 0.1);
+            border-radius: 4px;
         }
-        
+
         .question-text {
-            font-size: 1.1rem;
-            margin-bottom: 22px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1B1F24;
+            margin-bottom: 28px;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
         }
 
         .answer-options {
-            gap: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .question-option {
-            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            position: relative;
         }
 
-        .option-text {
-            font-size: 0.9rem;
+        .question-option:hover {
+            border-color: #007BFF;
+            background: rgba(0, 123, 255, 0.05);
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .question-option.selected {
+            background: #007BFF;
+            border-color: #007BFF;
+            transform: translateX(10px);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.3);
+        }
+
+        .question-option.selected:hover {
+            transform: translateX(10px);
         }
 
         .option-number {
-            width: 32px;
-            height: 32px;
-            font-size: 0.9rem;
-            margin-right: 14px;
-        }
-
-        .quiz-navigation {
-            padding-top: 20px;
-        }
-
-        .quiz-btn {
-            padding: 10px 20px;
-            font-size: 0.8rem;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .quiz-hero {
-            min-height: 100px;
-            padding: 35px 5% 25px;
-        }
-
-        .quiz-hero h1 {
-            font-size: 1.4rem;
-        }
-
-        .quiz-step {
-            padding: 25px 18px;
-        }
-
-        #streamStep {
-            padding: 25px 18px 30px;
-        }
-
-        .quiz-header h2 {
-            font-size: 1.25rem;
-        }
-
-        .quiz-header p {
-            font-size: 0.8rem;
-        }
-        
-        .question-card {
-            padding: 20px 16px;
-        }
-
-        .question-text {
+            width: 36px;
+            height: 36px;
+            border: 2px solid #007BFF;
+            border-radius: 50%;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 1rem;
+            font-weight: 700;
+            color: #007BFF;
+            flex-shrink: 0;
+            background: #FFFFFF;
+            transition: all 0.2s ease;
+        }
+
+        .question-option:hover .option-number {
+            background: #007BFF;
+            color: #FFFFFF;
+            transform: scale(1.1);
+        }
+
+        .question-option.selected .option-number {
+            background: #FFFFFF;
+            color: #007BFF;
+            border-color: #FFFFFF;
+        }
+
+        .option-text {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1B1F24;
+            flex: 1;
+            line-height: 1.5;
+            transition: all 0.2s ease;
+        }
+
+        .question-option.selected .option-text {
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        /* Quiz Navigation */
+        .quiz-navigation {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* Quiz Buttons */
+        .quiz-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            background-color: #007BFF;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 50px;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .quiz-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+            background: #1E4364;
+        }
+
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-btn.accent {
+            background-color: #007BFF;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .quiz-btn i {
+            margin-right: 8px;
+        }
+
+        /* Student Info Form */
+        .student-info-form {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
             margin-bottom: 20px;
         }
 
-        .answer-options {
-            gap: 8px;
+        .form-group {
+            margin-bottom: 18px;
         }
 
-        .question-option {
+        .form-group label {
+            display: block;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1B1F24;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group label .required {
+            color: #DC2626;
+        }
+
+        .form-control {
+            width: 100%;
             padding: 12px 14px;
+            font-size: 0.95rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            border-radius: 6px;
+            background: #FFFFFF;
+            color: #1B1F24;
+            transition: all 0.2s ease;
         }
 
-        .option-number {
-            width: 30px;
-            height: 30px;
-            font-size: 0.85rem;
-            margin-right: 12px;
-        }
-        
-        .option-text {
-            font-size: 0.85rem;
+        .form-control:focus {
+            outline: none;
+            border-color: #007BFF;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
         }
 
-        .stream-option-card {
-            padding: 25px 18px;
-        }
-
-        .stream-option-card i {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .stream-option-title {
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
-
-        .stream-option-subtitle {
-            font-size: 0.7rem;
-        }
-
+        /* Loading State */
         .loading-container {
-            padding: 60px 18px;
+            text-align: center;
+            padding: 70px 20px;
         }
 
         .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #E5E7EB;
-            border-top: 5px solid #2C5F8D;
+            border: 6px solid #E5E7EB;
+            border-top: 6px solid #007BFF;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-container h2 {
-            font-size: 1.2rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin-top: 25px;
+            color: #1B1F24;
+            font-weight: 600;
+            font-size: 1.4rem;
+            letter-spacing: -0.01em;
         }
 
         .loading-container p {
-            font-size: 0.85rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #6B7280;
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-top: 10px;
         }
-    }
-</style>
 
-<!-- Hero Section -->
-<section class="quiz-hero">
-    <div class="quiz-hero-content">
-        <h1>University Match Quiz</h1>
-    </div>
-</section>
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .quiz-page-container {
+                width: 95%;
+            }
+        }
 
-<!-- Quiz Container -->
-<div class="quiz-page-container">
-    <!-- Quiz Progress -->
-    <div class="quiz-progress">
-        <div class="quiz-progress-bar" id="progressBar"></div>
-    </div>
-    
-    <!-- Stream Selection - 4 SQUARE BUTTONS IN 2x2 GRID -->
-    <div class="quiz-step active" id="streamStep">
-        <div class="quiz-header">
-            <h2>Choose Your Academic Stream</h2>
-            <p>Select your current or preferred field of study</p>
+        @media (max-width: 768px) {
+            .quiz-hero {
+                min-height: 120px;
+                padding: 40px 5% 30px;
+            }
+
+            .quiz-hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .quiz-step {
+                padding: 30px 20px;
+            }
+
+            #streamStep {
+                padding: 30px 20px 35px;
+            }
+
+            .quiz-header {
+                margin-bottom: 30px;
+            }
+
+            .quiz-header h2 {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+            }
+
+            .quiz-header p {
+                font-size: 0.85rem;
+            }
+
+            .stream-options-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 15px;
+            }
+
+            .stream-option-card {
+                padding: 30px 20px;
+            }
+
+            .stream-option-card i {
+                font-size: 2.5rem;
+                margin-bottom: 12px;
+            }
+
+            .stream-option-title {
+                font-size: 1.1rem;
+                margin-bottom: 6px;
+            }
+
+            .stream-option-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .question-card {
+                padding: 25px 20px;
+                margin-bottom: 25px;
+            }
+
+            .question-number {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+                margin-bottom: 10px;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+                margin-bottom: 22px;
+            }
+
+            .answer-options {
+                gap: 10px;
+            }
+
+            .question-option {
+                padding: 14px 16px;
+            }
+
+            .option-text {
+                font-size: 0.9rem;
+            }
+
+            .option-number {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+                margin-right: 14px;
+            }
+
+            .quiz-navigation {
+                padding-top: 20px;
+            }
+
+            .quiz-btn {
+                padding: 10px 20px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .quiz-hero {
+                min-height: 100px;
+                padding: 35px 5% 25px;
+            }
+
+            .quiz-hero h1 {
+                font-size: 1.4rem;
+            }
+
+            .quiz-step {
+                padding: 25px 18px;
+            }
+
+            #streamStep {
+                padding: 25px 18px 30px;
+            }
+
+            .quiz-header h2 {
+                font-size: 1.25rem;
+            }
+
+            .quiz-header p {
+                font-size: 0.8rem;
+            }
+
+            .question-card {
+                padding: 20px 16px;
+            }
+
+            .question-text {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            .answer-options {
+                gap: 8px;
+            }
+
+            .question-option {
+                padding: 12px 14px;
+            }
+
+            .option-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.85rem;
+                margin-right: 12px;
+            }
+
+            .option-text {
+                font-size: 0.85rem;
+            }
+
+            .stream-option-card {
+                padding: 25px 18px;
+            }
+
+            .stream-option-card i {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+
+            .stream-option-title {
+                font-size: 1rem;
+                margin-bottom: 5px;
+            }
+
+            .stream-option-subtitle {
+                font-size: 0.7rem;
+            }
+
+            .loading-container {
+                padding: 60px 18px;
+            }
+
+            .loader {
+                width: 50px;
+                height: 50px;
+                border: 5px solid #E5E7EB;
+                border-top: 5px solid #007BFF;
+            }
+
+            .loading-container h2 {
+                font-size: 1.2rem;
+            }
+
+            .loading-container p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
+    <!-- Hero Section -->
+    <section class="quiz-hero">
+        <div class="quiz-hero-content">
+            <% const breadcrumbs=[ { name: 'Home' , url: '/' }, { name: 'University Finder Quiz' , url: '' } ]; %>
+                <%- include('partials/breadcrumbs', { breadcrumbs: breadcrumbs }) %>
+
+                    <h1>University Match Quiz</h1>
+                    <p class="quiz-hero-subtitle"
+                        style="font-family: var(--font-body); font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); font-weight: 400; line-height: 1.6; margin-top: 15px; max-width: 600px;">
+                        Discover your perfect university match with our interactive assessment tool.</p>
         </div>
-        
-        <div class="stream-options-grid">
-            <div class="stream-option-card" data-value="science">
-                <i class="fas fa-flask"></i>
-                <div class="stream-option-title">Science</div>
-                <p class="stream-option-subtitle">Physics, Chemistry, Biology</p>
+    </section>
+
+    <!-- Quiz Container -->
+    <div class="quiz-page-container">
+        <!-- Quiz Progress -->
+        <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Stream Selection - 4 SQUARE BUTTONS IN 2x2 GRID -->
+        <div class="quiz-step active" id="streamStep">
+            <div class="quiz-header">
+                <h2>Choose Your Academic Stream</h2>
+                <p>Select your current or preferred field of study</p>
             </div>
-            <div class="stream-option-card" data-value="commerce">
-                <i class="fas fa-chart-line"></i>
-                <div class="stream-option-title">Commerce</div>
-                <p class="stream-option-subtitle">Business, Economics, Accounts</p>
-            </div>
-            <div class="stream-option-card" data-value="arts">
-                <i class="fas fa-palette"></i>
-                <div class="stream-option-title">Arts & Humanities</div>
-                <p class="stream-option-subtitle">Design, Law, Literature</p>
-            </div>
-            <div class="stream-option-card" data-value="engineering">
-                <i class="fas fa-cogs"></i>
-                <div class="stream-option-title">Engineering</div>
-                <p class="stream-option-subtitle">Technology, Computer Science</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Questions - VERTICAL OPTIONS, AUTO-ADVANCE ON CLICK -->
-    <div class="quiz-step" id="questionsStep">
-        <div class="question-container" id="questionContainer">
-            <!-- Questions dynamically inserted by JS -->
-        </div>
-        
-        <div class="quiz-navigation">
-            <button class="quiz-btn" onclick="previousQuestion()" id="prevBtn" style="display:none;">
-                <i class="fas fa-arrow-left"></i> Previous
-            </button>
-        </div>
-    </div>
-    
-    <!-- Student Info Collection -->
-    <div class="quiz-step" id="studentInfoStep">
-        <div class="quiz-header">
-            <h2>Almost Done!</h2>
-            <p>Please provide your details to receive personalized recommendations</p>
-        </div>
-        
-        <form id="studentInfoForm" class="student-info-form">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="studentName">Full Name <span class="required">*</span></label>
-                    <input type="text" id="studentName" class="form-control" required>
+
+            <div class="stream-options-grid">
+                <div class="stream-option-card" data-value="science">
+                    <i class="fas fa-flask"></i>
+                    <div class="stream-option-title">Science</div>
+                    <p class="stream-option-subtitle">Physics, Chemistry, Biology</p>
                 </div>
-                <div class="form-group">
-                    <label for="studentPhone">Phone Number <span class="required">*</span></label>
-                    <input type="tel" id="studentPhone" class="form-control" required pattern="[0-9]{10}">
+                <div class="stream-option-card" data-value="commerce">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stream-option-title">Commerce</div>
+                    <p class="stream-option-subtitle">Business, Economics, Accounts</p>
+                </div>
+                <div class="stream-option-card" data-value="arts">
+                    <i class="fas fa-palette"></i>
+                    <div class="stream-option-title">Arts & Humanities</div>
+                    <p class="stream-option-subtitle">Design, Law, Literature</p>
+                </div>
+                <div class="stream-option-card" data-value="engineering">
+                    <i class="fas fa-cogs"></i>
+                    <div class="stream-option-title">Engineering</div>
+                    <p class="stream-option-subtitle">Technology, Computer Science</p>
                 </div>
             </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="studentEmail">Email Address <span class="required">*</span></label>
-                    <input type="email" id="studentEmail" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="studentCity">City</label>
-                    <input type="text" id="studentCity" class="form-control">
-                </div>
+        </div>
+
+        <!-- Questions - VERTICAL OPTIONS, AUTO-ADVANCE ON CLICK -->
+        <div class="quiz-step" id="questionsStep">
+            <div class="question-container" id="questionContainer">
+                <!-- Questions dynamically inserted by JS -->
             </div>
-            
-            <button type="submit" class="quiz-btn accent" style="width: 100%; margin-top: 20px;">
-                <i class="fas fa-check-circle"></i> Get My Recommendations
-            </button>
-        </form>
-    </div>
-    
-    <!-- Loading State -->
-    <div class="quiz-step" id="loadingStep">
-        <div class="loading-container">
-            <div class="loader"></div>
-            <h2>Analyzing Your Responses...</h2>
-            <p>Please wait while we match you with the perfect universities</p>
+
+            <div class="quiz-navigation">
+                <button class="quiz-btn" onclick="previousQuestion()" id="prevBtn" style="display:none;">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+            </div>
+        </div>
+
+        <!-- Student Info Collection -->
+        <div class="quiz-step" id="studentInfoStep">
+            <div class="quiz-header">
+                <h2>Almost Done!</h2>
+                <p>Please provide your details to receive personalized recommendations</p>
+            </div>
+
+            <form id="studentInfoForm" class="student-info-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="studentName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentPhone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="studentPhone" class="form-control" required pattern="[0-9]{10}">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentEmail">Email Address <span class="required">*</span></label>
+                        <input type="email" id="studentEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentCity">City</label>
+                        <input type="text" id="studentCity" class="form-control">
+                    </div>
+                </div>
+
+                <button type="submit" class="quiz-btn accent" style="width: 100%; margin-top: 20px;">
+                    <i class="fas fa-check-circle"></i> Get My Recommendations
+                </button>
+            </form>
+        </div>
+
+        <!-- Loading State -->
+        <div class="quiz-step" id="loadingStep">
+            <div class="loading-container">
+                <div class="loader"></div>
+                <h2>Analyzing Your Responses...</h2>
+                <p>Please wait while we match you with the perfect universities</p>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-let currentQuestion = 0;
-let quizAnswers = {};
-let selectedStream = '';
-let totalQuestions = 5;
+    <script>
+        let currentQuestion = 0;
+        let quizAnswers = {};
+        let selectedStream = '';
+        let totalQuestions = 5;
 
-// Initialize stream selection
-document.querySelectorAll('.stream-option-card').forEach(card => {
-    card.addEventListener('click', function() {
-        document.querySelectorAll('.stream-option-card').forEach(c => c.classList.remove('selected'));
-        this.classList.add('selected');
-        selectedStream = this.dataset.value;
-        
-        // Auto-advance to questions after showing selection
-        setTimeout(() => {
-            document.getElementById('streamStep').classList.remove('active');
-            document.getElementById('questionsStep').classList.add('active');
-            loadQuestion(0);
-            updateProgress();
-        }, 300);
-    });
-});
+        // Initialize stream selection
+        document.querySelectorAll('.stream-option-card').forEach(card => {
+            card.addEventListener('click', function () {
+                document.querySelectorAll('.stream-option-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedStream = this.dataset.value;
 
-// AUTO-ADVANCE: Click option → mark selected → redirect to next
-function setupQuestionOptions() {
-    document.querySelectorAll('.question-option').forEach(option => {
-        option.addEventListener('click', function() {
-            if (this.classList.contains('selected')) return;
-            
-            this.parentElement.querySelectorAll('.question-option').forEach(opt => {
-                opt.classList.remove('selected');
+                // Auto-advance to questions after showing selection
+                setTimeout(() => {
+                    document.getElementById('streamStep').classList.remove('active');
+                    document.getElementById('questionsStep').classList.add('active');
+                    loadQuestion(0);
+                    updateProgress();
+                }, 300);
             });
-            
-            this.classList.add('selected');
-            
-            const questionId = this.closest('.question-card').dataset.questionId;
-            quizAnswers[questionId] = this.dataset.value;
-            
-            this.parentElement.querySelectorAll('.question-option').forEach(opt => {
-                opt.style.pointerEvents = 'none';
-            });
-            
-            setTimeout(() => {
-                nextQuestion();
-            }, 200);
         });
-    });
-}
 
-function nextQuestion() {
-    currentQuestion++;
-    
-    if (currentQuestion >= totalQuestions) {
-        document.getElementById('questionsStep').classList.remove('active');
-        document.getElementById('studentInfoStep').classList.add('active');
-    } else {
-        loadQuestion(currentQuestion);
-    }
-    
-    updateProgress();
-    
-    if (currentQuestion > 0) {
-        document.getElementById('prevBtn').style.display = 'inline-flex';
-    }
-}
+        // AUTO-ADVANCE: Click option → mark selected → redirect to next
+        function setupQuestionOptions() {
+            document.querySelectorAll('.question-option').forEach(option => {
+                option.addEventListener('click', function () {
+                    if (this.classList.contains('selected')) return;
 
-function previousQuestion() {
-    if (currentQuestion > 0) {
-        currentQuestion--;
-        loadQuestion(currentQuestion);
-        updateProgress();
-        
-        if (currentQuestion === 0) {
-            document.getElementById('prevBtn').style.display = 'none';
+                    this.parentElement.querySelectorAll('.question-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+
+                    this.classList.add('selected');
+
+                    const questionId = this.closest('.question-card').dataset.questionId;
+                    quizAnswers[questionId] = this.dataset.value;
+
+                    this.parentElement.querySelectorAll('.question-option').forEach(opt => {
+                        opt.style.pointerEvents = 'none';
+                    });
+
+                    setTimeout(() => {
+                        nextQuestion();
+                    }, 200);
+                });
+            });
         }
-    }
-}
 
-function loadQuestion(index) {
-    const questions = [
-        {
-            id: 'q1',
-            text: 'What is your primary career goal?',
-            options: [
-                { value: 'research', text: 'Research and Development' },
-                { value: 'corporate', text: 'Corporate Career' },
-                { value: 'entrepreneurship', text: 'Entrepreneurship' },
-                { value: 'academia', text: 'Academic Career' }
-            ]
-        },
-        {
-            id: 'q2',
-            text: 'What is your preferred study location?',
-            options: [
-                { value: 'domestic', text: 'Within My Country' },
-                { value: 'international', text: 'Study Abroad' },
-                { value: 'online', text: 'Online/Remote' },
-                { value: 'hybrid', text: 'Hybrid (Mix of Both)' }
-            ]
-        },
-        {
-            id: 'q3',
-            text: 'What is your budget range for education?',
-            options: [
-                { value: 'budget', text: 'Budget Friendly (Under 5 Lakhs)' },
-                { value: 'moderate', text: 'Moderate (5-10 Lakhs)' },
-                { value: 'premium', text: 'Premium (10-20 Lakhs)' },
-                { value: 'luxury', text: 'Luxury (Above 20 Lakhs)' }
-            ]
-        },
-        {
-            id: 'q4',
-            text: 'What type of campus environment do you prefer?',
-            options: [
-                { value: 'urban', text: 'Urban City Campus' },
-                { value: 'suburban', text: 'Suburban Area' },
-                { value: 'rural', text: 'Rural/Countryside' },
-                { value: 'any', text: 'No Preference' }
-            ]
-        },
-        {
-            id: 'q5',
-            text: 'What matters most to you in a university?',
-            options: [
-                { value: 'ranking', text: 'University Ranking & Reputation' },
-                { value: 'placement', text: 'Placement Opportunities' },
-                { value: 'research', text: 'Research Facilities' },
-                { value: 'culture', text: 'Campus Culture & Activities' }
-            ]
+        function nextQuestion() {
+            currentQuestion++;
+
+            if (currentQuestion >= totalQuestions) {
+                document.getElementById('questionsStep').classList.remove('active');
+                document.getElementById('studentInfoStep').classList.add('active');
+            } else {
+                loadQuestion(currentQuestion);
+            }
+
+            updateProgress();
+
+            if (currentQuestion > 0) {
+                document.getElementById('prevBtn').style.display = 'inline-flex';
+            }
         }
-    ];
-    
-    const question = questions[index];
-    const questionHTML = `
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion(currentQuestion);
+                updateProgress();
+
+                if (currentQuestion === 0) {
+                    document.getElementById('prevBtn').style.display = 'none';
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            const questions = [
+                {
+                    id: 'q1',
+                    text: 'What is your primary career goal?',
+                    options: [
+                        { value: 'research', text: 'Research and Development' },
+                        { value: 'corporate', text: 'Corporate Career' },
+                        { value: 'entrepreneurship', text: 'Entrepreneurship' },
+                        { value: 'academia', text: 'Academic Career' }
+                    ]
+                },
+                {
+                    id: 'q2',
+                    text: 'What is your preferred study location?',
+                    options: [
+                        { value: 'domestic', text: 'Within My Country' },
+                        { value: 'international', text: 'Study Abroad' },
+                        { value: 'online', text: 'Online/Remote' },
+                        { value: 'hybrid', text: 'Hybrid (Mix of Both)' }
+                    ]
+                },
+                {
+                    id: 'q3',
+                    text: 'What is your budget range for education?',
+                    options: [
+                        { value: 'budget', text: 'Budget Friendly (Under 5 Lakhs)' },
+                        { value: 'moderate', text: 'Moderate (5-10 Lakhs)' },
+                        { value: 'premium', text: 'Premium (10-20 Lakhs)' },
+                        { value: 'luxury', text: 'Luxury (Above 20 Lakhs)' }
+                    ]
+                },
+                {
+                    id: 'q4',
+                    text: 'What type of campus environment do you prefer?',
+                    options: [
+                        { value: 'urban', text: 'Urban City Campus' },
+                        { value: 'suburban', text: 'Suburban Area' },
+                        { value: 'rural', text: 'Rural/Countryside' },
+                        { value: 'any', text: 'No Preference' }
+                    ]
+                },
+                {
+                    id: 'q5',
+                    text: 'What matters most to you in a university?',
+                    options: [
+                        { value: 'ranking', text: 'University Ranking & Reputation' },
+                        { value: 'placement', text: 'Placement Opportunities' },
+                        { value: 'research', text: 'Research Facilities' },
+                        { value: 'culture', text: 'Campus Culture & Activities' }
+                    ]
+                }
+            ];
+
+            const question = questions[index];
+            const questionHTML = `
         <div class="question-card" data-question-id="${question.id}">
             <div class="question-number">Question ${index + 1} of ${totalQuestions}</div>
             <h3 class="question-text">${question.text}</h3>
@@ -957,96 +962,96 @@ function loadQuestion(index) {
             </div>
         </div>
     `;
-    
-    document.getElementById('questionContainer').innerHTML = questionHTML;
-    setupQuestionOptions();
-}
 
-function updateProgress() {
-    const totalSteps = totalQuestions + 2;
-    const progress = ((currentQuestion + 2) / totalSteps) * 100;
-    document.getElementById('progressBar').style.width = progress + '%';
-}
-
-// Form submission
-document.getElementById('studentInfoForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    document.getElementById('studentInfoStep').classList.remove('active');
-    document.getElementById('loadingStep').classList.add('active');
-    document.getElementById('progressBar').style.width = '100%';
-    
-    const formData = {
-        name: document.getElementById('studentName').value,
-        phone: document.getElementById('studentPhone').value,
-        email: document.getElementById('studentEmail').value,
-        city: document.getElementById('studentCity').value,
-        stream: selectedStream,
-        answers: quizAnswers
-    };
-    
-    try {
-        const response = await fetch('/api/leads/quiz', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            // Calculate quiz score based on answers
-            const quizScore = calculateScore(quizAnswers);
-            
-            // Store results with recommendations from API
-            const quizResults = {
-                quizScore: quizScore,
-                recommendations: result.recommendations || []
-            };
-            
-            // Add match percentages to recommendations
-            quizResults.recommendations = quizResults.recommendations.map((uni, index) => {
-                return {
-                    ...uni,
-                    matchPercentage: 95 - (index * 3), // Descending match %
-                    id: uni._id,
-                    image: uni.logo || uni.image || '/images/default-university.jpg'
-                };
-            });
-            
-            localStorage.setItem('quizResults', JSON.stringify(quizResults));
-            
-            setTimeout(() => {
-                window.location.href = '/quiz-results';
-            }, 2000);
-        } else {
-            alert('Error submitting quiz. Please try again.');
-            document.getElementById('loadingStep').classList.remove('active');
-            document.getElementById('studentInfoStep').classList.add('active');
+            document.getElementById('questionContainer').innerHTML = questionHTML;
+            setupQuestionOptions();
         }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Network error. Please try again.');
-        document.getElementById('loadingStep').classList.remove('active');
-        document.getElementById('studentInfoStep').classList.add('active');
-    }
-});
 
-// Calculate score based on answers
-function calculateScore(answers) {
-    let score = 60; // Base score
-    
-    // Add points based on specific answers
-    if (answers.q1 === 'corporate') score += 10;
-    if (answers.q2 === 'domestic') score += 8;
-    if (answers.q3 === 'moderate') score += 7;
-    if (answers.q4 !== 'any') score += 5;
-    if (answers.q5 === 'placement') score += 10;
-    
-    return Math.min(score, 100); // Cap at 100
-}
-</script>
+        function updateProgress() {
+            const totalSteps = totalQuestions + 2;
+            const progress = ((currentQuestion + 2) / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
 
-<%- include('partials/footer') %>
+        // Form submission
+        document.getElementById('studentInfoForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            document.getElementById('studentInfoStep').classList.remove('active');
+            document.getElementById('loadingStep').classList.add('active');
+            document.getElementById('progressBar').style.width = '100%';
+
+            const formData = {
+                name: document.getElementById('studentName').value,
+                phone: document.getElementById('studentPhone').value,
+                email: document.getElementById('studentEmail').value,
+                city: document.getElementById('studentCity').value,
+                stream: selectedStream,
+                answers: quizAnswers
+            };
+
+            try {
+                const response = await fetch('/api/leads/quiz', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Calculate quiz score based on answers
+                    const quizScore = calculateScore(quizAnswers);
+
+                    // Store results with recommendations from API
+                    const quizResults = {
+                        quizScore: quizScore,
+                        recommendations: result.recommendations || []
+                    };
+
+                    // Add match percentages to recommendations
+                    quizResults.recommendations = quizResults.recommendations.map((uni, index) => {
+                        return {
+                            ...uni,
+                            matchPercentage: 95 - (index * 3), // Descending match %
+                            id: uni._id,
+                            image: uni.logo || uni.image || '/images/default-university.jpg'
+                        };
+                    });
+
+                    localStorage.setItem('quizResults', JSON.stringify(quizResults));
+
+                    setTimeout(() => {
+                        window.location.href = '/quiz-results';
+                    }, 2000);
+                } else {
+                    alert('Error submitting quiz. Please try again.');
+                    document.getElementById('loadingStep').classList.remove('active');
+                    document.getElementById('studentInfoStep').classList.add('active');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Network error. Please try again.');
+                document.getElementById('loadingStep').classList.remove('active');
+                document.getElementById('studentInfoStep').classList.add('active');
+            }
+        });
+
+        // Calculate score based on answers
+        function calculateScore(answers) {
+            let score = 60; // Base score
+
+            // Add points based on specific answers
+            if (answers.q1 === 'corporate') score += 10;
+            if (answers.q2 === 'domestic') score += 8;
+            if (answers.q3 === 'moderate') score += 7;
+            if (answers.q4 !== 'any') score += 5;
+            if (answers.q5 === 'placement') score += 10;
+
+            return Math.min(score, 100); // Cap at 100
+        }
+    </script>
+
+    <%- include('partials/footer') %>

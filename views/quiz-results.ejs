@@ -1,598 +1,594 @@
 <%- include('partials/header') %>
 
-<!-- Import Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts imported in header.ejs -->
 
-<style>
-    /* ========================================
+    <style>
+        /* ========================================
        QUIZ RESULTS PAGE - ACADEMIC THEME
     ======================================== */
-    
-    /* Global Scrollbar Hide */
-    html, body {
-        overflow-x: hidden;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
+        /* Global Scrollbar Hide */
+        html,
+        body {
+            overflow-x: hidden;
+            /* Scrollbar restored */
+        }
 
-    .results-page-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 60px 5% 80px;
-    }
-
-    .results-header {
-        text-align: center;
-        margin-bottom: 45px;
-    }
-
-    .results-header h1 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.9rem;
-        color: #1B1F24;
-        margin-bottom: 12px;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-        line-height: 1.2;
-    }
-
-    .results-header p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.95rem;
-        color: #4B5563;
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.6;
-    }
-
-    /* Recommendations Section */
-    .recommendations-section {
-        margin-bottom: 60px;
-    }
-
-    .recommendation-card {
-        background: #FFFFFF;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 8px;
-        padding: 22px;
-        margin-bottom: 18px;
-        display: flex;
-        gap: 22px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    }
-
-    .recommendation-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-        border-color: #2C5F8D;
-    }
-
-    .recommendation-image {
-        width: 200px;
-        height: 145px;
-        flex-shrink: 0;
-        overflow: hidden;
-        border-radius: 6px;
-    }
-
-    .recommendation-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-
-    .recommendation-card:hover .recommendation-image img {
-        transform: scale(1.05);
-    }
-
-    .recommendation-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .match-badge {
-        display: inline-block;
-        background: #2C5F8D;
-        color: #FFFFFF;
-        padding: 4px 12px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.75rem;
-        font-weight: 600;
-        margin-bottom: 8px;
-        border-radius: 20px;
-        width: fit-content;
-        letter-spacing: 0.02em;
-    }
-
-    .recommendation-content h3 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.25rem;
-        color: #1B1F24;
-        margin-bottom: 8px;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-        line-height: 1.3;
-    }
-
-    .recommendation-meta {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.8rem;
-        color: #6B7280;
-        margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-
-    .recommendation-meta i {
-        color: #2C5F8D;
-        margin-right: 4px;
-    }
-
-    .recommendation-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: auto;
-    }
-
-    /* Next Steps Section */
-    .next-steps {
-        background: #F7F8FA;
-        padding: 45px 30px;
-        margin-bottom: 50px;
-        border-radius: 8px;
-        text-align: center;
-    }
-
-    .next-steps h2 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.7rem;
-        color: #1B1F24;
-        margin-bottom: 35px;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-    }
-
-    .steps-list {
-        max-width: 700px;
-        margin: 0 auto 40px;
-        text-align: left;
-    }
-
-    .step-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 15px;
-        margin-bottom: 20px;
-    }
-
-    .step-item i {
-        font-size: 1.3rem;
-        color: #2C5F8D;
-        margin-top: 2px;
-        flex-shrink: 0;
-    }
-
-    .step-item p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.9rem;
-        color: #4B5563;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    .contact-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        margin-top: 35px;
-        padding-top: 30px;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 1.1rem;
-        color: #1B1F24;
-        font-weight: 600;
-    }
-
-    .contact-item i {
-        color: #2C5F8D;
-        font-size: 1.1rem;
-    }
-
-    .call-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 28px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.9rem;
-        font-weight: 600;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        border-radius: 50px;
-        gap: 8px;
-        background-color: #2C5F8D;
-        color: #FFFFFF;
-        box-shadow: 0 2px 8px rgba(44, 95, 141, 0.25);
-    }
-
-    .call-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(44, 95, 141, 0.35);
-        background: #1E4364;
-        text-decoration: none;
-    }
-
-    .call-button i {
-        font-size: 0.85rem;
-    }
-
-    /* CTA Section */
-    .cta-section {
-        text-align: center;
-        padding: 30px 0;
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-
-    /* Buttons */
-    .btn-primary, .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 11px 22px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        border-radius: 50px;
-        gap: 7px;
-    }
-
-    .btn-primary {
-        background-color: #2C5F8D;
-        color: #FFFFFF;
-        box-shadow: 0 2px 8px rgba(44, 95, 141, 0.25);
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(44, 95, 141, 0.35);
-        background: #1E4364;
-        text-decoration: none;
-    }
-
-    .btn-secondary {
-        background-color: transparent;
-        color: #2C5F8D;
-        border: 2px solid #2C5F8D;
-    }
-
-    .btn-secondary:hover {
-        background-color: rgba(44, 95, 141, 0.08);
-        transform: translateY(-2px);
-        text-decoration: none;
-    }
-
-    .btn-primary i, .btn-secondary i {
-        font-size: 0.8rem;
-    }
-
-    /* No Results Message - SMALLER TEXT */
-    .no-results-message {
-        text-align: center;
-        padding: 50px 30px;
-        background: #F7F8FA;
-        border-radius: 8px;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .no-results-message i {
-        font-size: 2.8rem;
-        color: #9CA3AF;
-        margin-bottom: 15px;
-    }
-
-    .no-results-message h3 {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.3rem;
-        color: #1B1F24;
-        margin-bottom: 10px;
-        font-weight: 600;
-        line-height: 1.3;
-    }
-
-    .no-results-message p {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.85rem;
-        color: #6B7280;
-        line-height: 1.6;
-        max-width: 500px;
-        margin: 0 auto 18px;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
         .results-page-container {
-            padding: 45px 5% 70px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 5% 80px;
         }
 
         .results-header {
-            margin-bottom: 35px;
+            text-align: center;
+            margin-bottom: 45px;
         }
 
         .results-header h1 {
-            font-size: 1.5rem;
-        }
-
-        .results-header p {
-            font-size: 0.875rem;
-        }
-
-        .recommendations-section {
-            margin-bottom: 50px;
-        }
-
-        .recommendation-card {
-            flex-direction: column;
-            padding: 18px;
-        }
-
-        .recommendation-image {
-            width: 100%;
-            height: 160px;
-        }
-
-        .recommendation-content h3 {
-            font-size: 1.15rem;
-        }
-
-        .recommendation-meta {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 6px;
-            font-size: 0.75rem;
-        }
-
-        .recommendation-actions {
-            flex-direction: column;
-        }
-
-        .next-steps {
-            padding: 38px 20px;
-        }
-
-        .next-steps h2 {
-            font-size: 1.4rem;
-            margin-bottom: 28px;
-        }
-
-        .steps-list {
-            margin-bottom: 32px;
-        }
-
-        .step-item {
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .step-item i {
-            font-size: 1.15rem;
-        }
-
-        .step-item p {
-            font-size: 0.85rem;
-        }
-
-        .contact-info {
-            gap: 12px;
-            margin-top: 28px;
-            padding-top: 25px;
-        }
-
-        .contact-item {
-            font-size: 1rem;
-        }
-
-        .call-button {
-            padding: 11px 24px;
-            font-size: 0.85rem;
-            width: 100%;
-            max-width: 280px;
-        }
-
-        .cta-section {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .btn-primary, .btn-secondary {
-            width: 100%;
-            max-width: 280px;
-        }
-
-        /* No Results Mobile */
-        .no-results-message {
-            padding: 35px 20px;
-        }
-
-        .no-results-message i {
-            font-size: 2.3rem;
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 1.9rem;
+            color: #1B1F24;
             margin-bottom: 12px;
-        }
-
-        .no-results-message h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .no-results-message p {
-            font-size: 0.8rem;
-            max-width: 100%;
-            margin-bottom: 15px;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .results-header h1 {
-            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
         }
 
         .results-header p {
-            font-size: 0.8rem;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: #4B5563;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Recommendations Section */
+        .recommendations-section {
+            margin-bottom: 60px;
         }
 
         .recommendation-card {
-            padding: 15px;
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            padding: 22px;
+            margin-bottom: 18px;
+            display: flex;
+            gap: 22px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            border-color: #2C5F8D;
         }
 
         .recommendation-image {
-            height: 140px;
+            width: 200px;
+            height: 145px;
+            flex-shrink: 0;
+            overflow: hidden;
+            border-radius: 6px;
         }
 
-        .recommendation-content h3 {
-            font-size: 1.05rem;
+        .recommendation-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .recommendation-card:hover .recommendation-image img {
+            transform: scale(1.05);
+        }
+
+        .recommendation-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .match-badge {
-            font-size: 0.7rem;
-            padding: 3px 10px;
+            display: inline-block;
+            background: #2C5F8D;
+            color: #FFFFFF;
+            padding: 4px 12px;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            border-radius: 20px;
+            width: fit-content;
+            letter-spacing: 0.02em;
         }
 
+        .recommendation-content h3 {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 1.25rem;
+            color: #1B1F24;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+
+        .recommendation-meta {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: #6B7280;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .recommendation-meta i {
+            color: #2C5F8D;
+            margin-right: 4px;
+        }
+
+        .recommendation-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        /* Next Steps Section */
         .next-steps {
-            padding: 32px 16px;
+            background: #F7F8FA;
+            padding: 45px 30px;
+            margin-bottom: 50px;
+            border-radius: 8px;
+            text-align: center;
         }
 
         .next-steps h2 {
-            font-size: 1.25rem;
-            margin-bottom: 24px;
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 1.7rem;
+            color: #1B1F24;
+            margin-bottom: 35px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .steps-list {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-align: left;
         }
 
         .step-item {
-            gap: 10px;
-            margin-bottom: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .step-item i {
-            font-size: 1.05rem;
+            font-size: 1.3rem;
+            color: #2C5F8D;
+            margin-top: 2px;
+            flex-shrink: 0;
         }
 
         .step-item p {
-            font-size: 0.8rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: #4B5563;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .contact-item {
-            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #1B1F24;
+            font-weight: 600;
         }
 
         .contact-item i {
-            font-size: 1rem;
+            color: #2C5F8D;
+            font-size: 1.1rem;
         }
 
         .call-button {
-            font-size: 0.8rem;
-            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-radius: 50px;
+            gap: 8px;
+            background-color: #2C5F8D;
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(44, 95, 141, 0.25);
         }
 
-        /* No Results Very Small Mobile */
+        .call-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 95, 141, 0.35);
+            background: #1E4364;
+            text-decoration: none;
+        }
+
+        .call-button i {
+            font-size: 0.85rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 22px;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-radius: 50px;
+            gap: 7px;
+        }
+
+        .btn-primary {
+            background-color: #2C5F8D;
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(44, 95, 141, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 95, 141, 0.35);
+            background: #1E4364;
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #2C5F8D;
+            border: 2px solid #2C5F8D;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(44, 95, 141, 0.08);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .btn-primary i,
+        .btn-secondary i {
+            font-size: 0.8rem;
+        }
+
+        /* No Results Message - SMALLER TEXT */
         .no-results-message {
-            padding: 28px 16px;
+            text-align: center;
+            padding: 50px 30px;
+            background: #F7F8FA;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .no-results-message i {
-            font-size: 2rem;
+            font-size: 2.8rem;
+            color: #9CA3AF;
+            margin-bottom: 15px;
         }
 
         .no-results-message h3 {
-            font-size: 1rem;
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 1.3rem;
+            color: #1B1F24;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.3;
         }
 
         .no-results-message p {
-            font-size: 0.75rem;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: #6B7280;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto 18px;
         }
 
-        .no-results-message .btn-primary {
-            font-size: 0.75rem;
-            padding: 10px 18px;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .results-page-container {
+                padding: 45px 5% 70px;
+            }
+
+            .results-header {
+                margin-bottom: 35px;
+            }
+
+            .results-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .results-header p {
+                font-size: 0.875rem;
+            }
+
+            .recommendations-section {
+                margin-bottom: 50px;
+            }
+
+            .recommendation-card {
+                flex-direction: column;
+                padding: 18px;
+            }
+
+            .recommendation-image {
+                width: 100%;
+                height: 160px;
+            }
+
+            .recommendation-content h3 {
+                font-size: 1.15rem;
+            }
+
+            .recommendation-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                font-size: 0.75rem;
+            }
+
+            .recommendation-actions {
+                flex-direction: column;
+            }
+
+            .next-steps {
+                padding: 38px 20px;
+            }
+
+            .next-steps h2 {
+                font-size: 1.4rem;
+                margin-bottom: 28px;
+            }
+
+            .steps-list {
+                margin-bottom: 32px;
+            }
+
+            .step-item {
+                gap: 12px;
+                margin-bottom: 16px;
+            }
+
+            .step-item i {
+                font-size: 1.15rem;
+            }
+
+            .step-item p {
+                font-size: 0.85rem;
+            }
+
+            .contact-info {
+                gap: 12px;
+                margin-top: 28px;
+                padding-top: 25px;
+            }
+
+            .contact-item {
+                font-size: 1rem;
+            }
+
+            .call-button {
+                padding: 11px 24px;
+                font-size: 0.85rem;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .cta-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            /* No Results Mobile */
+            .no-results-message {
+                padding: 35px 20px;
+            }
+
+            .no-results-message i {
+                font-size: 2.3rem;
+                margin-bottom: 12px;
+            }
+
+            .no-results-message h3 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+
+            .no-results-message p {
+                font-size: 0.8rem;
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
         }
-    }
-</style>
 
-<div class="results-page-container">
-    <div class="results-header">
-        <h1>Your University Recommendations</h1>
-        <p>Based on your responses, here are the best universities matched to your profile</p>
-    </div>
-    
-    <div class="recommendations-section">
-        <div id="recommendationsList">
-            <!-- Recommendations will be populated by JS -->
+        @media (max-width: 600px) {
+            .results-header h1 {
+                font-size: 1.3rem;
+            }
+
+            .results-header p {
+                font-size: 0.8rem;
+            }
+
+            .recommendation-card {
+                padding: 15px;
+            }
+
+            .recommendation-image {
+                height: 140px;
+            }
+
+            .recommendation-content h3 {
+                font-size: 1.05rem;
+            }
+
+            .match-badge {
+                font-size: 0.7rem;
+                padding: 3px 10px;
+            }
+
+            .next-steps {
+                padding: 32px 16px;
+            }
+
+            .next-steps h2 {
+                font-size: 1.25rem;
+                margin-bottom: 24px;
+            }
+
+            .step-item {
+                gap: 10px;
+                margin-bottom: 14px;
+            }
+
+            .step-item i {
+                font-size: 1.05rem;
+            }
+
+            .step-item p {
+                font-size: 0.8rem;
+            }
+
+            .contact-item {
+                font-size: 0.95rem;
+            }
+
+            .contact-item i {
+                font-size: 1rem;
+            }
+
+            .call-button {
+                font-size: 0.8rem;
+                padding: 10px 20px;
+            }
+
+            /* No Results Very Small Mobile */
+            .no-results-message {
+                padding: 28px 16px;
+            }
+
+            .no-results-message i {
+                font-size: 2rem;
+            }
+
+            .no-results-message h3 {
+                font-size: 1rem;
+            }
+
+            .no-results-message p {
+                font-size: 0.75rem;
+            }
+
+            .no-results-message .btn-primary {
+                font-size: 0.75rem;
+                padding: 10px 18px;
+            }
+        }
+    </style>
+
+    <div class="results-page-container">
+        <div class="results-header">
+            <h1>Your University Recommendations</h1>
+            <p>Based on your responses, here are the best universities matched to your profile</p>
         </div>
-    </div>
-    
-    <div class="next-steps">
-        <h2>What's Next?</h2>
-        
-        <div class="steps-list">
-            <div class="step-item">
-                <i class="fas fa-phone-alt"></i>
-                <p>Our guidance team will contact you within 24 hours</p>
-            </div>
-            <div class="step-item">
-                <i class="fas fa-file-alt"></i>
-                <p>Receive comprehensive details about each university</p>
-            </div>
-            <div class="step-item">
-                <i class="fas fa-hands-helping"></i>
-                <p>Complete support throughout the admission process</p>
+
+        <div class="recommendations-section">
+            <div id="recommendationsList">
+                <!-- Recommendations will be populated by JS -->
             </div>
         </div>
-        
+
+        <div class="next-steps">
+            <h2>What's Next?</h2>
+
+            <div class="steps-list">
+                <div class="step-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>Our guidance team will contact you within 24 hours</p>
+                </div>
+                <div class="step-item">
+                    <i class="fas fa-file-alt"></i>
+                    <p>Receive comprehensive details about each university</p>
+                </div>
+                <div class="step-item">
+                    <i class="fas fa-hands-helping"></i>
+                    <p>Complete support throughout the admission process</p>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
-</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
-    
-    if (!results.recommendations || results.recommendations.length === 0) {
-        // Show no results message
-        document.getElementById('recommendationsList').innerHTML = `
+            if (!results.recommendations || results.recommendations.length === 0) {
+                // Show no results message
+                document.getElementById('recommendationsList').innerHTML = `
             <div class="no-results-message">
                 <i class="fas fa-university"></i>
                 <h3>No Specific Recommendations Found</h3>
             </div>
         `;
-    } else {
-        // Display recommendations
-        const recommendationsList = document.getElementById('recommendationsList');
-        recommendationsList.innerHTML = results.recommendations.map(rec => `
+            } else {
+                // Display recommendations
+                const recommendationsList = document.getElementById('recommendationsList');
+                recommendationsList.innerHTML = results.recommendations.map(rec => `
             <div class="recommendation-card" onclick="window.location.href='/university/${rec.id || rec._id}'">
                 <div class="recommendation-image">
                     <img src="${rec.image || rec.logo || '/images/default-university.jpg'}" alt="${rec.name}">
@@ -615,8 +611,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `).join('');
-    }
-});
-</script>
+            }
+        });
+    </script>
 
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>
