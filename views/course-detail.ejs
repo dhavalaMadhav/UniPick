@@ -577,13 +577,14 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .course-hero {
-                padding: 100px 5% 40px;
-                min-height: 350px;
+                padding: 60px 5% 30px;
+                padding: 40px 5% 20px;
+                min-height: 200px;
             }
 
 
             .course-hero h1 {
-                font-size: 1.9rem;
+                font-size: 1.6rem;
             }
 
 
@@ -592,8 +593,17 @@
             }
 
 
-            /* Smaller breadcrumb on mobile */
-            /* Breadcrumb styles removed - using global style.css */
+            /* Smaller breadcrumb on mobile - matching About page scale */
+            .breadcrumb {
+                font-size: 0.65rem;
+                padding: 6px 12px;
+                margin-bottom: 1.5rem;
+            }
+
+            .breadcrumb a,
+            .breadcrumb span {
+                padding: 0 8px;
+            }
 
 
             .course-meta {

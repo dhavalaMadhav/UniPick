@@ -378,8 +378,13 @@ async function seedUniversities() {
         await University.deleteMany({});
         console.log('🗑️  Removed all existing universities');
         
-        // Insert new universities
-        const inserted = await University.insertMany(universities);
+        // Insert new universities with individual save calls to trigger pre-save slugification
+        const universityDocs = universities.map(u => new University(u));
+        const inserted = [];
+        for (const doc of universityDocs) {
+            await doc.save();
+            inserted.push(doc);
+        }
         
         // Count featured vs non-featured
         const featuredCount = universities.filter(u => u.featured).length;

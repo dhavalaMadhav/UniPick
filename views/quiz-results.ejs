@@ -589,7 +589,7 @@
                 // Display recommendations
                 const recommendationsList = document.getElementById('recommendationsList');
                 recommendationsList.innerHTML = results.recommendations.map(rec => `
-            <div class="recommendation-card" onclick="window.location.href='/university/${rec.id || rec._id}'">
+            <div class="recommendation-card" onclick="window.location.href='/university/${rec.slug || rec.id}'">
                 <div class="recommendation-image">
                     <img src="${rec.image || rec.logo || '/images/default-university.jpg'}" alt="${rec.name}">
                 </div>
@@ -601,7 +601,7 @@
                         <span><i class="fas fa-trophy"></i> ${rec.ranking || 'NAAC Accredited'}</span>
                     </div>
                     <div class="recommendation-actions">
-                        <button class="btn-primary" onclick="event.stopPropagation(); window.location.href='/university/${rec.id || rec._id}'">
+                        <button class="btn-primary" onclick="event.stopPropagation(); window.location.href='/university/${rec.slug || rec.id}'">
                             View Details
                         </button>
                         <button class="btn-secondary" onclick="event.stopPropagation(); window.location.href='/contact'">

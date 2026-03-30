@@ -1855,7 +1855,7 @@
                              type: university.type ? university.type.toLowerCase() : ' private', fee: university.fee ||
                             0, programmes: university.programmes || [], rating: university.rating || 4.0, featured:
                             university.featured || false }) %>'
-                            onclick="window.location.href='/university/<%= university._id %>'">
+                            onclick="window.location.href='/university/<%= university.slug %>'">
 
                                 <% if (university.featured) { %>
                                     <div class="featured-badge">FEATURED</div>

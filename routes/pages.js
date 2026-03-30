@@ -77,7 +77,7 @@ router.get('/quiz-results', async (req, res) => {
         });
     } catch (error) {
         console.error('❌ Error loading quiz results:', error);
-        res.status(500).render('error', {
+        res.status(500).render('error.ejs', {
             title: 'Error',
             message: 'Unable to load quiz results'
         });
@@ -99,7 +99,7 @@ router.get('/universities', async (req, res) => {
         });
     } catch (error) {
         console.error('❌ Error fetching universities:', error);
-        res.status(500).render('error', {
+        res.status(500).render('error.ejs', {
             title: 'Error',
             message: 'Unable to load universities'
         });
@@ -112,7 +112,7 @@ router.get('/university/:slug', async (req, res) => {
         const university = await University.findOne({ slug: req.params.slug });
         
         if (!university) {
-            return res.status(404).render('error', {
+            return res.status(404).render('error.ejs', {
                 title: 'Not Found',
                 message: 'University not found'
             });
@@ -127,7 +127,7 @@ router.get('/university/:slug', async (req, res) => {
         });
     } catch (error) {
         console.error('❌ Error loading university:', error);
-        res.status(500).render('error', {
+        res.status(500).render('error.ejs', {
             title: 'Error',
             message: 'Error loading university details'
         });

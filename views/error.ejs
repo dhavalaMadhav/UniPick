@@ -1,0 +1,128 @@
+<%- include('partials/header') %>
+
+<main class="error-page">
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h1><%= typeof title !== 'undefined' ? title : 'Oops! Something went wrong' %></h1>
+            <p><%= typeof message !== 'undefined' ? message : 'The page you are looking for might have been moved, deleted, or is temporarily unavailable.' %></p>
+            
+            <div class="error-actions">
+                <a href="/" class="btn-primary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="/contact" class="btn-secondary">
+                    <i class="fas fa-envelope"></i> Contact Support
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .error-page {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #F7F8FA;
+        padding: 40px 20px;
+    }
+
+    .error-container {
+        max-width: 600px;
+        width: 100%;
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        padding: 60px 40px;
+        text-align: center;
+    }
+
+    .error-icon {
+        font-size: 5rem;
+        color: #007BFF;
+        margin-bottom: 24px;
+    }
+
+    .error-content h1 {
+        font-family: 'Rubik', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1B1F24;
+        margin-bottom: 16px;
+    }
+
+    .error-content p {
+        font-family: 'Rubik', sans-serif;
+        font-size: 1.1rem;
+        color: #4B5563;
+        line-height: 1.6;
+        margin-bottom: 40px;
+    }
+
+    .error-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-primary, .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: #007BFF;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .btn-primary:hover {
+        background: #0056b3;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        color: #FFFFFF !important;
+        text-decoration: none;
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: #007BFF;
+        border: 2px solid #007BFF;
+        text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+        background: rgba(0, 123, 255, 0.05);
+        transform: translateY(-2px);
+        color: #007BFF !important;
+        text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+        .error-container {
+            padding: 40px 20px;
+        }
+        
+        .error-actions {
+            flex-direction: column;
+        }
+        
+        .btn-primary, .btn-secondary {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<%- include('partials/footer') %>

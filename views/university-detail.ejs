@@ -1266,6 +1266,19 @@
             display: none;
         }
 
+        /* Smaller breadcrumb on mobile - matching About page scale */
+        .breadcrumb {
+            font-size: 0.65rem;
+            padding: 6px 12px;
+            margin-bottom: 1.5rem;
+            min-height: 28px;
+        }
+
+        .breadcrumb a,
+        .breadcrumb span {
+            padding: 0 8px;
+        }
+
         /* CONTENT */
         .content-grid {
             grid-template-columns: 1fr;
@@ -1538,9 +1551,7 @@
                 { name: 'Universities', url: '/universities' },
                 { name: university.name, url: '' }
             ]; %>
-            <div style="margin-bottom: 25px;">
-                <%- include('partials/breadcrumbs', { breadcrumbs: breadcrumbs }) %>
-            </div>
+            <%- include('partials/breadcrumbs', { breadcrumbs: breadcrumbs }) %>
             <h1><%= university.name %></h1>
             <p><i class="fas fa-map-marker-alt"></i> <%= university.location %></p>
         </div>
@@ -1927,11 +1938,11 @@
 <script>
 // UNIVERSITY DATA
 const universityData = {
-    name: '<%= university.name %>',
+    name: '<%= university.name.replace(/\'/g, "\\\'") %>',
     lat: <%= (university.coordinates && university.coordinates.lat) ? university.coordinates.lat : 19.0760 %>,
     lng: <%= (university.coordinates && university.coordinates.lng) ? university.coordinates.lng : 72.8777 %>,
-    location: '<%= university.location %>',
-    address: '<%= (university.address || university.location) %>'
+    location: '<%= university.location.replace(/\'/g, "\\\'") %>',
+    address: '<%= (university.address || university.location).replace(/\'/g, "\\\'") %>'
 };
 
 let map;
