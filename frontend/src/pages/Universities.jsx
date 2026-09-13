@@ -282,14 +282,23 @@ export default function Universities() {
                             <button className="mobile-filter-button" onClick={() => setShowMobileFilters(true)}>
                                 <i className="fas fa-filter"></i> Filters
                             </button>
-                            <div className="view-toggle">
-                                <button className={`view-btn ${viewMode === 'list' ? 'active' : ''}`} onClick={() => setViewMode('list')}>
+                            <div className="view-toggle" style={{ display: 'inline-flex', background: '#E2E8F0', padding: '3px', borderRadius: '50px', gap: '2px' }}>
+                                <button 
+                                    className={`view-btn ${viewMode === 'list' ? 'active' : ''}`} 
+                                    onClick={() => setViewMode('list')}
+                                    style={{ borderRadius: '50px', padding: '6px 16px', border: 'none', background: viewMode === 'list' ? '#007BFF' : 'transparent', color: viewMode === 'list' ? '#FFFFFF' : '#475569', fontWeight: 600, cursor: 'pointer' }}
+                                >
                                     <i className="fas fa-list"></i> List
                                 </button>
-                                <button className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')}>
+                                <button 
+                                    className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`} 
+                                    onClick={() => setViewMode('grid')}
+                                    style={{ borderRadius: '50px', padding: '6px 16px', border: 'none', background: viewMode === 'grid' ? '#007BFF' : 'transparent', color: viewMode === 'grid' ? '#FFFFFF' : '#475569', fontWeight: 600, cursor: 'pointer' }}
+                                >
                                     <i className="fas fa-th"></i> Grid
                                 </button>
                             </div>
+
                         </div>
                     </div>
 

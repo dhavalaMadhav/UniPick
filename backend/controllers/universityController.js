@@ -32,6 +32,15 @@ const getUniversityById = async (req, res) => {
         if (!university) {
             university = await University.findOne({ slug: new RegExp(`^${idOrSlug}$`, 'i') });
         }
+        if (!university) {
+            const cleanPattern = idOrSlug.replace(/^(university|college)-|-university$/gi, '').replace(/-/g, '.*');
+            university = await University.findOne({
+                $or: [
+                    { slug: new RegExp(cleanPattern, 'i') },
+                    { name: new RegExp(cleanPattern, 'i') }
+                ]
+            });
+        }
         
         if (!university) {
             return res.status(404).json({

@@ -377,15 +377,12 @@ export default function About() {
                             </p>
 
                             <div className="partner-logos">
-                                <div className="partner-logo">Swarnim University</div>
-                                <div className="partner-logo">Sanskriti University</div>
-                                <div className="partner-logo">MIT World Peace University</div>
-                                <div className="partner-logo">Lovely Professional University</div>
-                                <div className="partner-logo">Chandigarh University</div>
-                                <div className="partner-logo">Amity University</div>
-                                <div className="partner-logo">SRM Institute of Science</div>
-                                <div className="partner-logo">VIT University</div>
-                                <div className="partner-logo">Manipal University</div>
+                                <div className="partner-logo">Swarrnim Startup & Innovation University</div>
+                                <div className="partner-logo">Swaminarayan University</div>
+                                <div className="partner-logo">Sankalchand Patel University</div>
+                                <div className="partner-logo">Uka Tarsadia University</div>
+                                <div className="partner-logo">Ajeenkya D Y Patil University</div>
+                                <div className="partner-logo">Karpaga Vinayaga CET</div>
                             </div>
                         </section>
                     )}

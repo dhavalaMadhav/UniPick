@@ -1,66 +1,69 @@
-require('dotenv').config();
+require('dotenv').config({ path: './backend/.env' });
 const mongoose = require('mongoose');
-const University = require('./models/University');
-
-mongoose.connect(process.env.MONGODB_URI);
+const University = require('./backend/models/University');
 
 const universities = [
-    // FEATURED UNIVERSITIES
     {
-        name: "Swarnim University",
-        location: "Ahmedabad, Gujarat",
+        name: "Swarrnim Startup & Innovation University",
+        location: "Gandhinagar, Gujarat",
         state: "gujarat",
-        established: 2020,
-        description: "A premier institution focused on innovation and entrepreneurship. Offers cutting-edge programs in various disciplines with strong industry connections.",
+        established: 2017,
+        description: "Swarrnim Startup & Innovation University (SSIU) was established in 2017 under the Gujarat Private Universities Act and is India's first private 'startup-focused' university. Nestling in a green campus, Swarrnim emphasizes innovation and entrepreneurship. It offers over 100 multidisciplinary programs (around 106 courses) across Engineering, Architecture, Design, Science, Management, Paramedical, and Agriculture among other fields. Its focus on startups is reflected in its curriculum and clubs.",
         bannerImage: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1920&q=80",
         logo: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=200&q=80",
         type: "Private",
-        accreditation: "UGC Approved | AICTE",
-        ranking: "NIRF Innovation: Top 50",
-        website: "https://swarnimuniversity.edu.in",
-        students: "4000+",
+        accreditation: "UGC Approved | AICTE | AIU | Ayush | CCIM | INC | COA",
+        ranking: "NIRF 2025 Reported | India's 1st Startup University",
+        website: "https://swarrnimuniversity.edu.in",
+        students: "2,045+",
         faculty: "180+",
-        campusSize: "35 acres",
-        feeRange: "₹2 - 4.5 LPA",
-        fee: 325000,
+        campusSize: "75 acres",
+        feeRange: "₹1.3 - 4.3 LPA",
+        fee: 350000,
         globalRanking: 45,
         mastersPrograms: 40,
         scholarships: 35,
         featured: true,
-        rating: 4.4,
-        programmes: ["engineering", "management", "computer", "design", "law"],
+        rating: 4.3,
+        programmes: ["engineering", "management", "computer", "design", "architecture", "sciences", "medical"],
         facilities: [
-            "Startup Incubation Center",
-            "Innovation Labs",
-            "Modern Library",
-            "Smart Classrooms",
-            "Hostel Facilities",
-            "Sports Complex",
-            "Cafeteria",
-            "Auditorium"
+            "75-Acre Main Campus",
+            "In-Campus Hospital",
+            "Startup Incubation & Research Center",
+            "Modern Library & Computer Labs",
+            "On-Campus Hostels & Mess",
+            "Sports Grounds & Complex",
+            "Wi-Fi Enabled Campus",
+            "Entrepreneurship & Startup Clubs"
         ],
         placements: {
-            percentage: 87,
+            percentage: 98,
             averagePackage: "₹5.2 LPA",
-            highestPackage: "₹22 LPA",
-            topRecruiters: ["Startups", "Tech Companies", "VC Firms", "Corporate"]
-        }
+            highestPackage: "₹84 LPA (Dom) / ₹48 LPA (Intl)",
+            topRecruiters: ["Wipro", "Infosys", "IBM", "ICICI Bank", "Tech Mahindra", "eClinicalWorks", "Cognizant", "Byju's", "Reliance", "HCL", "Deloitte", "Coca-Cola"]
+        },
+        contactInfo: {
+            phone: "+91 95123 43333",
+            email: "info@swarrnim.edu.in",
+            address: "Bhoyan Rathod, Adalaj Kalol Highway, Gandhinagar, Gujarat – 382422"
+        },
+        address: "Bhoyan Rathod, Adalaj Kalol Highway, Gandhinagar, Gujarat – 382422"
     },
     {
         name: "Swaminarayan University",
-        location: "Kalol, Gujarat",
+        location: "Kalol, Gandhinagar, Gujarat",
         state: "gujarat",
-        established: 2017,
-        description: "A leading private university offering diverse programs in Engineering, Management, Pharmacy, and more with strong industry connections.",
+        established: 2022,
+        description: "Swaminarayan University (SU), established by Shree Swaminarayan Gurukul in 2022, is a multi-disciplinary private university in Kalol (Gandhinagar district). The 60-acre campus is UGC-approved under the Gujarat Private Universities Act 2009. SU comprises a large group of institutes offering programs in Engineering, Management, Commerce, Arts & Humanities, Education, Physiotherapy, Allied Health/Paramedical, Ayurveda, Homoeopathy, Nursing, Science, Law, and Information Technology.",
         bannerImage: "https://images.unsplash.com/photo-1562774053-701939374585?w=1920&q=80",
         logo: "https://images.unsplash.com/photo-1562774053-701939374585?w=200&q=80",
         type: "Private",
-        accreditation: "NAAC A+ | UGC Approved",
-        ranking: "NIRF Rank: 150-200",
+        accreditation: "UGC Approved | Gujarat Private Universities Act 2009",
+        ranking: "UGC Recognized | High Placement Success Rate",
         website: "https://swaminarayanuniversity.ac.in",
-        students: "5200+",
-        faculty: "210+",
-        campusSize: "55 acres",
+        students: "3,500+",
+        faculty: "200+",
+        campusSize: "60 acres",
         feeRange: "₹1.5 - 3.8 LPA",
         fee: 265000,
         globalRanking: 85,
@@ -68,310 +71,213 @@ const universities = [
         scholarships: 30,
         featured: true,
         rating: 4.3,
-        programmes: ["engineering", "management", "pharmacy", "medical", "sciences"],
+        programmes: ["engineering", "management", "computer", "commerce", "medical", "law", "sciences", "arts", "education"],
         facilities: [
-            "Modern Library with 50,000+ books",
-            "State-of-the-art Computer Labs",
-            "Sports Complex & Gymnasium",
-            "Separate Boys & Girls Hostels",
-            "24/7 Medical Facility",
-            "Wi-Fi Enabled Campus",
-            "Cafeteria & Food Court",
-            "Auditorium (1000+ capacity)"
+            "60-Acre Campus on Ahmedabad-Mehsana Highway",
+            "Training & Placement Cell",
+            "Modern Laboratories & Classrooms",
+            "Central Library",
+            "Ayurveda & Allied Health Facilities",
+            "Hostel & Dining Facilities",
+            "Sports & Recreation Grounds"
         ],
         placements: {
             percentage: 90,
-            averagePackage: "₹4.8 LPA",
-            highestPackage: "₹20 LPA",
-            topRecruiters: ["TCS", "Infosys", "Wipro", "Capgemini", "Cognizant", "Amazon"]
-        }
+            averagePackage: "₹4.5 LPA",
+            highestPackage: "₹34.5 LPA",
+            topRecruiters: ["TCS", "Infosys", "Wipro", "Financial & Tech Corporates", "Healthcare Partners"]
+        },
+        contactInfo: {
+            phone: "+91 98765 43211",
+            email: "info@swaminarayanuniversity.ac.in",
+            address: "Ahmedabad–Mehsana Highway, Kalol, Gandhinagar District, Gujarat – 382725"
+        },
+        address: "Ahmedabad–Mehsana Highway, Kalol, Gandhinagar District, Gujarat – 382725"
     },
     {
-        name: "Sanjay Ghodawat University",
-        location: "Kolhapur, Maharashtra",
-        state: "maharashtra",
-        established: 2017,
-        description: "A modern university offering innovative programs in Engineering, Management, and Sciences with emphasis on practical learning and research.",
+        name: "Sankalchand Patel University",
+        location: "Visnagar, Mehsana, Gujarat",
+        state: "gujarat",
+        established: 2016,
+        description: "Sankalchand Patel University (SPU, est. 2016) is a UGC-recognized private university spread over an 84-acre green campus in Visnagar. It encompasses 16 constituent faculties covering Engineering, Medicine, Dental, Nursing, Pharmacy, Physiotherapy, Science, Commerce & Management, Law, Education, Design, and Vocational Studies. SPU currently enrolls over 10,000 students with 600+ faculty. Graded 4-star in GSIRF.",
         bannerImage: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1920&q=80",
         logo: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=200&q=80",
         type: "Private",
-        accreditation: "UGC Approved | AICTE",
-        ranking: "NIRF Rank: 180-220",
-        website: "https://sanjayghodawatuniversity.ac.in",
-        students: "5000+",
-        faculty: "220+",
-        campusSize: "65 acres",
-        feeRange: "₹1.5 - 4 LPA",
-        fee: 275000,
-        globalRanking: 175,
-        mastersPrograms: 38,
-        scholarships: 32,
+        accreditation: "UGC Approved | GSIRF 4-Star Graded | AICTE",
+        ranking: "GSIRF 4-Star Rating | Top University in North Gujarat",
+        website: "https://spu.ac.in",
+        students: "10,000+",
+        faculty: "600+",
+        campusSize: "84 acres",
+        feeRange: "₹1.8 - 4.5 LPA",
+        fee: 300000,
+        globalRanking: 110,
+        mastersPrograms: 45,
+        scholarships: 40,
         featured: true,
-        rating: 4.3,
-        programmes: ["engineering", "management", "computer", "sciences", "commerce", "design"],
+        rating: 4.4,
+        programmes: ["engineering", "management", "medical", "dental", "pharmacy", "computer", "law", "design", "education", "commerce", "sciences"],
         facilities: [
-            "State-of-the-art Laboratories",
-            "Modern Library",
-            "Hostel Facilities",
-            "Sports Complex",
-            "Auditorium",
-            "Cafeteria",
-            "Medical Center",
-            "Research Centers"
+            "84-Acre Green Campus (Sankalchand Patel Vidyadham)",
+            "Attached Teaching Hospitals & Diagnostic Center",
+            "14 Advanced Research Laboratories",
+            "Audio-Visual Studio & Learning Centers",
+            "Biogas Plant & EV Charging Station",
+            "Wi-Fi Enabled Classrooms",
+            "Auditoriums & Hostels"
         ],
         placements: {
             percentage: 88,
-            averagePackage: "₹4.8 LPA",
-            highestPackage: "₹20 LPA",
-            topRecruiters: ["Sanjay Ghodawat Group", "TCS", "Wipro", "Capgemini", "Accenture", "IBM"]
-        }
-    },
-    // NON-FEATURED UNIVERSITIES
-    {
-        name: "Gokul Global University",
-        location: "Siddhpur, Gujarat",
-        state: "gujarat",
-        established: 2018,
-        description: "A comprehensive university offering programs in multiple disciplines with focus on holistic development and global standards.",
-        bannerImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80",
-        logo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=200&q=80",
-        type: "Private",
-        accreditation: "UGC Approved | PCI",
-        ranking: "NIRF Rank: 250-300",
-        website: "https://gokulglobaluniversity.ac.in",
-        students: "4500+",
-        faculty: "190+",
-        campusSize: "45 acres",
-        feeRange: "₹1.2 - 3.2 LPA",
-        fee: 220000,
-        globalRanking: 152,
-        mastersPrograms: 32,
-        scholarships: 28,
-        featured: false,
-        rating: 4.1,
-        programmes: ["engineering", "management", "computer", "arts", "education", "commerce"],
-        facilities: [
-            "Digital Library",
-            "Computer Center",
-            "Seminar Halls",
-            "Hostel Accommodation",
-            "Medical Center",
-            "Sports Ground",
-            "Cafeteria",
-            "Transport Facility"
-        ],
-        placements: {
-            percentage: 82,
-            averagePackage: "₹4.0 LPA",
-            highestPackage: "₹15 LPA",
-            topRecruiters: ["Local Industries", "Educational Institutions", "Service Sector", "IT Companies"]
-        }
-    },
-    {
-        name: "Sandip University",
-        location: "Nashik, Maharashtra",
-        state: "maharashtra",
-        established: 2016,
-        description: "A premier institution in Maharashtra offering quality education in Engineering, Management, and Applied Sciences with modern infrastructure.",
-        bannerImage: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&q=80",
-        logo: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=200&q=80",
-        type: "Private",
-        accreditation: "NAAC B+ | UGC Approved",
-        ranking: "NIRF Rank: 200-250",
-        website: "https://sandipuniversity.edu.in",
-        students: "6500+",
-        faculty: "270+",
-        campusSize: "80 acres",
-        feeRange: "₹1.8 - 4.5 LPA",
-        fee: 315000,
-        globalRanking: 195,
-        mastersPrograms: 42,
-        scholarships: 35,
-        featured: false,
-        rating: 4.2,
-        programmes: ["engineering", "management", "computer", "law", "pharmacy", "architecture"],
-        facilities: [
-            "Modern Campus",
-            "Research Facilities",
-            "Library with E-Resources",
-            "Hostel with AC/Non-AC options",
-            "Sports Complex",
-            "Medical Center",
-            "Auditorium",
-            "Placement Cell"
-        ],
-        placements: {
-            percentage: 85,
-            averagePackage: "₹4.5 LPA",
+            averagePackage: "₹3.5 - 4 LPA",
             highestPackage: "₹18 LPA",
-            topRecruiters: ["Tech Mahindra", "Persistent", "Zensar", "L&T", "KPIT", "Infosys"]
-        }
+            topRecruiters: ["Pharma Majors", "Tech & IT Firms", "Government & Private Hospitals", "Manufacturing Leaders", "Zydus", "Torrent"]
+        },
+        contactInfo: {
+            phone: "+91 98765 43212",
+            email: "info@spu.ac.in",
+            address: "Sankalchand Patel Vidyadham, Ambaji-Gandhinagar Hwy, Visnagar – 384315, Mehsana District, Gujarat"
+        },
+        address: "Sankalchand Patel Vidyadham, Ambaji-Gandhinagar Hwy, Visnagar – 384315, Mehsana District, Gujarat"
     },
     {
-        name: "Marwadi University",
-        location: "Rajkot, Gujarat",
+        name: "Uka Tarsadia University",
+        location: "Bardoli, Surat, Gujarat",
         state: "gujarat",
-        established: 2016,
-        description: "A dynamic university known for its excellent academic standards, industry partnerships, and placement records.",
+        established: 2011,
+        description: "Uka Tarsadia University (UTU), established under the Gujarat Private University (Amendment) Act 2011, is a private university at Gopal Vidyanagar, Surat. Approved under UGC Section 22, UTU hosts over 10,000 students on its fully Wi-Fi campus. It consists of 28 institutes offering programs from Engineering and Architecture to Pharmacy, Biotechnology, IT, Management, Design, Nursing, Agriculture and more.",
         bannerImage: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&q=80",
         logo: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=200&q=80",
         type: "Private",
-        accreditation: "NAAC A | UGC Approved",
-        ranking: "NIRF Rank: 140-160",
-        website: "https://marwadiuniversity.ac.in",
-        students: "6500+",
-        faculty: "280+",
-        campusSize: "55 acres",
-        feeRange: "₹2.2 - 4.5 LPA",
-        fee: 335000,
-        globalRanking: 142,
+        accreditation: "UGC Approved (Section 22) | AICTE | PCI",
+        ranking: "UGC Recognized | Top Campus in South Gujarat",
+        website: "https://utu.ac.in",
+        students: "10,000+",
+        faculty: "450+",
+        campusSize: "100+ acres",
+        feeRange: "₹1.5 - 4.0 LPA",
+        fee: 280000,
+        globalRanking: 130,
         mastersPrograms: 40,
         scholarships: 35,
-        featured: false,
-        rating: 4.2,
-        programmes: ["engineering", "management", "computer", "sciences", "commerce"],
+        featured: true,
+        rating: 4.3,
+        programmes: ["engineering", "management", "pharmacy", "computer", "architecture", "design", "sciences"],
         facilities: [
-            "Modern Campus",
-            "Advanced Laboratories",
-            "Digital Library",
-            "Hostel Facilities",
-            "Sports Complex",
-            "Cafeteria",
-            "Medical Center",
-            "Auditorium"
+            "Maliba Campus (Gopal Vidyanagar) Fully Wi-Fi Enabled",
+            "28 Specialized Constituent Institutes",
+            "Modern High-Tech Research Laboratories",
+            "Central & Departmental Libraries",
+            "Hostels, Mess & Food Courts",
+            "Sports Fields & Indoor Stadium"
         ],
         placements: {
-            percentage: 85,
-            averagePackage: "₹4.5 LPA",
-            highestPackage: "₹18 LPA",
-            topRecruiters: ["TCS", "Infosys", "Capgemini", "Cognizant", "L&T", "Reliance"]
-        }
+            percentage: 89,
+            averagePackage: "₹4.2 LPA",
+            highestPackage: "₹15 LPA",
+            topRecruiters: ["L&T", "Reliance Industries", "TCS", "Sun Pharma", "Alembic", "Infosys", "Torrent Pharma"]
+        },
+        contactInfo: {
+            phone: "+91 98765 43213",
+            email: "info@utu.ac.in",
+            address: "Maliba Campus, Gopal Vidyanagar, Bardoli–Mahuva Road, Tarsadi – 394350, Dist. Surat, Gujarat"
+        },
+        address: "Maliba Campus, Gopal Vidyanagar, Bardoli–Mahuva Road, Tarsadi – 394350, Dist. Surat, Gujarat"
     },
     {
-        name: "Sanskriti University",
-        location: "Mathura, Uttar Pradesh",
-        state: "uttar pradesh",
-        established: 2016,
-        description: "A comprehensive university offering diverse programs with modern infrastructure and emphasis on holistic development.",
+        name: "Ajeenkya D Y Patil University",
+        location: "Lohegaon, Pune, Maharashtra",
+        state: "maharashtra",
+        established: 2015,
+        description: "Ajeenkya D Y Patil University (ADYPU) is a private university in the DY Patil Group (est. 2015) located at Lohegaon, Pune, Maharashtra. NAAC has accredited it 'A' grade. ADYPU comprises several schools of Engineering, Management, Design, Hospitality, Law, Liberal Arts, Architecture, Film & Media, Science, Allied Health, and Centers of Indian Knowledge System. Its scenic 100-acre Pune campus includes specialized labs and a finishing school for industry skills.",
         bannerImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80",
         logo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=200&q=80",
         type: "Private",
-        accreditation: "UGC Approved | AICTE",
-        ranking: "NIRF Rank: 300-350",
-        website: "https://sanskriti.edu.in",
-        students: "3500+",
-        faculty: "150+",
-        campusSize: "40 acres",
-        feeRange: "₹1 - 2.5 LPA",
-        fee: 175000,
-        globalRanking: 210,
-        mastersPrograms: 25,
-        scholarships: 20,
-        featured: false,
-        rating: 3.9,
-        programmes: ["engineering", "management", "arts", "commerce", "education", "pharmacy"],
-        facilities: [
-            "Modern Classrooms",
-            "Library",
-            "Hostel Facilities",
-            "Sports Ground",
-            "Medical Center",
-            "Computer Labs",
-            "Auditorium",
-            "Cafeteria"
-        ],
-        placements: {
-            percentage: 75,
-            averagePackage: "₹3.5 LPA",
-            highestPackage: "₹10 LPA",
-            topRecruiters: ["Local Industries", "Educational Sector", "Service Companies"]
-        }
-    },
-    // ADDITIONAL NON-FEATURED UNIVERSITIES
-    {
-        name: "RK University",
-        location: "Rajkot, Gujarat",
-        state: "gujarat",
-        established: 2011,
-        description: "One of Gujarat's leading universities with focus on professional education, research, and innovation across multiple disciplines.",
-        bannerImage: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1920&q=80",
-        logo: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=200&q=80",
-        type: "Private",
-        accreditation: "NAAC A | UGC Approved",
-        ranking: "NIRF Rank: 120-150",
-        website: "https://rku.ac.in",
-        students: "7000+",
-        faculty: "300+",
-        campusSize: "60 acres",
-        feeRange: "₹2 - 5 LPA",
-        fee: 350000,
-        globalRanking: 125,
-        mastersPrograms: 42,
+        accreditation: "NAAC Grade 'A' | UGC Approved | Maharashtra Govt Recognized",
+        ranking: "NAAC A Grade | Top Private University in Maharashtra",
+        website: "https://adypu.edu.in",
+        students: "6,500+",
+        faculty: "320+",
+        campusSize: "100 acres",
+        feeRange: "₹2.5 - 5.5 LPA",
+        fee: 380000,
+        globalRanking: 60,
+        mastersPrograms: 45,
         scholarships: 40,
-        featured: false,
-        rating: 4.3,
-        programmes: ["engineering", "management", "computer", "pharmacy", "medical"],
+        featured: true,
+        rating: 4.6,
+        programmes: ["engineering", "management", "design", "architecture", "law", "computer", "arts", "sciences"],
         facilities: [
-            "State-of-the-art Laboratories",
-            "Central Library",
-            "Hostel Facilities",
-            "Sports Complex",
-            "Auditorium",
-            "Cafeteria",
-            "Medical Center",
-            "Transport Services"
+            "100-Acre Scenic Pune Campus",
+            "Specialized Innovation & Design Labs",
+            "Finishing School for Industry Skills",
+            "Apple Mac & Design Studios",
+            "State-of-the-Art Sports Complex",
+            "Luxury Hostels & Student Residences"
         ],
         placements: {
-            percentage: 88,
-            averagePackage: "₹4.8 LPA",
-            highestPackage: "₹20 LPA",
-            topRecruiters: ["Reliance", "Adani", "Tata", "IBM", "Accenture", "Wipro"]
-        }
+            percentage: 100,
+            averagePackage: "₹13 - 14 LPA",
+            highestPackage: "₹45 LPA",
+            topRecruiters: ["Tech Mahindra", "Deloitte", "HSBC", "Tata Technologies", "TVS Motors", "HCL", "Cohesity", "Entrata"]
+        },
+        contactInfo: {
+            phone: "+91 98765 43214",
+            email: "info@adypu.edu.in",
+            address: "Charholi Budruk via Lohegaon, Pune, Maharashtra – 412105"
+        },
+        address: "Charholi Budruk via Lohegaon, Pune, Maharashtra – 412105"
     },
     {
-        name: "JK Lakshmipat University",
-        location: "Jaipur, Rajasthan",
-        state: "rajasthan",
-        established: 2011,
-        description: "A premier university in Rajasthan offering industry-aligned programs with strong focus on research and innovation.",
+        name: "Karpaga Vinayaga College of Engineering & Technology",
+        location: "Chengalpattu, Chennai, Tamil Nadu",
+        state: "tamilnadu",
+        established: 2001,
+        description: "Karpaga Vinayaga College of Engineering & Technology (est. 2001) is a private engineering college in Chengalpattu (near Chennai), affiliated to Anna University and approved by AICTE. It holds NBA accreditation for its core engineering programs and has NAAC 'A' grade. KVCET offers B.E. degrees in fields such as Computer Science, Electronics, Mechanical, Biomedical, CSE-AI, Biotechnology, and M.E./M.Tech. programs in similar streams.",
         bannerImage: "https://images.unsplash.com/photo-1562774053-701939374585?w=1920&q=80",
         logo: "https://images.unsplash.com/photo-1562774053-701939374585?w=200&q=80",
         type: "Private",
-        accreditation: "NAAC A+ | UGC Approved",
-        ranking: "NIRF Rank: 80-100",
-        website: "https://jklu.edu.in",
-        students: "5500+",
-        faculty: "220+",
-        campusSize: "30 acres",
-        feeRange: "₹2.5 - 6 LPA",
-        fee: 425000,
-        globalRanking: 95,
-        mastersPrograms: 36,
-        scholarships: 32,
-        featured: false,
-        rating: 4.4,
-        programmes: ["engineering", "management", "computer", "design", "architecture"],
+        accreditation: "NAAC Grade 'A' | NBA Accredited | Anna University Affiliated | AICTE",
+        ranking: "NAAC A Grade | NBA Accredited Engineering College",
+        website: "https://kvcet.ac.in",
+        students: "3,200+",
+        faculty: "210+",
+        campusSize: "45 acres",
+        feeRange: "₹1.2 - 2.8 LPA",
+        fee: 180000,
+        globalRanking: 160,
+        mastersPrograms: 25,
+        scholarships: 30,
+        featured: true,
+        rating: 4.2,
+        programmes: ["engineering", "computer", "sciences"],
         facilities: [
-            "Modern Infrastructure",
-            "Research Centers",
-            "Library with Digital Access",
-            "Hostel Accommodation",
-            "Sports Facilities",
-            "Cafeteria",
-            "Medical Center",
-            "Placement Cell"
+            "Modern Lecture Halls & Smart Classrooms",
+            "Advanced CSE, AI & Biotech Laboratories",
+            "Central Digital Library",
+            "Soft-Skills & Career Enhancement Training Center",
+            "On-Campus Boys & Girls Hostels",
+            "Sports Facilities & Cafeteria"
         ],
         placements: {
-            percentage: 90,
-            averagePackage: "₹5.2 LPA",
-            highestPackage: "₹22 LPA",
-            topRecruiters: ["Amazon", "Microsoft", "Deloitte", "KPMG", "EY", "PwC"]
-        }
+            percentage: 95,
+            averagePackage: "₹3.1 LPA",
+            highestPackage: "₹12 LPA",
+            topRecruiters: ["Transvaal Global Tech", "TCS", "Cognizant", "Wipro", "Infosys", "HCL Tech", "Tech Mahindra"]
+        },
+        contactInfo: {
+            phone: "+91 98765 43215",
+            email: "info@kvcet.ac.in",
+            address: "GST Road, Chinna Kolambakkam, Palayanoor Post, Chengalpattu – 603308, Tamil Nadu"
+        },
+        address: "GST Road, Chinna Kolambakkam, Palayanoor Post, Chengalpattu – 603308, Tamil Nadu"
     }
 ];
 
 async function seedUniversities() {
     try {
+        console.log('🔄 Connecting to MongoDB...');
+        await mongoose.connect(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 30000 });
+        console.log('Connected to MongoDB');
         console.log('🔄 Seeding process started...');
         
         // Clear ALL existing universities
@@ -395,24 +301,14 @@ async function seedUniversities() {
         console.log(`⭐ Featured universities: ${featuredCount}`);
         console.log(`📝 Non-featured universities: ${nonFeaturedCount}`);
         
-        console.log('\n🎯 Featured Universities:');
-        universities.filter(u => u.featured).forEach((uni, index) => {
-            console.log(`${index + 1}. ${uni.name} - ${uni.location}`);
-        });
-        
         console.log('\n📚 All Universities:');
-        universities.forEach((uni, index) => {
-            console.log(`${index + 1}. ${uni.name}${uni.featured ? ' ⭐' : ''}`);
+        inserted.forEach((uni, index) => {
+            console.log(`${index + 1}. ${uni.name} (Slug: ${uni.slug}) - ${uni.location}`);
         });
-        
-        console.log('\n🌐 You can now access:');
-        console.log('   - Universities page: http://localhost:3000/universities');
-        console.log('   - Homepage: http://localhost:3000/');
         
         process.exit(0);
     } catch (error) {
         console.error('❌ Error seeding universities:', error);
-        console.log('💡 Tip: Make sure MongoDB is running and connection string is correct');
         process.exit(1);
     }
 }

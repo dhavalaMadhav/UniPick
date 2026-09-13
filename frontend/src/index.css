@@ -9387,6 +9387,200 @@ input[type="button"] {
     border-radius: 0px !important;
     padding-top: 6px !important;
     padding-bottom: 6px !important;
+        .placement-number {
+            font-size: 2rem;
+        }
+
+        .placement-label {
+            font-size: 0.75rem;
+        }
+
+        /* RECRUITERS - 2 per row */
+        .recruiters-slide {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px;
+            padding: 0 4%;
+        }
+
+        .company-item {
+            height: 60px;
+            font-size: 0.75rem;
+            padding: 10px 12px;
+        }
+
+        /* GALLERY - 2×3 PERFECT FROM FILE:6 */
+        .gallery-section {
+            padding: 40px 5%;
+        }
+
+        .gallery-header h2 {
+            font-size: 1.3rem;
+        }
+
+        .gallery-slide {
+            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-rows: repeat(3, 1fr) !important;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .gallery-cell {
+            aspect-ratio: 4 / 3;
+        }
+
+        /* VIDEO */
+        .video-section {
+            padding: 0 5% 40px;
+        }
+
+        .video-header h2 {
+            font-size: 1.3rem;
+        }
+
+        .video-overlay-images {
+            display: none !important;
+        }
+
+        /* MAP */
+        .map-section-full {
+            padding: 40px 5%;
+        }
+
+        .map-header h2 {
+            font-size: 1.3rem;
+        }
+
+        .distance-calculator-box,
+        .address-info-box {
+            padding: 20px;
+        }
+
+        .distance-calculator-box h3,
+        .address-info-box h4 {
+            font-size: 1.05rem;
+        }
+
+        .calculator-inputs {
+            flex-direction: column;
+        }
+
+        .calculator-inputs input {
+            padding: 12px 16px;
+            font-size: 0.85rem;
+        }
+
+        .btn-calculate,
+        .btn-map-action {
+            padding: 12px 20px;
+            font-size: 0.8rem;
+        }
+
+        .map-actions-buttons {
+            flex-direction: column;
+        }
+
+        .university-detail-map {
+            height: 300px;
+        }
+
+        .distance-info {
+            flex-direction: column;
+            text-align: center;
+            gap: 16px;
+        }
+
+        .distance-number {
+            font-size: 2rem;
+        }
+
+        .distance-text h4 {
+            font-size: 1.05rem;
+        }
+
+        .distance-text p {
+            font-size: 0.75rem;
+        }
+
+        .travel-time {
+            grid-template-columns: 1fr;
+        }
+
+        .travel-option .time {
+            font-size: 1rem;
+        }
+
+        .travel-option .label {
+            font-size: 0.7rem;
+        }
+
+        /* APPLY */
+        .apply-section-bottom {
+            padding: 40px 5%;
+        }
+
+        .apply-cta-title {
+            font-size: 1.25rem;
+        }
+
+        .apply-cta-subtitle {
+            font-size: 0.85rem;
+        }
+
+        .apply-button-large {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.75rem;
+            width: 100%;
+            max-width: 280px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .hero-overlay h1 {
+            font-size: 1.35rem;
+        }
+
+        .gallery-slide {
+            grid-template-columns: repeat(2, 1fr) !important;
+            grid-template-rows: repeat(3, 1fr) !important;
+        }
+    }
+
+/* ========================================
+   GLOBAL RECTANGULAR BUTTON OVERRIDE
+   Forces all buttons across the entire site to be:
+   1. Perfectly rectangular with minimal/zero border-radius.
+   2. Sleek with low vertical padding for reduced height.
+========================================= */
+button,
+.btn,
+.btn-primary,
+.btn-secondary,
+.cta-btn,
+.cta-btn-primary,
+.cta-btn-secondary,
+.cta-button,
+.btn-map-action,
+.btn-calculate,
+.apply-button-large,
+.inst-talk-btn,
+.search-btn,
+.filter-btn,
+.quiz-btn,
+.nav-cta-btn,
+.card-btn,
+a.btn,
+a.btn-primary,
+a.btn-secondary,
+a.cta-btn-primary,
+a.cta-btn-secondary,
+a.apply-button-large,
+a.inst-talk-btn,
+a.view-all,
+input[type="submit"],
+input[type="button"] {
+    border-radius: 0px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
     padding-left: 16px !important;
     padding-right: 16px !important;
     line-height: 1.25 !important;
@@ -9399,4 +9593,42 @@ button.btn-sm, .btn-sm {
     padding-bottom: 4px !important;
     padding-left: 10px !important;
     padding-right: 10px !important;
+}
+
+/* Exception: List and Grid view toggle buttons remain circular pills */
+.view-toggle,
+.view-toggle button,
+.view-btn,
+button.view-btn,
+.view-btn.active,
+.mobile-filter-button {
+    border-radius: 50px !important;
+}
+
+.view-toggle {
+    display: inline-flex;
+    background: #E2E8F0;
+    padding: 3px !important;
+    border-radius: 50px !important;
+    gap: 2px;
+}
+
+.view-btn,
+button.view-btn {
+    border: none !important;
+    background: transparent !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    padding: 6px 16px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.view-btn.active,
+button.view-btn.active {
+    background: #007BFF !important;
+    color: #FFFFFF !important;
+    border-radius: 50px !important;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3) !important;
 }
