@@ -2,10 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 
+const testimonials = [
+    {
+        name: "Rahul Sharma",
+        university: "Swarrnim Startup & Innovation University",
+        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
+        course: "B.Tech Computer Science",
+        review: "The career guidance team helped me find the perfect university for my engineering dreams. Their personalized approach made all the difference!"
+    },
+    {
+        name: "Priya Patel",
+        university: "Swaminarayan University",
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=80",
+        course: "MBA Finance",
+        review: "Thanks to UniPick, I got admitted to my dream business school. The assessment quiz was incredibly accurate in understanding my goals."
+    },
+    {
+        name: "Arjun Kumar",
+        university: "Sankalchand Patel University",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+        course: "MBBS",
+        review: "The guidance office was extremely helpful throughout my admission process. Now I'm studying at one of India's top medical institutes!"
+    },
+    {
+        name: "Sneha Reddy",
+        university: "Ajeenkya D Y Patil University",
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+        course: "B.Des Fashion Design",
+        review: "I never thought finding the right design school would be so easy. The counsellors really understood my creative aspirations!"
+    }
+];
+
 export default function Home() {
     const [stats, setStats] = useState({ universities: 0, courses: 0, students: 0 });
-    const [testimonials, setTestimonials] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [openFaq, setOpenFaq] = useState(null);
 
     const toggleFaq = (idx) => {
@@ -33,22 +62,9 @@ export default function Home() {
 
     useEffect(() => {
         document.title = "UniPick - Admissions, Courses & Universities";
-        
-        Promise.all([
-            api.get('/api/stats').catch(() => api.get('/stats')),
-            api.get('/api/testimonials').catch(() => api.get('/testimonials'))
-        ]).then(([statsRes, testRes]) => {
-            if (statsRes && statsRes.data) {
-                setStats(statsRes.data);
-            }
-            if (testRes && testRes.data) {
-                setTestimonials(Array.isArray(testRes.data) ? testRes.data : (testRes.data.testimonials || []));
-            }
-            setLoading(false);
-        }).catch(err => {
-            console.error("Error fetching homepage data:", err);
-            setLoading(false);
-        });
+        api.get('/api/stats').catch(() => api.get('/stats')).then(res => {
+            if (res && res.data) setStats(res.data);
+        }).catch(() => {});
     }, []);
 
     return (
@@ -90,38 +106,6 @@ export default function Home() {
         </div>
     </section>
 
-    
-    <section className="stats-section">
-        <div className="stats-grid">
-            <div className="stat-item">
-                <div className="stat-icon"><i className="fas fa-users"></i></div>
-                <div className="stat-number" data-target="500">0</div>
-                <div className="stat-plus">+</div>
-                <div className="stat-label">Students Placed</div>
-            </div>
-            <div className="stat-item">
-                <div className="stat-icon"><i className="fas fa-university"></i></div>
-                <div className="stat-number" data-target="150">0</div>
-                <div className="stat-plus">+</div>
-                <div className="stat-label">Partner Universities</div>
-            </div>
-            <div className="stat-item">
-                <div className="stat-icon"><i className="fas fa-chart-line"></i></div>
-                <div className="stat-number" data-target="95">0</div>
-                <div className="stat-percent">%</div>
-                <div className="stat-label">Success Rate</div>
-            </div>
-            <div className="stat-item">
-                <div className="stat-icon"><i className="fas fa-headset"></i></div>
-                <div className="stat-number-text">24/7</div>
-                <div className="stat-label">Support Available</div>
-            </div>
-        </div>
-    </section>
-
-    
-    
-
     <section className="inst-why-choose">
         <div className="inst-why-choose-container">
             <div className="inst-why-choose-header">
@@ -133,8 +117,8 @@ export default function Home() {
                 
                 <div className="inst-feature-item">
                     <div className="inst-feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <circle cx="32" cy="20" r="12" stroke="#008FD3" stroke-width="1.5"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="32" cy="20" r="12" stroke="#008FD3" strokeWidth="1.5"/>
                           <path d="M10 54v-6a16 16 0 0 1 16-16h12a16 16 0 0 1 16 16v6" />
                           <circle cx="48" cy="14" r="4" fill="#38A169" stroke="none" />
                         </svg>
@@ -147,8 +131,8 @@ export default function Home() {
                 
                 <div className="inst-feature-item">
                     <div className="inst-feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M32 4L6 18v38h52V18L32 4z" stroke="#008FD3" stroke-width="1.5"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M32 4L6 18v38h52V18L32 4z" stroke="#008FD3" strokeWidth="1.5"/>
                           <path d="M22 56V36h20v20" />
                           <path d="M14 28h8M42 28h8M14 40h4M46 40h4" />
                           <circle cx="32" cy="14" r="4" fill="#38A169" stroke="none" />
@@ -162,8 +146,8 @@ export default function Home() {
                 
                 <div className="inst-feature-item">
                     <div className="inst-feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <circle cx="32" cy="32" r="26" stroke="#008FD3" stroke-width="1.5"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="32" cy="32" r="26" stroke="#008FD3" strokeWidth="1.5"/>
                           <circle cx="32" cy="32" r="12" />
                           <path d="M32 6v6M32 52v6M6 32h6M52 32h6" />
                           <circle cx="48" cy="16" r="4" fill="#38A169" stroke="none"/>
@@ -177,8 +161,8 @@ export default function Home() {
                 
                 <div className="inst-feature-item">
                     <div className="inst-feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M32 10v44" stroke="#008FD3" stroke-width="1.5"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M32 10v44" stroke="#008FD3" strokeWidth="1.5"/>
                           <path d="M12 24l20-10 20 10v20l-20 10-20-10V24z" />
                           <circle cx="32" cy="32" r="4" fill="#38A169" stroke="none" />
                         </svg>
@@ -191,11 +175,6 @@ export default function Home() {
         </div>
     </section>
 
-
-
-    
-    
-
     <section id="stories" className="inst-stories-section">
         <div className="inst-stories-container">
             <div className="inst-stories-header">
@@ -204,34 +183,25 @@ export default function Home() {
             </div>
 
             <div className="stories-carousel" id="testimonialsCarousel">
-                
-                {loading ? (
-                    <div style={{ textAlign: 'center', padding: '50px' }}>Loading stories...</div>
-                ) : testimonials.length > 0 ? (
-                    testimonials.map((testimonial, idx) => (
-                        <div className="inst-story-card" itemScope itemType="http://schema.org/Review" key={idx}>
-                            <div className="inst-story-top">
-                                <div className="inst-story-student-info">
-                                    <div className="inst-story-name" itemProp="author">{ testimonial.name }</div>
-                                    <div className="inst-story-course">{ testimonial.course }</div>
-                                    <div className="inst-story-univ">{ testimonial.university }</div>
-                                </div>
-                                <div className="inst-story-img-container">
-                                    <img src={ testimonial.image || "https://via.placeholder.com/70" } alt={"Student " + testimonial.name} loading="lazy" />
-                                </div>
+                {testimonials.map((testimonial, idx) => (
+                    <div className="inst-story-card" itemScope itemType="http://schema.org/Review" key={idx}>
+                        <div className="inst-story-top">
+                            <div className="inst-story-student-info">
+                                <div className="inst-story-name" itemProp="author">{ testimonial.name }</div>
+                                <div className="inst-story-course">{ testimonial.course }</div>
+                                <div className="inst-story-univ">{ testimonial.university }</div>
                             </div>
-                            <div className="inst-story-review" itemProp="reviewBody">
-                                "{ testimonial.review }"
+                            <div className="inst-story-img-container" style={{ width: '60px', height: '60px', borderRadius: '50%', minWidth: '60px', minHeight: '60px', flexShrink: 0, overflow: 'hidden', border: '2px solid #007BFF' }}>
+                                <img src={ testimonial.image } alt={"Student " + testimonial.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
                             </div>
                         </div>
-                    ))
-                ) : (
-                    <div style={{ textAlign: 'center', padding: '50px' }}>No stories found.</div>
-                )}
-
+                        <div className="inst-story-review" itemProp="reviewBody">
+                            "{ testimonial.review }"
+                        </div>
+                    </div>
+                ))}
             </div>
 
-            
             <div className="carousel-dots" id="testimonialDots"></div>
         </div>
     </section>

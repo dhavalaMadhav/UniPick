@@ -122,13 +122,39 @@ export default function About() {
                     border-bottom-color: #007BFF !important;
                     font-weight: 600 !important;
                 }
-                .sidebar-link.active i {
+                .cta-buttons {
+                    display: flex;
+                    gap: 20px;
+                    flex-wrap: wrap;
+                    margin-top: 30px;
+                }
+                .cta-btn-primary {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 14px 28px;
+                    background: #007BFF !important;
                     color: #FFFFFF !important;
-                    opacity: 1 !important;
+                    border: 2px solid #007BFF !important;
+                    font-family: 'Inter', sans-serif;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: all 0.2s ease;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                }
+                .cta-btn-primary:hover {
+                    background: #0056b3 !important;
+                    border-color: #0056b3 !important;
+                }
+                .cta-btn-primary i {
+                    margin-right: 10px;
                 }
                 .explore-unis-btn {
                     display: inline-flex;
                     align-items: center;
+                    justify-content: center;
                     padding: 14px 28px;
                     background: #FFFFFF !important;
                     color: #007BFF !important;
@@ -139,10 +165,31 @@ export default function About() {
                     text-decoration: none;
                     transition: all 0.2s ease;
                     border-radius: 4px;
+                    box-sizing: border-box;
                 }
                 .explore-unis-btn:hover {
                     background: #007BFF !important;
                     color: #FFFFFF !important;
+                }
+                @media (max-width: 768px) {
+                    .cta-buttons {
+                        flex-direction: column !important;
+                        width: 100% !important;
+                        gap: 12px !important;
+                    }
+                    .cta-buttons .cta-btn-primary,
+                    .cta-buttons .explore-unis-btn {
+                        width: 100% !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        text-align: center !important;
+                        box-sizing: border-box !important;
+                        padding: 14px 20px !important;
+                        font-size: 1rem !important;
+                        min-height: 52px !important;
+                        flex: 1 1 100% !important;
+                    }
                 }
             `}</style>
 

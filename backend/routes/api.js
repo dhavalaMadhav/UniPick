@@ -19,6 +19,40 @@ router.post('/leads/quiz', leadController.createLeadFromQuiz);
 router.get('/universities', universityController.getAllUniversities);
 router.get('/universities/:id', universityController.getUniversityById);
 
+// Testimonials API
+router.get('/testimonials', (req, res) => {
+    res.json([
+        {
+            name: "Rahul Sharma",
+            university: "Swarrnim Startup & Innovation University",
+            image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
+            course: "B.Tech Computer Science",
+            review: "The career guidance team helped me find the perfect university for my engineering dreams. Their personalized approach made all the difference!"
+        },
+        {
+            name: "Priya Patel",
+            university: "Swaminarayan University",
+            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=80",
+            course: "MBA Finance",
+            review: "Thanks to UniPick, I got admitted to my dream business school. The assessment quiz was incredibly accurate in understanding my goals."
+        },
+        {
+            name: "Arjun Kumar",
+            university: "Sankalchand Patel University",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+            course: "MBBS",
+            review: "The guidance office was extremely helpful throughout my admission process. Now I'm studying at one of India's top medical institutes!"
+        },
+        {
+            name: "Sneha Reddy",
+            university: "Ajeenkya D Y Patil University",
+            image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+            course: "B.Des Fashion Design",
+            review: "I never thought finding the right design school would be so easy. The counsellors really understood my creative aspirations!"
+        }
+    ]);
+});
+
 // Admin login API
 router.post('/admin/login', async (req, res) => {
     const { username, password } = req.body;

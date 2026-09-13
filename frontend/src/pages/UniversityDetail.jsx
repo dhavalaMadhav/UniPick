@@ -371,79 +371,109 @@ export default function UniversityDetail() {
     const campusVideoTitle = activeMedia.videoTitle;
 
     const companyLogoMap = {
-        'Wipro': 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg',
-        'Infosys': 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg',
-        'IBM': 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg',
-        'ICICI Bank': 'https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg',
-        'Tech Mahindra': 'https://upload.wikimedia.org/wikipedia/commons/2/29/Tech_Mahindra_New_Logo.svg',
-        'eClinicalWorks': 'https://upload.wikimedia.org/wikipedia/commons/7/7b/EClinicalWorks_Logo.svg',
-        'Cognizant': 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg',
-        "Byju's": 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Byju%27s_logo.svg',
-        'Reliance': 'https://upload.wikimedia.org/wikipedia/commons/9/99/Reliance_Industries_Logo.svg',
-        'Reliance Industries': 'https://upload.wikimedia.org/wikipedia/commons/9/99/Reliance_Industries_Logo.svg',
-        'HCL': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/HCL_Technologies_logo.svg',
-        'HCL Tech': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/HCL_Technologies_logo.svg',
-        'Deloitte': 'https://upload.wikimedia.org/wikipedia/commons/5/56/Deloitte.svg',
-        'Coca-Cola': 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg',
-        'TCS': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg',
-        'Capgemini': 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_2017_logo.svg',
-        'Amazon': 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
-        'Zydus': 'https://upload.wikimedia.org/wikipedia/commons/8/82/Zydus_Lifesciences_logo.svg',
-        'Torrent': 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Torrent_Group_logo.png',
-        'Torrent Pharma': 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Torrent_Group_logo.png',
-        'L&T': 'https://upload.wikimedia.org/wikipedia/commons/e/e5/L%26T.svg',
-        'Sun Pharma': 'https://upload.wikimedia.org/wikipedia/commons/c/c2/Sun_Pharma_logo.svg',
-        'Alembic': 'https://upload.wikimedia.org/wikipedia/commons/0/06/Alembic_Pharmaceuticals_logo.png',
-        'HSBC': 'https://upload.wikimedia.org/wikipedia/commons/a/aa/HSBC_logo_%282018%29.svg',
-        'Tata Technologies': 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg',
-        'TVS Motors': 'https://upload.wikimedia.org/wikipedia/commons/e/e0/TVS_Motor_Company_logo.svg',
-        'Cohesity': 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Cohesity_logo.svg',
-        'Entrata': 'https://upload.wikimedia.org/wikipedia/commons/2/23/Entrata_logo.svg',
-        'Google': 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
-        'Microsoft': 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg',
-        'Accenture': 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg',
-        'Intel': 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Intel_logo_%282020%29.svg',
-        'Samsung': 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg',
-        'Tata Motors': 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg',
-        'Mahindra': 'https://upload.wikimedia.org/wikipedia/commons/7/77/Mahindra_Rise_logo.svg',
-        'Bosch': 'https://upload.wikimedia.org/wikipedia/commons/1/16/Bosch-logo.svg',
-        'Siemens': 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Siemens-logo.svg',
-        'Ashok Leyland': 'https://upload.wikimedia.org/wikipedia/commons/6/6c/Ashok_Leyland_logo.svg',
-        'DLF': 'https://upload.wikimedia.org/wikipedia/commons/4/4f/DLF_logo.svg',
-        'NTPC': 'https://upload.wikimedia.org/wikipedia/commons/8/86/NTPC_Logo.svg',
-        'Power Grid': 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Power_Grid_Corporation_of_India_logo.svg',
-        'Qualcomm': 'https://upload.wikimedia.org/wikipedia/commons/7/71/Qualcomm-Logo.svg',
-        'Texas Instruments': 'https://upload.wikimedia.org/wikipedia/commons/3/36/Texas_Instruments_logo.svg',
-        'Broadcom': 'https://upload.wikimedia.org/wikipedia/commons/2/29/Broadcom_Logo.svg',
-        'Analog Devices': 'https://upload.wikimedia.org/wikipedia/commons/1/14/Analog_Devices_logo.svg',
-        'McKinsey': 'https://upload.wikimedia.org/wikipedia/commons/7/7b/McKinsey_%26_Company_logo.svg',
-        'BCG': 'https://upload.wikimedia.org/wikipedia/commons/7/73/Boston_Consulting_Group_logo.svg',
-        'Bain': 'https://upload.wikimedia.org/wikipedia/commons/b/b8/Bain_%26_Company_logo.svg',
-        'Goldman Sachs': 'https://upload.wikimedia.org/wikipedia/commons/6/61/Goldman_Sachs.svg',
-        'KPMG': 'https://upload.wikimedia.org/wikipedia/commons/9/9d/KPMG_logo.svg',
-        'HDFC Bank': 'https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg',
-        'Morgan Stanley': 'https://upload.wikimedia.org/wikipedia/commons/3/34/Morgan_Stanley_Logo_2019.svg',
-        'JP Morgan': 'https://upload.wikimedia.org/wikipedia/commons/a/af/J_P_Morgan_Logo_2008.svg',
-        'Axis Bank': 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Axis_Bank_logo.svg',
-        'Unilever': 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Unilever.svg',
-        'P&G': 'https://upload.wikimedia.org/wikipedia/commons/8/85/Procter_%26_Gamble_logo.svg',
-        'Flipkart': 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Flipkart_logo.svg',
-        'Facebook': 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
-        'ISRO': 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Indian_Space_Research_Organisation_Logo.svg',
-        'DRDO': 'https://upload.wikimedia.org/wikipedia/commons/9/9c/DRDO_logo.svg',
-        'Cipla': 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Cipla_logo.svg',
-        'Dr. Reddy\'s': 'https://upload.wikimedia.org/wikipedia/commons/8/87/Dr._Reddy%27s_Laboratories_logo.svg',
-        'Lupin': 'https://upload.wikimedia.org/wikipedia/commons/7/72/Lupin_Limited_logo.svg',
-        'Pfizer': 'https://upload.wikimedia.org/wikipedia/commons/5/57/Pfizer_logo.svg',
-        'SBI': 'https://upload.wikimedia.org/wikipedia/commons/c/cc/State_Bank_of_India_logo.svg',
-        'Kotak Mahindra': 'https://upload.wikimedia.org/wikipedia/commons/0/07/Kotak_Mahindra_Bank_logo.svg',
+        'Tech Mahindra': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="55" viewBox="0 0 180 55"><path d="M12 10 L28 10 L28 40 L20 40 L20 22 L12 22 Z M24 10 L40 10 L40 22 L24 22 Z" fill="%23E2231A"/><text x="10" y="36" font-family="'Inter', Arial, sans-serif" font-size="18" font-weight="900" fill="%23E2231A">Tech</text><text x="60" y="36" font-family="'Inter', Arial, sans-serif" font-size="18" font-weight="900" fill="%23333333">Mahindra</text></svg>`,
+        'Deloitte': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><text x="10" y="34" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="28" font-weight="900" fill="%23000000" letter-spacing="-0.5">Deloitte<tspan fill="%2386BC25">.</tspan></text></svg>`,
+        'HSBC': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><polygon points="10,25 25,12 25,38" fill="%23DB0011"/><polygon points="40,25 25,12 25,38" fill="%23DB0011"/><polygon points="25,12 10,25 40,25" fill="%23FFFFFF"/><polygon points="25,38 10,25 40,25" fill="%23FFFFFF"/><text x="48" y="33" font-family="'Arial', sans-serif" font-size="22" font-weight="900" fill="%23000000">HSBC</text></svg>`,
+        'Tata Technologies': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><path d="M25 10 C15 10 10 18 10 25 C10 32 15 40 25 40 C35 40 40 32 40 25 C40 18 35 10 25 10 Z M25 14 L25 36 M18 18 L32 18" fill="none" stroke="%231C3F94" stroke-width="4"/><text x="50" y="33" font-family="'Arial', sans-serif" font-size="20" font-weight="bold" fill="%231C3F94">TATA</text></svg>`,
+        'Tata Motors': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><path d="M25 10 C15 10 10 18 10 25 C10 32 15 40 25 40 C35 40 40 32 40 25 C40 18 35 10 25 10 Z M25 14 L25 36 M18 18 L32 18" fill="none" stroke="%231C3F94" stroke-width="4"/><text x="50" y="33" font-family="'Arial', sans-serif" font-size="20" font-weight="bold" fill="%231C3F94">TATA</text></svg>`,
+        'Tata Projects': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><path d="M25 10 C15 10 10 18 10 25 C10 32 15 40 25 40 C35 40 40 32 40 25 C40 18 35 10 25 10 Z M25 14 L25 36 M18 18 L32 18" fill="none" stroke="%231C3F94" stroke-width="4"/><text x="50" y="33" font-family="'Arial', sans-serif" font-size="20" font-weight="bold" fill="%231C3F94">TATA</text></svg>`,
+        'Tata Power': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><path d="M25 10 C15 10 10 18 10 25 C10 32 15 40 25 40 C35 40 40 32 40 25 C40 18 35 10 25 10 Z M25 14 L25 36 M18 18 L32 18" fill="none" stroke="%231C3F94" stroke-width="4"/><text x="50" y="33" font-family="'Arial', sans-serif" font-size="20" font-weight="bold" fill="%231C3F94">TATA</text></svg>`,
+        'TVS Motors': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><path d="M10 14 L26 36 L42 14" fill="none" stroke="%23D32F2F" stroke-width="4"/><text x="46" y="34" font-family="'Impact', Arial, sans-serif" font-size="24" font-style="italic" fill="%231976D2">TVS</text><text x="96" y="34" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="%23333">MOTOR</text></svg>`,
+        'HCL': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="35" font-family="'Arial Black', sans-serif" font-size="32" font-weight="900" fill="%2300549E" letter-spacing="1">HCL</text></svg>`,
+        'HCL Tech': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="35" font-family="'Arial Black', sans-serif" font-size="32" font-weight="900" fill="%2300549E" letter-spacing="1">HCL</text></svg>`,
+        'Cohesity': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><circle cx="20" cy="25" r="10" fill="none" stroke="%234FA83D" stroke-width="4.5"/><text x="38" y="32" font-family="'Inter', sans-serif" font-size="19" font-weight="800" fill="%232D3748" letter-spacing="1">COHESITY</text></svg>`,
+        'Entrata': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><rect x="10" y="14" width="18" height="22" rx="3" fill="%23E53E3E"/><text x="36" y="32" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="%231A202C">entrata</text></svg>`,
+        'Wipro': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><circle cx="16" cy="22" r="4" fill="%23E53E3E"/><circle cx="24" cy="16" r="3.5" fill="%23D69E2E"/><circle cx="28" cy="27" r="4" fill="%2338A169"/><circle cx="18" cy="32" r="3.5" fill="%233182CE"/><text x="38" y="33" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="%231A202C">wipro</text></svg>`,
+        'Infosys': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><text x="10" y="34" font-family="'Trebuchet MS', Arial, sans-serif" font-size="28" font-weight="bold" fill="%23007CC3">Infosys</text></svg>`,
+        'IBM': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="130" height="50" viewBox="0 0 130 50"><text x="10" y="35" font-family="'Arial Black', sans-serif" font-size="32" font-weight="900" fill="%23052FAD" letter-spacing="3">IBM</text></svg>`,
+        'ICICI Bank': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><path d="M12 15 L22 35 L32 15" fill="none" stroke="%23F37021" stroke-width="5"/><text x="38" y="32" font-family="'Arial', sans-serif" font-size="20" font-weight="bold" fill="%23004A8F">ICICI Bank</text></svg>`,
+        'Cognizant': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><text x="10" y="33" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="%23000066">Cognizant</text></svg>`,
+        "Byju's": `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><rect x="10" y="12" width="26" height="26" rx="6" fill="%23813588"/><text x="44" y="33" font-family="'Arial', sans-serif" font-size="22" font-weight="900" fill="%23813588">BYJU'S</text></svg>`,
+        'Reliance': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><rect x="10" y="14" width="22" height="22" fill="%23E31837"/><text x="38" y="32" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="%23003366">Reliance</text></svg>`,
+        'Reliance Industries': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><rect x="10" y="14" width="22" height="22" fill="%23E31837"/><text x="38" y="32" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="%23003366">Reliance</text></svg>`,
+        'Coca-Cola': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><text x="10" y="34" font-family="'Brush Script MT', cursive, sans-serif" font-size="28" font-weight="bold" fill="%23F40009">Coca-Cola</text></svg>`,
+        'TCS': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="34" font-family="'Arial', sans-serif" font-size="28" font-weight="900" fill="%231C3F94" letter-spacing="1">TCS</text></svg>`,
+        'Capgemini': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><path d="M20 15 C15 20 15 30 25 35 C35 30 35 20 30 15 Z" fill="%230070AD"/><text x="40" y="32" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="%230070AD">Capgemini</text></svg>`,
+        'Amazon': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><text x="10" y="30" font-family="'Arial', sans-serif" font-size="24" font-weight="bold" fill="%23232F3E">amazon</text><path d="M12 36 Q45 46 85 36" fill="none" stroke="%23FF9900" stroke-width="3"/></svg>`,
+        'Zydus': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="33" font-family="'Inter', sans-serif" font-size="24" font-weight="800" fill="%2300843D">zydus</text></svg>`,
+        'Torrent': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><polygon points="10,35 25,12 40,35" fill="%2300A859"/><text x="48" y="32" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%23005A9C">torrent</text></svg>`,
+        'Torrent Pharma': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><polygon points="10,35 25,12 40,35" fill="%2300A859"/><text x="48" y="32" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%23005A9C">torrent</text></svg>`,
+        'L&T': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><rect x="10" y="10" width="120" height="30" fill="%2300549E"/><text x="70" y="31" dominant-baseline="middle" text-anchor="middle" font-family="'Arial Black', sans-serif" font-size="20" font-weight="900" fill="%23FFFFFF">L&amp;T</text></svg>`,
+        'Sun Pharma': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><circle cx="22" cy="25" r="10" fill="%23FF6600"/><text x="40" y="31" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="%23333333">SUN PHARMA</text></svg>`,
+        'Alembic': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><text x="10" y="32" font-family="'Georgia', serif" font-size="22" font-weight="bold" fill="%23004B87">Alembic</text></svg>`,
+        'eClinicalWorks': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><text x="10" y="32" font-family="'Inter', sans-serif" font-size="18" font-weight="800" fill="%23005B94">eClinicalWorks</text></svg>`,
+        'Google': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="34" font-family="'Product Sans', Arial, sans-serif" font-size="26" font-weight="bold"><tspan fill="%234285F4">G</tspan><tspan fill="%23EA4335">o</tspan><tspan fill="%23FBBC05">o</tspan><tspan fill="%234285F4">g</tspan><tspan fill="%2334A853">l</tspan><tspan fill="%23EA4335">e</tspan></text></svg>`,
+        'Microsoft': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><rect x="10" y="14" width="10" height="10" fill="%23F25022"/><rect x="22" y="14" width="10" height="10" fill="%237FBA00"/><rect x="10" y="26" width="10" height="10" fill="%2300A4EF"/><rect x="22" y="26" width="10" height="10" fill="%23FFB900"/><text x="40" y="31" font-family="'Segoe UI', sans-serif" font-size="20" font-weight="600" fill="%23737373">Microsoft</text></svg>`,
+        'Accenture': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><text x="10" y="32" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="%23000000">accenture<tspan fill="%23A100FF" font-size="26">></tspan></text></svg>`,
+        'Intel': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="130" height="50" viewBox="0 0 130 50"><text x="10" y="34" font-family="'Inter', sans-serif" font-size="28" font-weight="800" fill="%230068B5">intel</text></svg>`,
+        'Samsung': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><ellipse cx="80" cy="25" rx="70" ry="18" fill="%23034EA2"/><text x="80" y="31" dominant-baseline="middle" text-anchor="middle" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="%23FFFFFF" letter-spacing="2">SAMSUNG</text></svg>`,
+        'Mahindra': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><path d="M10 25 L25 15 L40 25 L25 35 Z" fill="%23E2231A"/><text x="48" y="32" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="%23E2231A">Mahindra</text></svg>`,
+        'Bosch': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><circle cx="20" cy="25" r="12" fill="none" stroke="%23EA1D25" stroke-width="4"/><text x="40" y="33" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%231D1D1B">BOSCH</text></svg>`,
+        'Siemens': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><text x="10" y="33" font-family="'Arial', sans-serif" font-size="24" font-weight="bold" fill="%23009999" letter-spacing="2">SIEMENS</text></svg>`,
+        'Ashok Leyland': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><polygon points="10,35 25,15 40,35" fill="%23003399"/><text x="45" y="32" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="%23003399">ASHOK LEYLAND</text></svg>`,
+        'DLF': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="130" height="50" viewBox="0 0 130 50"><rect x="10" y="12" width="24" height="26" fill="%23003366"/><text x="42" y="34" font-family="'Arial', sans-serif" font-size="26" font-weight="900" fill="%23003366">DLF</text></svg>`,
+        'NTPC': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="34" font-family="'Arial', sans-serif" font-size="26" font-weight="900" fill="%23004B87" letter-spacing="1">NTPC</text></svg>`,
+        'Power Grid': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><path d="M15 15 L25 35 L35 15" stroke="%230072CE" stroke-width="4" fill="none"/><text x="40" y="32" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="%230072CE">POWERGRID</text></svg>`,
+        'Qualcomm': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><text x="10" y="33" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%233253DC">Qualcomm</text></svg>`,
+        'Texas Instruments': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><polygon points="10,35 25,15 40,35" fill="%23CC0000"/><text x="45" y="32" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="%23CC0000">TEXAS INSTRUMENTS</text></svg>`,
+        'Broadcom': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><text x="10" y="33" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%23CC092F">BROADCOM</text></svg>`,
+        'Analog Devices': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><polygon points="10,35 25,15 40,35" fill="%23000000"/><text x="45" y="32" font-family="'Arial', sans-serif" font-size="15" font-weight="bold" fill="%23000000">ANALOG DEVICES</text></svg>`,
+        'McKinsey': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><text x="10" y="32" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="%23051C2C">McKinsey&amp;Company</text></svg>`,
+        'BCG': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="33" font-family="'Arial', sans-serif" font-size="26" font-weight="bold" fill="%2300805B">BCG</text></svg>`,
+        'Bain': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><text x="10" y="32" font-family="'Arial', sans-serif" font-size="20" font-weight="bold" fill="%23CC0000">BAIN &amp; COMPANY</text></svg>`,
+        'Goldman Sachs': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><rect x="10" y="10" width="150" height="30" fill="%237399C6"/><text x="85" y="29" dominant-baseline="middle" text-anchor="middle" font-family="'Georgia', serif" font-size="13" font-weight="bold" fill="%23FFFFFF">Goldman Sachs</text></svg>`,
+        'KPMG': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="34" font-family="'Arial', sans-serif" font-size="26" font-weight="900" fill="%2300338D" letter-spacing="1">KPMG</text></svg>`,
+        'HDFC Bank': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><rect x="10" y="12" width="24" height="24" fill="%23004B87"/><rect x="16" y="18" width="12" height="12" fill="%23ED1C24"/><text x="40" y="31" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="%23004B87">HDFC BANK</text></svg>`,
+        'Morgan Stanley': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><text x="10" y="32" font-family="'Georgia', serif" font-size="18" font-weight="bold" fill="%23000000">Morgan Stanley</text></svg>`,
+        'JP Morgan': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><text x="10" y="32" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="%23111111">J.P. Morgan</text></svg>`,
+        'Axis Bank': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><polygon points="10,35 22,12 34,35" fill="%2397144D"/><text x="40" y="32" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="%2397144D">AXIS BANK</text></svg>`,
+        'Unilever': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><text x="10" y="34" font-family="'Arial', sans-serif" font-size="24" font-weight="bold" fill="%231F3683">Unilever</text></svg>`,
+        'P&G': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="130" height="50" viewBox="0 0 130 50"><text x="10" y="34" font-family="'Arial', sans-serif" font-size="28" font-weight="900" fill="%2300205B">P&amp;G</text></svg>`,
+        'Flipkart': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><rect x="10" y="12" width="24" height="24" rx="4" fill="%232874F0"/><text x="40" y="31" font-family="'Inter', sans-serif" font-size="20" font-style="italic" font-weight="bold" fill="%232874F0">Flipkart</text></svg>`,
+        'Facebook': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><circle cx="25" cy="25" r="14" fill="%231877F2"/><text x="21" y="32" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%23FFFFFF">f</text><text x="46" y="32" font-family="'Inter', sans-serif" font-size="20" font-weight="bold" fill="%231877F2">facebook</text></svg>`,
+        'ISRO': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><polygon points="20,10 10,38 30,38" fill="%23F37023"/><text x="38" y="32" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%23005A9C">ISRO</text></svg>`,
+        'DRDO': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><circle cx="22" cy="25" r="12" fill="%23003366"/><text x="40" y="32" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%23003366">DRDO</text></svg>`,
+        'Cipla': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="33" font-family="'Arial', sans-serif" font-size="26" font-weight="bold" fill="%2300549E">Cipla</text></svg>`,
+        'Dr. Reddy\'s': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="170" height="50" viewBox="0 0 170 50"><text x="10" y="32" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="%235C2D91">Dr.Reddy's</text></svg>`,
+        'Lupin': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><text x="10" y="33" font-family="'Arial', sans-serif" font-size="24" font-weight="bold" fill="%2300843D">LUPIN</text></svg>`,
+        'Pfizer': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><ellipse cx="70" cy="25" rx="60" ry="18" fill="%23000099"/><text x="70" y="31" dominant-baseline="middle" text-anchor="middle" font-family="'Georgia', serif" font-size="20" font-weight="bold" font-style="italic" fill="%23FFFFFF">Pfizer</text></svg>`,
+        'GlaxoSmithKline': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50"><text x="10" y="34" font-family="'Arial', sans-serif" font-size="26" font-weight="900" fill="%23F36633">GSK</text></svg>`,
+        'SBI': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="50" viewBox="0 0 140 50"><circle cx="22" cy="25" r="12" fill="%232800A0"/><circle cx="22" cy="21" r="5" fill="%23FFFFFF"/><rect x="20" y="21" width="4" height="12" fill="%23FFFFFF"/><text x="40" y="32" font-family="'Arial', sans-serif" font-size="22" font-weight="bold" fill="%232800A0">SBI</text></svg>`,
+        'Kotak Mahindra': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><rect x="10" y="12" width="24" height="24" fill="%23ED1C24"/><text x="40" y="31" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="%23002B5E">kotak</text></svg>`,
+        'Yes Bank': `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50"><text x="10" y="32" font-family="'Arial', sans-serif" font-size="20" font-weight="bold" fill="%23005A9C">YES BANK</text></svg>`,
         'Pharma Majors': '/images/recruiters/pharma-majors.png',
         'Tech & IT Firms': '/images/recruiters/tech-it-firms.png',
         'Government & Private Hospitals': '/images/recruiters/hospitals.png',
         'Healthcare Partners': '/images/recruiters/hospitals.png',
+        'Hospitals': '/images/recruiters/hospitals.png',
         'Manufacturing Leaders': '/images/recruiters/manufacturing-leaders.png',
         'Financial & Tech Corporates': '/images/recruiters/fintech-corporates.png',
-        'Transvaal Global Tech': '/images/recruiters/transvaal-tech.png'
+        'Transvaal Global Tech': '/images/recruiters/transvaal-tech.png',
+        'Corporate Firms': '/images/recruiters/fintech-corporates.png',
+        'MNCs': '/images/recruiters/tech-it-firms.png',
+        'Consulting Firms': '/images/recruiters/fintech-corporates.png',
+        'Banks': '/images/recruiters/fintech-corporates.png',
+        'Big 4 Firms': '/images/recruiters/fintech-corporates.png',
+        'Audit Firms': '/images/recruiters/fintech-corporates.png',
+        'Financial Institutions': '/images/recruiters/fintech-corporates.png'
+    };
+
+    const getCompanyLogo = (item) => {
+        if (!item) return null;
+        if (typeof item === 'object' && item.logo) return item.logo;
+        const name = (typeof item === 'string' ? item : item.name || '').trim();
+        if (!name) return null;
+
+        if (companyLogoMap[name]) return companyLogoMap[name];
+
+        const lower = name.toLowerCase();
+        const foundKey = Object.keys(companyLogoMap).find(k => k.toLowerCase() === lower);
+        if (foundKey) return companyLogoMap[foundKey];
+
+        const partialKey = Object.keys(companyLogoMap).find(k => lower.includes(k.toLowerCase()) || k.toLowerCase().includes(lower));
+        if (partialKey) return companyLogoMap[partialKey];
+
+        return null;
     };
 
     const rawRecruiters = (university.placements && university.placements.topRecruiters && university.placements.topRecruiters.length > 0)
@@ -454,10 +484,13 @@ export default function UniversityDetail() {
         if (typeof item === 'string') {
             return {
                 name: item,
-                logo: companyLogoMap[item] || null
+                logo: getCompanyLogo(item)
             };
         }
-        return item;
+        return {
+            ...item,
+            logo: item.logo || getCompanyLogo(item.name)
+        };
     });
 
     // Data for Pie Charts & Line Growth Chart from views folder EJS logic
@@ -858,45 +891,34 @@ export default function UniversityDetail() {
                                 .slice(0, 3)
                                 .toUpperCase();
                             const fallbackSvg = `data:image/svg+xml;utf8,${encodeURIComponent(
-                                `<svg xmlns="http://www.w3.org/2000/svg" width="110" height="40" viewBox="0 0 110 40">
-                                    <rect width="110" height="40" rx="4" fill="#002B5E"/>
-                                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="12" font-weight="bold">${initials}</text>
+                                `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="50" viewBox="0 0 160 50">
+                                    <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#002B5E" font-family="'Inter', Arial, sans-serif" font-size="15" font-weight="800" letter-spacing="-0.5">${name}</text>
                                 </svg>`
                             )}`;
-                            const logoSrc = recruiter.logo || companyLogoMap[name] || fallbackSvg;
+                            const logoSrc = recruiter.logo || getCompanyLogo(name) || fallbackSvg;
 
                             return (
                                 <div key={idx} style={{
                                     background: '#FFFFFF',
                                     border: '1px solid #E2E8F0',
-                                    padding: '12px 14px',
-                                    borderRadius: 0,
+                                    padding: '14px 16px',
+                                    borderRadius: '6px',
                                     display: 'flex',
-                                    flexDirection: 'column',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    height: '95px',
-                                    gap: '6px',
+                                    height: '85px',
                                     transition: 'all 0.2s ease',
                                     boxShadow: '0 1px 4px rgba(0,0,0,0.03)'
                                 }}>
                                     <img 
                                         src={logoSrc} 
                                         alt={name} 
-                                        style={{ maxHeight: '42px', maxWidth: '110px', objectFit: 'contain' }} 
+                                        title={name}
+                                        style={{ maxHeight: '55px', maxWidth: '120px', width: 'auto', height: 'auto', objectFit: 'contain' }} 
                                         onError={(e) => {
                                             e.target.src = fallbackSvg;
                                         }}
                                     />
-                                    <span style={{ 
-                                        fontWeight: 700, 
-                                        fontSize: '0.78rem', 
-                                        color: '#475569',
-                                        textAlign: 'center',
-                                        lineHeight: 1.15
-                                    }}>
-                                        {name}
-                                    </span>
                                 </div>
                             );
                         })}
