@@ -470,107 +470,107 @@ export default function UniversityDetail() {
                 boxSizing: 'border-box',
                 minHeight: '130px'
             }}>
-                {/* Type Badge - Explicitly zIndex: 10 ON TOP of overlay */}
-                <div style={{
-                    position: 'absolute',
-                    top: '20px',
-                    right: '5%',
-                    background: '#FFFFFF',
-                    color: '#0F172A',
-                    padding: '6px 14px',
-                    fontFamily: "'Inter', sans-serif",
-                    fontWeight: 700,
-                    fontSize: '0.8rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    border: 'none',
-                    borderRadius: 0,
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
-                    zIndex: 10
-                }}>
-                    {university.type || 'Private'} University
-                </div>
-
-                <div className="hero-overlay" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', color: '#FFFFFF', position: 'relative', zIndex: 5 }}>
-                    <Breadcrumbs items={breadcrumbs} />
-                    <h1 style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '2.1rem',
-                        fontWeight: 700,
-                        margin: '8px 0 4px',
-                        color: '#FFFFFF',
-                        letterSpacing: '-0.02em',
-                        lineHeight: 1.25
-                    }}>
-                        {university.name}
-                    </h1>
-                    <p style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '0.95rem',
-                        fontWeight: 400,
-                        color: 'rgba(255, 255, 255, 0.9)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        margin: 0
-                    }}>
-                        <i className="fas fa-map-marker-alt" style={{ color: '#38BDF8' }}></i>
-                        {university.location}, {university.state || 'India'}
-                    </p>
-                </div>
+            {/* Type Badge - Explicitly zIndex: 10 ON TOP of overlay */}
+            <div className="hero-type-badge" style={{
+                position: 'absolute',
+                top: '20px',
+                right: '5%',
+                background: '#FFFFFF',
+                color: '#0F172A',
+                padding: '6px 14px',
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 700,
+                fontSize: '0.8rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                border: 'none',
+                borderRadius: 0,
+                boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
+                zIndex: 10
+            }}>
+                {university.type || 'Private'} University
             </div>
 
-            {/* Main Content Section */}
-            <div className="content-section" style={{ padding: '50px 5%', maxWidth: '1300px', margin: '0 auto', boxSizing: 'border-box' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '2.8fr 1fr', gap: '30px', alignItems: 'start' }}>
+            <div className="hero-overlay" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', color: '#FFFFFF', position: 'relative', zIndex: 5 }}>
+                <Breadcrumbs items={breadcrumbs} />
+                <h1 style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '2.1rem',
+                    fontWeight: 700,
+                    margin: '8px 0 4px',
+                    color: '#FFFFFF',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.25
+                }}>
+                    {university.name}
+                </h1>
+                <p style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '0.95rem',
+                    fontWeight: 400,
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    margin: 0
+                }}>
+                    <i className="fas fa-map-marker-alt" style={{ color: '#38BDF8' }}></i>
+                    {university.location}, {university.state || 'India'}
+                </p>
+            </div>
+        </div>
+
+        {/* Main Content Section */}
+        <div className="content-section" style={{ padding: '50px 5%', maxWidth: '1300px', margin: '0 auto', boxSizing: 'border-box' }}>
+            <div className="univ-detail-grid" style={{ display: 'grid', gridTemplateColumns: '2.8fr 1fr', gap: '30px', alignItems: 'start' }}>
+                
+                {/* Main Content Left */}
+                <div className="univ-detail-left" style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                     
-                    {/* Main Content Left */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                        
-                        {/* About University */}
-                        <div style={{ background: '#FFFFFF', padding: '30px', borderRadius: 0, border: 'none', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
-                            <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.4rem', fontWeight: 700, color: '#0F172A', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <i className="fas fa-info-circle" style={{ color: '#007BFF' }}></i> About University
-                            </h2>
-                            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', lineHeight: '1.7', color: '#334155', margin: 0 }}>
-                                {university.description || 'No description available for this institution.'}
-                            </p>
-                        </div>
+                    {/* About University */}
+                    <div style={{ background: '#FFFFFF', padding: '30px', borderRadius: 0, border: 'none', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
+                        <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.4rem', fontWeight: 700, color: '#0F172A', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <i className="fas fa-info-circle" style={{ color: '#007BFF' }}></i> About University
+                        </h2>
+                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', lineHeight: '1.7', color: '#334155', margin: 0 }}>
+                            {university.description || 'No description available for this institution.'}
+                        </p>
+                    </div>
 
-                        {/* Programs Offered Section - Name Tags ONLY */}
-                        <div style={{ background: '#FFFFFF', padding: '30px', borderRadius: 0, border: 'none', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
-                            <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.4rem', fontWeight: 700, color: '#0F172A', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                <i className="fas fa-graduation-cap" style={{ color: '#007BFF' }}></i> Programs Offered
-                            </h2>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-                                {displayProgrammes.map((programCode, idx) => {
-                                    const codeLower = typeof programCode === 'string' ? programCode.toLowerCase() : 'engineering';
-                                    const prog = programNameMap[codeLower] || { name: programCode, icon: 'fas fa-graduation-cap' };
-                                    return (
-                                        <div key={idx} style={{
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            gap: '10px',
-                                            background: '#F1F5F9',
-                                            padding: '12px 20px',
-                                            borderRadius: 0,
-                                            border: 'none',
-                                            fontFamily: "'Inter', sans-serif",
-                                            fontWeight: 600,
-                                            fontSize: '0.95rem',
-                                            color: '#0F172A',
-                                            transition: 'all 0.2s ease'
-                                        }}>
-                                            <i className={prog.icon} style={{ color: '#007BFF', fontSize: '1.1rem' }}></i>
-                                            <span>{prog.name}</span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                    {/* Programs Offered Section - Name Tags ONLY */}
+                    <div style={{ background: '#FFFFFF', padding: '30px', borderRadius: 0, border: 'none', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
+                        <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.4rem', fontWeight: 700, color: '#0F172A', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <i className="fas fa-graduation-cap" style={{ color: '#007BFF' }}></i> Programs Offered
+                        </h2>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                            {displayProgrammes.map((programCode, idx) => {
+                                const codeLower = typeof programCode === 'string' ? programCode.toLowerCase() : 'engineering';
+                                const prog = programNameMap[codeLower] || { name: programCode, icon: 'fas fa-graduation-cap' };
+                                return (
+                                    <div key={idx} style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        background: '#F1F5F9',
+                                        padding: '12px 20px',
+                                        borderRadius: 0,
+                                        border: 'none',
+                                        fontFamily: "'Inter', sans-serif",
+                                        fontWeight: 600,
+                                        fontSize: '0.95rem',
+                                        color: '#0F172A',
+                                        transition: 'all 0.2s ease'
+                                    }}>
+                                        <i className={prog.icon} style={{ color: '#007BFF', fontSize: '1.1rem' }}></i>
+                                        <span>{prog.name}</span>
+                                    </div>
+                                );
+                            })}
                         </div>
+                    </div>
 
-                        {/* Graphical Representations & Metrics */}
-                        <div style={{ background: '#FFFFFF', padding: '30px', borderRadius: 0, border: 'none', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
+                    {/* Graphical Representations & Metrics - Hiddem on Mobile */}
+                    <div className="analytics-section" style={{ background: '#FFFFFF', padding: '30px', borderRadius: 0, border: 'none', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
                             <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.4rem', fontWeight: 700, color: '#0F172A', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                                 <i className="fas fa-chart-pie" style={{ color: '#007BFF' }}></i> Institutional Analytics & Metrics
                             </h2>
@@ -675,7 +675,7 @@ export default function UniversityDetail() {
                     </div>
 
                     {/* Sidebar Right */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    <div className="univ-detail-right" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                         
                         {/* Quick Info */}
                         <div style={{ background: '#FFFFFF', padding: '24px', borderRadius: 0, border: 'none', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
@@ -898,7 +898,7 @@ export default function UniversityDetail() {
                         </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '18px' }}>
+                    <div className="gallery-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '18px' }}>
                         {galleryImages[gallerySlide].map((img, idx) => (
                             <div 
                                 key={idx} 
@@ -949,7 +949,7 @@ export default function UniversityDetail() {
                         {campusVideoTitle}
                     </p>
                     
-                    <div style={{ width: '100%', height: '440px', background: '#000000', borderRadius: 0, overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+                    <div className="video-tour-container" style={{ width: '100%', height: '440px', background: '#000000', borderRadius: 0, overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
                         <iframe 
                             src={campusVideoUrl} 
                             title={campusVideoTitle} 
@@ -968,7 +968,7 @@ export default function UniversityDetail() {
                         <i className="fas fa-map-marked-alt" style={{ color: '#007BFF' }}></i> Campus Location & Distance Calculator
                     </h2>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '30px', alignItems: 'stretch' }}>
+                    <div className="location-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '30px', alignItems: 'stretch' }}>
                         
                         {/* LEFT: Minimized Interactive Map Iframe */}
                         <div style={{ background: '#FFFFFF', height: '360px', borderRadius: 0, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}>
@@ -1136,20 +1136,22 @@ export default function UniversityDetail() {
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: '#64748B', marginBottom: '24px' }}>
                         Connect with our expert counsellors for official admission procedures, cutoffs, and fees at {university.name}.
                     </p>
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                    <div className="cta-button-group" style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
                         <Link 
                             to="/contact" 
                             style={{
-                                padding: '8px 20px',
+                                padding: '12px 24px',
                                 background: '#007BFF',
                                 color: '#FFFFFF',
                                 borderRadius: 0,
                                 textDecoration: 'none',
                                 fontWeight: 700,
-                                fontSize: '0.85rem',
+                                fontSize: '0.9rem',
                                 display: 'inline-flex',
                                 alignItems: 'center',
-                                gap: '8px'
+                                justifyContent: 'center',
+                                gap: '8px',
+                                minWidth: '180px'
                             }}
                         >
                             <i className="fas fa-envelope"></i> Contact Admissions
@@ -1157,17 +1159,19 @@ export default function UniversityDetail() {
                         <a 
                             href="tel:+919160064204" 
                             style={{
-                                padding: '8px 20px',
+                                padding: '12px 24px',
                                 background: 'transparent',
                                 border: '2px solid #007BFF',
                                 color: '#007BFF',
                                 borderRadius: 0,
                                 textDecoration: 'none',
                                 fontWeight: 700,
-                                fontSize: '0.85rem',
+                                fontSize: '0.9rem',
                                 display: 'inline-flex',
                                 alignItems: 'center',
-                                gap: '8px'
+                                justifyContent: 'center',
+                                gap: '8px',
+                                minWidth: '180px'
                             }}
                         >
                             <i className="fas fa-phone"></i> Call Counsellor
@@ -1179,4 +1183,3 @@ export default function UniversityDetail() {
         </div>
     );
 }
-

@@ -3,35 +3,56 @@ import { Link } from 'react-router-dom';
 import api from '../services/api';
 
 export default function Home() {
+    const [stats, setStats] = useState({ universities: 0, courses: 0, students: 0 });
     const [testimonials, setTestimonials] = useState([]);
-    const [universities, setUniversities] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [openFaq, setOpenFaq] = useState(null);
+
+    const toggleFaq = (idx) => {
+        setOpenFaq(openFaq === idx ? null : idx);
+    };
+
+    const faqs = [
+        {
+            question: "How does UniPick help me choose the right university?",
+            answer: "UniPick provides comprehensive university profiles, course comparisons, and expert counseling to help you align your academic choices with your career goals."
+        },
+        {
+            question: "Are the partner universities verified?",
+            answer: "Yes, all partner institutions on our platform are thoroughly vetted and verified to ensure high standards of academic excellence and student support."
+        },
+        {
+            question: "How do I get personalized admission guidance?",
+            answer: "You can easily connect with our expert advisors by clicking 'Talk to an Advisor' or booking a consultation session through our contact page."
+        },
+        {
+            question: "Can I take a career quiz to find suitable courses?",
+            answer: "Yes! Our interactive career quiz helps you identify your strengths and interests, recommending courses and universities that best match your profile."
+        }
+    ];
 
     useEffect(() => {
-        api.get('/')
-            .then(res => {
-                if (res.data) {
-                    setTestimonials(res.data.testimonials || []);
-                    setUniversities(res.data.universities || []);
-                }
-                setLoading(false);
-            })
-            .catch(console.error);
+        document.title = "UniPick - Admissions, Courses & Universities";
+        
+        Promise.all([
+            api.get('/api/stats').catch(() => api.get('/stats')),
+            api.get('/api/testimonials').catch(() => api.get('/testimonials'))
+        ]).then(([statsRes, testRes]) => {
+            if (statsRes && statsRes.data) {
+                setStats(statsRes.data);
+            }
+            if (testRes && testRes.data) {
+                setTestimonials(Array.isArray(testRes.data) ? testRes.data : (testRes.data.testimonials || []));
+            }
+            setLoading(false);
+        }).catch(err => {
+            console.error("Error fetching homepage data:", err);
+            setLoading(false);
+        });
     }, []);
 
     return (
         <div className="home-wrapper">
-            
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     
     
@@ -226,55 +247,23 @@ export default function Home() {
             </div>
 
             <div className="inst-faq-list">
-                <div className="inst-faq-item">
-                    <div className="inst-faq-question" onClick={() => {}}>
-                        <h3>How does UniPick select its partner universities?</h3>
-                        <i className="fas fa-plus"></i>
+                {faqs.map((faq, idx) => (
+                    <div className={`inst-faq-item ${openFaq === idx ? 'active' : ''}`} key={idx} style={{ marginBottom: '12px', border: '1px solid #E2E8F0', borderRadius: '4px', overflow: 'hidden', background: '#FFFFFF' }}>
+                        <div 
+                            className="inst-faq-question" 
+                            onClick={() => toggleFaq(idx)}
+                            style={{ padding: '18px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', userSelect: 'none' }}
+                        >
+                            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 600, color: '#0F172A' }}>{faq.question}</h3>
+                            <i className={`fas ${openFaq === idx ? 'fa-minus' : 'fa-plus'}`} style={{ color: '#007BFF', transition: 'transform 0.2s ease' }}></i>
+                        </div>
+                        {openFaq === idx && (
+                            <div className="inst-faq-answer" style={{ padding: '0 24px 18px', color: '#475569', fontSize: '0.95rem', lineHeight: '1.6', borderTop: '1px solid #F1F5F9' }}>
+                                <p style={{ marginTop: '12px', marginBottom: 0 }}>{faq.answer}</p>
+                            </div>
+                        )}
                     </div>
-                    <div className="inst-faq-answer">
-                        <p>We conduct thorough evaluations of universities based on academic reputation, faculty quality, placement records, infrastructure, and student support services. Our university admissions consultants ensure only institutions meeting our rigorous standards for quality admission guidance are included in our network.</p>
-                    </div>
-                </div>
-
-                <div className="inst-faq-item">
-                    <div className="inst-faq-question" onClick={() => {}}>
-                        <h3>What services are included in your counseling?</h3>
-                        <i className="fas fa-plus"></i>
-                    </div>
-                    <div className="inst-faq-answer">
-                        <p>Our comprehensive counseling includes career assessment, university selection guidance, application assistance, documentation support, interview preparation, and post-admission guidance. We provide end-to-end support throughout your admission journey.</p>
-                    </div>
-                </div>
-
-                <div className="inst-faq-item">
-                    <div className="inst-faq-question" onClick={() => {}}>
-                        <h3>Are there any hidden fees or charges?</h3>
-                        <i className="fas fa-plus"></i>
-                    </div>
-                    <div className="inst-faq-answer">
-                        <p>No, we believe in complete transparency. All fees and charges are clearly communicated upfront. Our counseling service fee is separate from university tuition, and we'll help you understand all costs involved before you commit.</p>
-                    </div>
-                </div>
-
-                <div className="inst-faq-item">
-                    <div className="inst-faq-question" onClick={() => {}}>
-                        <h3>How long does the admission process typically take?</h3>
-                        <i className="fas fa-plus"></i>
-                    </div>
-                    <div className="inst-faq-answer">
-                        <p>The timeline varies by university and program, but typically ranges from 2-6 weeks from application submission to admission decision. We ensure all applications are submitted well before deadlines to maximize your chances of acceptance.</p>
-                    </div>
-                </div>
-                
-                <div className="inst-faq-item">
-                    <div className="inst-faq-question" onClick={() => {}}>
-                        <h3>Can I apply to multiple universities through UniPick?</h3>
-                        <i className="fas fa-plus"></i>
-                    </div>
-                    <div className="inst-faq-answer">
-                        <p>Yes, we encourage applying to multiple universities to increase your options. Our counselors will help you create a strategic application plan with reach, match, and safety schools tailored to your profile and preferences.</p>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
     </section>

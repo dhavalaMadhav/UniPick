@@ -3,9 +3,15 @@ import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function About() {
     const [activeSection, setActiveSection] = useState('mission');
+    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
 
     useEffect(() => {
         document.title = 'About Us | UniPick - University Admissions Consultant';
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const breadcrumbs = [
@@ -164,10 +170,10 @@ export default function About() {
                     </nav>
                 </aside>
 
-                {/* Main Content - Dynamically displays ONLY the selected active section */}
+                {/* Main Content - Dynamically displays selected section on desktop or all sections sequentially on mobile */}
                 <main className="about-content">
                     {/* Mission Section */}
-                    {activeSection === 'mission' && (
+                    {(isMobile || activeSection === 'mission') && (
                         <section id="mission" className="content-block active-block" itemScope itemType="http://schema.org/AboutPage">
                             <h2 className="section-title" itemProp="name">UniPick's Mission - Connecting Students with Best-Fit Universities</h2>
                             <p className="section-subtitle" itemProp="description">Transforming how students discover and choose their ideal universities through expert university admissions guidance</p>
@@ -213,7 +219,7 @@ export default function About() {
                     )}
 
                     {/* Education Consultant Section */}
-                    {activeSection === 'consultant' && (
+                    {(isMobile || activeSection === 'consultant') && (
                         <section id="consultant" className="content-block active-block" itemScope itemType="http://schema.org/Person">
                             <h2 className="section-title">Meet Our Education Consultant - Your Expert Guide</h2>
                             
@@ -250,7 +256,7 @@ export default function About() {
                     )}
 
                     {/* Metrics Section */}
-                    {activeSection === 'impact' && (
+                    {(isMobile || activeSection === 'impact') && (
                         <section id="impact" className="content-block active-block">
                             <h2 className="section-title">Our Impact in Numbers</h2>
                             <p className="section-subtitle">Measurable success built on trust and expert university admissions guidance</p>
@@ -277,7 +283,7 @@ export default function About() {
                     )}
 
                     {/* Core Values */}
-                    {activeSection === 'values' && (
+                    {(isMobile || activeSection === 'values') && (
                         <section id="values" className="content-block active-block">
                             <h2 className="section-title">Our Core Values</h2>
                             <p className="section-subtitle">The principles that guide every student interaction at our university admissions consultant practice</p>
@@ -330,7 +336,7 @@ export default function About() {
                     )}
 
                     {/* Professional Journey */}
-                    {activeSection === 'journey' && (
+                    {(isMobile || activeSection === 'journey') && (
                         <section id="journey" className="content-block active-block">
                             <h2 className="section-title">Professional Journey</h2>
                             <p className="section-subtitle">From Chartered Accountant to Education Innovation Leader</p>
@@ -369,7 +375,7 @@ export default function About() {
                     )}
 
                     {/* Partner Universities */}
-                    {activeSection === 'network' && (
+                    {(isMobile || activeSection === 'network') && (
                         <section id="network" className="content-block active-block">
                             <h2 className="section-title">Our University Network</h2>
                             <p className="body-text">
@@ -388,7 +394,7 @@ export default function About() {
                     )}
 
                     {/* CTA Section */}
-                    {activeSection === 'cta' && (
+                    {(isMobile || activeSection === 'cta') && (
                         <section id="cta" className="content-block active-block">
                             <div className="editorial-quote">
                                 <blockquote className="quote-text">

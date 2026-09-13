@@ -2899,9 +2899,8 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .course-hero {
-                padding: 60px 5% 30px;
-                padding: 40px 5% 20px;
-                min-height: 200px;
+                padding: 24px 5% !important;
+                min-height: 130px !important;
             }
 
 
@@ -9784,6 +9783,11 @@ input[type="button"] {
     }
 
     @media (max-width: 600px) {
+        .course-hero {
+            padding: 24px 5% !important;
+            min-height: 130px !important;
+        }
+
         .hero-overlay h1 {
             font-size: 1.35rem;
         }
@@ -9880,4 +9884,118 @@ button.view-btn.active {
     color: #FFFFFF !important;
     border-radius: 50px !important;
     box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3) !important;
+}
+
+/* Mobile Responsiveness Enhancements for University Detail, Student Stories, About Us */
+@media (max-width: 768px) {
+    /* 1. Hide Private University Tag on Mobile */
+    .hero-type-badge {
+        display: none !important;
+    }
+
+    /* 2. Hide Institutional Analytics & Metrics on Mobile */
+    .analytics-section {
+        display: none !important;
+    }
+
+    /* 3. University Detail Stacking & Column Ordering */
+    .univ-detail-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+    }
+
+    .univ-detail-left,
+    .univ-detail-right {
+        display: contents !important;
+    }
+
+    /* Column Order: About University (1) -> Quick Info (2) -> Recognitions (3) -> Programs Offered (4) -> Facilities (5) */
+    .univ-detail-left > div:nth-child(1) { order: 1 !important; }
+    .univ-detail-right > div:nth-child(1) { order: 2 !important; }
+    .univ-detail-right > div:nth-child(2) { order: 3 !important; }
+    .univ-detail-left > div:nth-child(2) { order: 4 !important; }
+    .univ-detail-left > div:nth-child(4) { order: 5 !important; }
+    .univ-detail-right > div:nth-child(3) { order: 6 !important; }
+
+    /* 4. Campus Gallery Small Images on Mobile */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .gallery-grid > div {
+        height: 125px !important;
+    }
+
+    /* 5. Virtual Tour 16:9 Aspect Ratio */
+    .video-tour-container {
+        height: auto !important;
+        aspect-ratio: 16 / 9 !important;
+        width: 100% !important;
+    }
+
+    /* 6. Campus Location: Map on top, Campus Address on bottom */
+    .location-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 7. Contact Admission & Call Counselor Equal Size Buttons */
+    .cta-button-group {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100% !important;
+    }
+
+    .cta-button-group a,
+    .cta-button-group button {
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+
+    /* 8. Student Success Stories Carousel on Mobile: Square cards & horizontal swipe */
+    .stories-carousel {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        padding: 10px 0 20px !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    .inst-story-card {
+        flex: 0 0 85vw !important;
+        min-width: 85vw !important;
+        width: 85vw !important;
+        aspect-ratio: 1 / 1 !important;
+        scroll-snap-align: center !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+
+    /* 9. About Us Page on Mobile: Hide Sub Navigation, Display Sections Sequentially */
+    .about-sidebar {
+        display: none !important;
+    }
+
+    .about-layout {
+        display: block !important;
+    }
+
+    .about-content {
+        width: 100% !important;
+    }
+
+    .content-block {
+        margin-bottom: 40px !important;
+        padding-bottom: 30px !important;
+        border-bottom: 1px solid #E2E8F0 !important;
+    }
 }
