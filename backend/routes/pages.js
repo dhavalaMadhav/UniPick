@@ -97,20 +97,22 @@ router.get('/quiz-results', async (req, res) => {
 // Universities listing page
 router.get('/universities', async (req, res) => {
     try {
-        const universities = await University.find();
+        let universities = await University.find();
+        if (!universities || universities.length === 0) {
+            const { FALLBACK_UNIVERSITIES } = require('../controllers/universityController');
+            universities = FALLBACK_UNIVERSITIES;
+        }
         
         sendPageResponse(req, res, 'universities', {
             title: 'Universities - UniPick',
             universities: universities
         });
     } catch (error) {
-        console.error('❌ Error fetching universities:', error);
-        if (req.xhr || req.headers.accept?.includes('application/json')) {
-            return res.status(500).json({ error: 'Unable to load universities' });
-        }
-        res.status(500).render('error.ejs', {
-            title: 'Error',
-            message: 'Unable to load universities'
+        console.error('❌ Error fetching universities, using fallback:', error);
+        const { FALLBACK_UNIVERSITIES } = require('../controllers/universityController');
+        sendPageResponse(req, res, 'universities', {
+            title: 'Universities - UniPick',
+            universities: FALLBACK_UNIVERSITIES
         });
     }
 });
