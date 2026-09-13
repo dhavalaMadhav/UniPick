@@ -1,1722 +1,873 @@
 <%- include('partials/header') %>
 
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Learn about UniPick's mission to connect students with the best-fit universities. Meet our lead consultant and understand how we help shape your academic future.">
-    <meta name="keywords"
-        content="about our university admissions consultant, UniPick's mission, meet our education consultant, university counseling expert, Ravi Vajendla CA consultant">
-    <meta property="og:title" content="About UniPick - Meet Our University Admissions Consultant">
-    <meta property="og:description"
-        content="Learn about UniPick's mission to connect students with the best-fit universities. Meet our lead consultant and understand how we help shape your academic future.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://unipick.org/about-image.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About UniPick - Meet Our University Admissions Consultant">
-    <meta name="twitter:description"
-        content="Learn about UniPick's mission to connect students with the best-fit universities. Meet our lead consultant and understand how we help shape your academic future.">
+<!-- SEO Meta Tags -->
+<meta name="description"
+    content="Learn about UniPick's mission to connect students with the best-fit universities. Meet our lead consultant and understand how we help shape your academic future.">
+<meta name="keywords"
+    content="about our university admissions consultant, UniPick's mission, meet our education consultant, university counseling expert, Ravi Vajendla CA consultant">
+<meta property="og:title" content="About UniPick - Meet Our University Admissions Consultant">
+<meta property="og:description"
+    content="Learn about UniPick's mission to connect students with the best-fit universities. Meet our lead consultant and understand how we help shape your academic future.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://unipick.org/about-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About UniPick - Meet Our University Admissions Consultant">
+<meta name="twitter:description"
+    content="Learn about UniPick's mission to connect students with the best-fit universities. Meet our lead consultant and understand how we help shape your academic future.">
+
+<style>
+    /* ========================================
+       ABOUT PAGE - INSTITUTIONAL TWO-COLUMN LAYOUT
+    ========================================= */
+
+    :root {
+        --primary-blue: #007BFF;
+        --academic-dark: #002b5e;
+        --text-dark: #1B1F24;
+        --text-gray: #4B5563;
+        --border-color: #e5e7eb;
+        --bg-light: #F7FAFC;
+    }
+
+    html, body {
+        scroll-behavior: smooth;
+    }
+
+    /* Container & Layout */
+    .about-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 40px 5%;
+    }
+
+    .about-layout {
+        display: flex;
+        gap: 60px;
+        align-items: flex-start;
+    }
+
+    /* Left Sidebar */
+    .about-sidebar {
+        width: 25%;
+        flex-shrink: 0;
+        position: sticky;
+        top: 100px; /* Below sticky header */
+        background: #FFFFFF;
+        padding-right: 20px;
+    }
+
+    .sidebar-title {
+        font-family: var(--font-heading), 'Inter', sans-serif;
+        font-size: 2rem;
+        font-weight: 300;
+        color: var(--academic-dark);
+        margin-bottom: 24px;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+        border: none;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        min-height: 56px;
+        color: var(--academic-dark);
+        text-decoration: none;
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        border-bottom: 1px solid var(--border-color);
+        transition: all 0.2s ease;
+    }
+
+    .sidebar-link i {
+        font-size: 0.8rem;
+        color: var(--academic-dark);
+        transition: all 0.2s ease;
+        opacity: 0.5;
+    }
+
+    .sidebar-link:hover {
+        background: var(--bg-light);
+        color: var(--primary-blue);
+    }
+
+    .sidebar-link:hover i {
+        color: var(--primary-blue);
+        opacity: 1;
+        transform: translateX(4px);
+    }
+
+    .sidebar-link.active {
+        background: var(--primary-blue);
+        color: #FFFFFF;
+        border-bottom-color: var(--primary-blue);
+        font-weight: 600;
+    }
+
+    .sidebar-link.active i {
+        color: #FFFFFF;
+        opacity: 1;
+    }
+
+    /* Right Main Content */
+    .about-content {
+        flex: 1;
+        max-width: 850px;
+    }
+
+    /* Breadcrumbs override for light background */
+    .about-container > .breadcrumb {
+        background: transparent;
+        padding: 0;
+        margin-bottom: 30px;
+        box-shadow: none;
+        border: none;
+        font-size: 0.9rem;
+    }
+
+    .about-container > .breadcrumb a {
+        color: var(--academic-dark);
+    }
+    
+    .about-container > .breadcrumb span {
+        color: var(--text-gray);
+        font-weight: 500;
+    }
+    
+    .about-container > .breadcrumb a:hover {
+        color: var(--primary-blue);
+    }
+
+    .about-container > .breadcrumb a::after,
+    .about-container > .breadcrumb span::after {
+        background: rgba(0, 0, 0, 0.2);
+    }
 
 
-    <style>
-        /* ========================================
-   ABOUT PAGE - ACADEMIC THEME
-========================================= */
+    /* Main Page Header */
+    .main-page-header {
+        margin-bottom: 60px;
+    }
 
+    .main-page-title {
+        font-family: var(--font-heading), 'Inter', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 300;
+        color: var(--academic-dark);
+        letter-spacing: -0.02em;
+        margin-bottom: 24px;
+        line-height: 1.1;
+    }
 
+    .main-page-lead {
+        font-family: 'Libre Baskerville', Georgia, serif;
+        font-size: 1.4rem;
+        font-style: italic;
+        color: var(--academic-dark);
+        line-height: 1.6;
+        font-weight: 400;
+    }
 
-        /* Global Scrollbar Hide */
-        html,
-        body {
-            overflow-x: hidden;
-            /* Scrollbar restored */
+    /* Content Blocks (Sections) */
+    .content-block {
+        margin-bottom: 40px;
+        padding-top: 20px; /* For scrollspy offset */
+        animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+        font-family: var(--font-heading), 'Inter', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 300;
+        color: var(--academic-dark);
+        letter-spacing: -0.02em;
+        margin-bottom: 24px;
+        line-height: 1.1;
+        text-decoration: none;
+        border: none;
+        padding-bottom: 0;
+    }
+
+    .section-title::after,
+    .section-title::before {
+        display: none !important;
+        content: none !important;
+    }
+
+    .section-subtitle {
+        font-family: 'Libre Baskerville', Georgia, serif;
+        font-size: 1.4rem;
+        font-style: italic;
+        color: var(--academic-dark);
+        line-height: 1.6;
+        font-weight: 400;
+        margin: 0 0 30px 0 !important;
+        text-align: left !important;
+        max-width: 100% !important;
+    }
+
+    .body-text {
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-dark);
+        margin-bottom: 24px;
+        font-weight: 400;
+    }
+
+    /* Mission Highlights */
+    .platform-highlights {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        margin-top: 40px;
+        border-top: 1px solid var(--border-color);
+        padding-top: 40px;
+    }
+
+    .platform-highlight {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .highlight-icon {
+        font-size: 1.8rem;
+        color: var(--primary-blue);
+        margin-top: 4px;
+    }
+
+    .highlight-title {
+        font-family: var(--font-heading), 'Inter', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--academic-dark);
+        margin-bottom: 8px;
+    }
+
+    .highlight-text {
+        font-family: var(--font-body), 'Inter', sans-serif;
+        color: var(--text-gray);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Consultant Profile */
+    .consultant-layout {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        margin-top: 30px;
+    }
+
+    .consultant-image {
+        width: 250px;
+        flex-shrink: 0;
+    }
+
+    .consultant-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 1px solid var(--border-color);
+    }
+
+    .consultant-info h3 {
+        font-family: var(--font-heading), 'Inter', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--academic-dark);
+        margin-bottom: 8px;
+    }
+
+    .consultant-job-title {
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--primary-blue);
+        margin-bottom: 24px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .expertise-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .expertise-tag {
+        background: var(--bg-light);
+        color: var(--academic-dark);
+        padding: 8px 16px;
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: 1px solid var(--border-color);
+    }
+
+    /* Metrics */
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        margin-top: 30px;
+    }
+
+    .metric-box {
+        padding: 30px;
+        background: var(--bg-light);
+        border: 1px solid var(--border-color);
+    }
+
+    .metric-number {
+        font-family: var(--font-heading), 'Inter', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 300;
+        color: var(--primary-blue);
+        line-height: 1;
+        margin-bottom: 12px;
+    }
+
+    .metric-label {
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    /* Values Grid */
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        margin-top: 40px;
+    }
+
+    .value-item {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .value-icon {
+        font-size: 1.5rem;
+        color: var(--primary-blue);
+        margin-top: 4px;
+    }
+
+    .value-title {
+        font-family: var(--font-heading), 'Inter', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--academic-dark);
+        margin-bottom: 8px;
+    }
+
+    .value-description {
+        font-family: var(--font-body), 'Inter', sans-serif;
+        color: var(--text-gray);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Timeline */
+    .timeline-container {
+        border-left: 2px solid var(--border-color);
+        padding-left: 30px;
+        margin-top: 40px;
+        margin-left: 10px;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -37px;
+        top: 6px;
+        width: 12px;
+        height: 12px;
+        background: #FFFFFF;
+        border: 2px solid var(--primary-blue);
+        border-radius: 50%;
+    }
+
+    .timeline-date {
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--primary-blue);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+    }
+
+    .timeline-title {
+        font-family: var(--font-heading), 'Inter', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--academic-dark);
+        margin-bottom: 12px;
+    }
+
+    /* Quote / Highlight Block */
+    .editorial-quote {
+        border-left: 6px solid var(--primary-blue);
+        padding: 20px 0 20px 40px;
+        margin: 60px 0;
+        background: transparent;
+    }
+
+    .quote-text {
+        font-family: 'Libre Baskerville', Georgia, serif;
+        font-size: 1.6rem;
+        line-height: 1.6;
+        color: var(--academic-dark);
+        font-style: italic;
+        margin-bottom: 24px;
+    }
+
+    .quote-author {
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    /* Partners */
+    .partner-logos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    .partner-logo {
+        padding: 12px 24px;
+        background: #FFFFFF;
+        border: 1px solid var(--border-color);
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--academic-dark);
+    }
+
+    /* CTA Section */
+    .cta-buttons {
+        display: flex;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .cta-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 28px;
+        background: var(--primary-blue);
+        color: #FFFFFF;
+        font-family: var(--font-body), 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-radius: 4px; /* Rectangular corners */
+    }
+
+    .cta-btn-primary i {
+        margin-right: 10px;
+    }
+
+    .cta-btn-primary:hover {
+        background: var(--academic-dark);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .about-layout {
+            flex-direction: column;
         }
 
-
-
-        /* Hero Section - Reduced Height */
-        .about-hero {
-            position: relative;
+        .about-sidebar {
             width: 100%;
-            min-height: 200px;
-            overflow: hidden;
-            background: #000000;
-            padding: 80px 5% 50px;
-            display: flex;
-            align-items: center;
-            border-bottom: none;
-        }
-
-
-
-        /* Background Image */
-        .about-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1562774053-701939374585?w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: 0;
-        }
-
-
-
-        /* Black Overlay */
-        .about-hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.70);
-            z-index: 1;
-        }
-
-
-
-        .about-hero-content {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            text-align: left;
-        }
-
-
-
-        .about-hero h1 {
-            font-family: var(--font-heading);
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 0;
-            color: #FFFFFF;
-            line-height: 1.3;
-            letter-spacing: -0.01em;
-            text-decoration: none;
-        }
-
-        .about-hero-subtitle {
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 400;
-            line-height: 1.6;
-            margin-top: 15px;
-            max-width: 600px;
-        }
-
-
-
-        /* Content Sections - Reduced Padding */
-        .about-section {
-            padding: 60px 5%;
-            background: #FFFFFF;
-        }
-
-
-
-        .about-section:nth-child(even) {
-            background: #F7F8FA;
-        }
-
-
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 45px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-
-
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            font-weight: 600;
-            color: #1B1F24;
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-            text-decoration: none;
-            position: relative;
-            display: inline-block;
-        }
-
-
-
-        /* Remove any pseudo-element decorations */
-        .section-title::before,
-        .section-title::after {
-            display: none !important;
-            content: none !important;
-        }
-
-
-
-        .section-subtitle {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: #4B5563;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-
-
-
-        /* Platform Mission Section */
-        .platform-mission {
-            background: #FFFFFF;
-            border-radius: 8px;
-            padding: 40px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            position: static;
+            padding-right: 0;
             margin-bottom: 40px;
         }
 
-
-
-        .platform-title {
-            font-family: 'Libre Baskerville', Georgia, serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #007BFF;
-            margin-bottom: 20px;
-            text-align: center;
-            letter-spacing: -0.01em;
-        }
-
-
-
-        /* Remove decorations from platform title */
-        .platform-title::before,
-        .platform-title::after {
-            display: none !important;
-            content: none !important;
-        }
-
-
-
-        .platform-description {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #4B5563;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-
-
-        /* Updated Platform Highlights - Column on Mobile */
-        .platform-highlights {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0;
-            margin-top: 35px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-
-
-        .platform-highlight {
-            text-align: center;
-            padding: 30px 25px;
-            background: transparent;
-            border: none;
-            border-right: 1px solid rgba(0, 0, 0, 0.12);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-            transition: all 0.3s ease;
-        }
-
-
-
-        .platform-highlight:nth-child(2n) {
-            border-right: none;
-        }
-
-
-
-        .platform-highlight:nth-child(3),
-        .platform-highlight:nth-child(4) {
-            border-bottom: none;
-        }
-
-
-
-        .platform-highlight:hover {
-            transform: none;
-            background: rgba(0, 123, 255, 0.02);
-            border-color: rgba(0, 0, 0, 0.12);
-            box-shadow: none;
-        }
-
-
-
-        .highlight-icon {
-            font-size: 2.2rem;
-            color: #007BFF;
-            margin-bottom: 15px;
-        }
-
-
-
-        .highlight-title {
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1B1F24;
-            margin-bottom: 10px;
-            letter-spacing: 0.01em;
-        }
-
-
-
-        .highlight-text {
-            font-family: var(--font-body);
-            color: #6B7280;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-
-
-        /* Consultant Section - Blue-Black Gradient Background */
-        .consultant-profile {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 40px;
-            align-items: center;
-            margin: 40px 0;
-            background: linear-gradient(135deg, #007BFF 0%, #1B1F24 100%);
-            padding: 40px;
-            border: 1px solid rgba(0, 123, 255, 0.3);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-
-
-        .consultant-image {
-            width: 100%;
-            height: 300px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 3px solid #FFFFFF;
-        }
-
-
-
-        .consultant-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .consultant-image:hover img {
-            transform: scale(1.05);
-        }
-
-
-
-        .consultant-info h2 {
-            font-family: 'Libre Baskerville', Georgia, serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #FFFFFF;
-            margin-bottom: 10px;
-            letter-spacing: -0.01em;
-            text-align: left;
-        }
-
-
-
-        .consultant-title {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: 0.01em;
-            text-align: left;
-        }
-
-
-
-        .consultant-description {
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-
-
-        .expertise-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: flex-start;
-        }
-
-
-
-        .expertise-tag {
-            background: rgba(255, 255, 255, 0.15);
-            color: #FFFFFF;
-            padding: 8px 16px;
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            letter-spacing: 0.02em;
-            transition: all 0.3s ease;
-        }
-
-
-
-        .expertise-tag:hover {
-            background: #FFFFFF;
-            color: #007BFF;
-            transform: translateY(-2px);
-        }
-
-
-
-        /* Success Metrics - White Background */
-        .metrics-section {
-            background: #F9FAFB;
-            color: #1B1F24;
-            padding: 60px 5%;
-            text-align: center;
-        }
-
-
-
-        .metrics-section .section-header {
-            margin-bottom: 45px;
-        }
-
-
-
-        .metrics-section .section-title {
-            color: #1B1F24;
-            margin-bottom: 8px;
-            font-size: 2rem;
-        }
-
-
-
-        .metrics-section .section-subtitle {
-            color: #4B5563;
-            font-size: 1rem;
-        }
-
-
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #FFFFFF;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-
-
-        .metric-box {
-            background: transparent;
-            padding: 35px 20px;
-            border: none;
-            border-right: 1px solid rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-
-
-        .metric-box:last-child {
-            border-right: none;
-        }
-
-
-
-        .metric-box:hover {
-            background: rgba(0, 123, 255, 0.02);
-            transform: none;
-        }
-
-
-
-        .metric-number {
-            font-family: var(--font-heading);
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            line-height: 1;
-            color: #007BFF;
-        }
-
-
-
-        .metric-label {
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #6B7280;
-        }
-
-
-
-        /* Core Values - 6 items, 3 per row */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px 25px;
-            margin-top: 40px;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-
-
-        .value-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            text-align: left;
-        }
-
-
-
-        .value-icon {
-            font-size: 1.6rem;
-            color: #007BFF;
-            flex-shrink: 0;
-            margin-top: 3px;
-        }
-
-
-
-        .value-content {
-            flex: 1;
-        }
-
-
-
-        .value-title {
-            font-family: var(--font-heading);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #1B1F24;
-            margin-bottom: 6px;
-            letter-spacing: 0.01em;
-        }
-
-
-
-        .value-description {
-            font-family: var(--font-body);
-            color: #6B7280;
-            line-height: 1.6;
-            font-size: 0.85rem;
-        }
-
-
-
-        /* Timeline - Icons moved further left on vertical line */
-        .timeline {
-            max-width: 900px;
-            margin: 35px auto 0;
-            position: relative;
-            padding-top: 20px;
-        }
-
-
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 20px;
-            bottom: 0;
-            width: 2px;
-            background: #007BFF;
-            transform: translateX(-50%);
-        }
-
-
-
-        .timeline-item {
-            position: relative;
-            margin: 40px 0;
-            width: 50%;
-            padding: 0 35px;
-        }
-
-
-
-        .timeline-item:first-child {
-            margin-top: 0;
-        }
-
-
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            text-align: right;
-            padding-right: 65px;
-        }
-
-
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-            padding-left: 65px;
-        }
-
-
-
-        .timeline-content {
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 0;
-            position: relative;
-            box-shadow: none;
-            transition: all 0.3s ease;
-        }
-
-
-
-        .timeline-content:hover {
-            border-color: transparent;
-            transform: none;
-            box-shadow: none;
-        }
-
-
-
-        .timeline-date {
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            color: #007BFF;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 10px;
-        }
-
-
-
-        .timeline-title {
-            font-family: 'Libre Baskerville', Georgia, serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1B1F24;
-            margin-bottom: 10px;
-            letter-spacing: -0.01em;
-        }
-
-
-
-        /* Remove decorations from timeline titles */
-        .timeline-title::before,
-        .timeline-title::after {
-            display: none !important;
-            content: none !important;
-        }
-
-
-
-        .timeline-text {
-            font-family: var(--font-body);
-            color: #4B5563;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-
-
-
-        .timeline-icon {
-            position: absolute;
-            top: 5px;
-            width: 48px;
-            height: 48px;
-            background: #007BFF;
-            color: #FFFFFF;
-            border: 4px solid #FFFFFF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            z-index: 2;
-            box-shadow: 0 0 0 3px #007BFF;
-        }
-
-
-
-        .timeline-item:nth-child(odd) .timeline-icon {
-            right: -24px;
-        }
-
-
-
-        .timeline-item:nth-child(even) .timeline-icon {
-            left: -24px;
-        }
-
-
-
-        /* Partner Universities - Horizontal Scroll */
-        .partners-section {
-            background: #F9FAFB;
-            border: none;
-            border-radius: 0;
-            padding: 50px 5%;
+        .about-content {
             max-width: 100%;
-            margin: 0;
-            text-align: center;
-            box-shadow: none;
         }
 
-
-
-        .partners-title {
-            font-family: 'Libre Baskerville', Georgia, serif;
-            font-size: 1.6rem;
-            color: #1B1F24;
-            font-weight: 600;
-            margin-bottom: 18px;
-            letter-spacing: -0.01em;
+        .main-page-title {
+            font-size: 2.8rem;
         }
 
-
-
-        /* Remove decorations */
-        .partners-title::before,
-        .partners-title::after {
-            display: none !important;
-            content: none !important;
+        .platform-highlights, .values-grid, .metrics-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
 
+        .consultant-layout {
+            flex-direction: column;
+        }
+    }
 
-
-        .partners-text {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: #4B5563;
-            line-height: 1.6;
-            max-width: 850px;
-            margin: 0 auto 30px;
+    @media (max-width: 768px) {
+        .main-page-title {
+            font-size: 2.2rem;
         }
 
-
-
-        .partner-logos-wrapper {
-            position: relative;
-            overflow-x: auto;
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: #007BFF #E5E7EB;
+        .main-page-lead {
+            font-size: 1.2rem;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
         }
 
-
-
-        .partner-logos-wrapper::-webkit-scrollbar {
-            height: 8px;
+        .editorial-quote {
+            padding-left: 20px;
         }
-
-
-
-        .partner-logos-wrapper::-webkit-scrollbar-track {
-            background: #E5E7EB;
-            border-radius: 4px;
-        }
-
-
-
-        .partner-logos-wrapper::-webkit-scrollbar-thumb {
-            background: #007BFF;
-            border-radius: 4px;
-        }
-
-
-
-        .partner-logos {
-            display: flex;
-            gap: 15px;
-            padding-bottom: 10px;
-            width: max-content;
-        }
-
-
-
-        .partner-logo {
-            min-width: 180px;
-            padding: 12px 20px;
-            background: #FFFFFF;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #007BFF;
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-            white-space: nowrap;
-        }
-
-
-
-        .partner-logo:hover {
-            background: #007BFF;
-            color: #FFFFFF;
-            border-color: #007BFF;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-        }
-
-
-
-        /* Quote Section */
-        .quote-section {
-            background: linear-gradient(135deg, #1B1F24 0%, #111827 100%);
-            color: #FFFFFF;
-            text-align: center;
-            padding: 70px 5%;
-            position: relative;
-            overflow: hidden;
-        }
-
-
-
-        .quote-section::before {
-            content: '"';
-            position: absolute;
-            font-size: 16rem;
-            color: rgba(255, 255, 255, 0.03);
-            font-family: Georgia, serif;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-
-
-
-        .quote-content {
-            position: relative;
-            z-index: 2;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-
 
         .quote-text {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 1.5rem;
-            font-style: italic;
-            line-height: 1.6;
-            margin: 0 auto 24px;
-            opacity: 0.95;
-            font-weight: 400;
+            font-size: 1.3rem;
         }
-
-
-
-        .quote-author {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            opacity: 0.9;
-            letter-spacing: 0.05em;
-        }
-
-
-
-        /* CTA Section - Fully Curved Buttons */
-        .cta-section {
-            background: #FFFFFF;
-            padding: 60px 5%;
-            text-align: center;
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-
-
-        .cta-content {
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-
-
-        .cta-content h2 {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #1B1F24;
-            margin-bottom: 18px;
-            letter-spacing: -0.01em;
-        }
-
-
-
-        /* Remove decorations */
-        .cta-content h2::before,
-        .cta-content h2::after {
-            display: none !important;
-            content: none !important;
-        }
-
-
-
-        .cta-content p {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 1rem;
-            margin-bottom: 35px;
-            color: #4B5563;
-            line-height: 1.6;
-        }
-
-
-
+        
         .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            flex-wrap: wrap;
+            flex-direction: column;
         }
-
-
-
-        .cta-btn-primary {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 28px;
-            background: #007BFF;
-            color: #FFFFFF;
-            border: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            border-radius: 50px;
-            gap: 10px;
-        }
-
-
-
-        .cta-btn-primary:hover {
-            background: #1E4364;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.3);
-            text-decoration: none;
-        }
-
-
-
-        .cta-btn-primary i {
-            font-size: 0.95rem;
-        }
-
-
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .timeline {
-                padding-left: 70px;
-                padding-top: 15px;
-            }
-
-            .timeline::before {
-                left: 25px;
-                top: 15px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                left: 0 !important;
-                text-align: left !important;
-                padding: 0 0 0 55px !important;
-            }
-
-            /* Icon on left line - moved further left */
-            .timeline-icon {
-                left: 1px !important;
-                right: auto !important;
-                top: 5px;
-            }
-
-            .values-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-
-
-        @media (max-width: 900px) {
-            .consultant-profile {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                text-align: left;
-            }
-
-            .consultant-image {
-                margin: 0;
-                max-width: 280px;
-            }
-
-            .consultant-info h2 {
-                text-align: left;
-            }
-
-            .consultant-title {
-                text-align: left;
-            }
-
-            .expertise-tags {
-                justify-content: flex-start;
-            }
-        }
-
-
-
-        @media (max-width: 768px) {
-            .about-hero {
-                min-height: 120px;
-                padding: 40px 5% 30px;
-            }
-
-            .about-hero h1 {
-                font-size: 1.6rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .section-subtitle {
-                font-size: 0.9rem;
-            }
-
-            .about-section {
-                padding: 40px 5%;
-            }
-
-            .section-header {
-                margin-bottom: 30px;
-            }
-
-            .platform-mission {
-                padding: 25px 18px;
-                margin-bottom: 30px;
-            }
-
-            .platform-title {
-                font-size: 1.3rem;
-                margin-bottom: 15px;
-            }
-
-            .platform-description {
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-            }
-
-            .consultant-profile {
-                padding: 25px 18px;
-                gap: 25px;
-            }
-
-            .consultant-image {
-                height: 250px;
-                max-width: 250px;
-            }
-
-            .consultant-info h2 {
-                font-size: 1.5rem;
-            }
-
-            .consultant-title {
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-            }
-
-            .consultant-description {
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-            }
-
-            .expertise-tags {
-                margin-top: 15px;
-                gap: 8px;
-            }
-
-            .expertise-tag {
-                font-size: 0.75rem;
-                padding: 6px 12px;
-            }
-
-            /* Platform highlights mobile - column layout */
-            .platform-highlights {
-                grid-template-columns: 1fr;
-                gap: 0;
-                margin-top: 25px;
-            }
-
-            .platform-highlight {
-                display: flex;
-                align-items: center;
-                text-align: left;
-                gap: 12px;
-                padding: 16px 12px;
-                border-right: none;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-            }
-
-            .platform-highlight:last-child {
-                border-bottom: none;
-            }
-
-            .highlight-icon {
-                font-size: 1.6rem;
-                margin-bottom: 0;
-                flex-shrink: 0;
-            }
-
-            .highlight-content {
-                flex: 1;
-            }
-
-            .highlight-title {
-                font-size: 0.9rem;
-                margin-bottom: 5px;
-            }
-
-            .highlight-text {
-                font-size: 0.8rem;
-            }
-
-            /* Metrics mobile - 2 per row */
-            .metrics-section {
-                padding: 40px 5%;
-            }
-
-            .metrics-section .section-title {
-                font-size: 1.5rem;
-            }
-
-            .metrics-section .section-subtitle {
-                font-size: 0.9rem;
-            }
-
-            .metrics-section .section-header {
-                margin-bottom: 30px;
-            }
-
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0;
-            }
-
-            .metric-box {
-                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-                padding: 25px 15px;
-            }
-
-            .metric-box:nth-child(2n) {
-                border-right: none;
-            }
-
-            .metric-box:nth-child(3),
-            .metric-box:nth-child(4) {
-                border-bottom: none;
-            }
-
-            .metric-number {
-                font-size: 2.3rem;
-            }
-
-            .metric-label {
-                font-size: 0.8rem;
-            }
-
-            /* Values mobile */
-            .values-grid {
-                grid-template-columns: 1fr;
-                gap: 18px;
-                margin-top: 30px;
-            }
-
-            .value-icon {
-                font-size: 1.4rem;
-            }
-
-            .value-title {
-                font-size: 0.9rem;
-                margin-bottom: 5px;
-            }
-
-            .value-description {
-                font-size: 0.8rem;
-            }
-
-            /* Timeline mobile - MOVED ICONS FURTHER LEFT */
-            .timeline {
-                padding-left: 45px;
-                margin-top: 25px;
-            }
-
-            .timeline::before {
-                left: 13px;
-            }
-
-            /* Icon moved FURTHER LEFT - on the line */
-            .timeline-icon {
-                left: -6px !important;
-                right: auto !important;
-                width: 38px;
-                height: 38px;
-                font-size: 0.95rem;
-                border: 3px solid #FFFFFF;
-                box-shadow: 0 0 0 2px #007BFF;
-            }
-
-            .timeline-item {
-                padding-left: 35px !important;
-                margin: 30px 0;
-            }
-
-            .timeline-date {
-                font-size: 0.72rem;
-                margin-bottom: 8px;
-            }
-
-            .timeline-title {
-                font-size: 1.05rem;
-                margin-bottom: 8px;
-            }
-
-            .timeline-text {
-                font-size: 0.8rem;
-            }
-
-            .cta-section {
-                padding: 45px 5%;
-            }
-
-            .cta-content h2 {
-                font-size: 1.7rem;
-                margin-bottom: 15px;
-            }
-
-            .cta-content p {
-                font-size: 0.9rem;
-                margin-bottom: 28px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-btn-primary {
-                width: 100%;
-                max-width: 300px;
-                padding: 12px 24px;
-                font-size: 0.85rem;
-            }
-
-            .quote-section {
-                padding: 55px 5%;
-            }
-
-            .quote-text {
-                font-size: 1.15rem;
-            }
-
-            .quote-author {
-                font-size: 0.85rem;
-            }
-
-            .partners-section {
-                padding: 40px 5%;
-            }
-
-            .partners-title {
-                font-size: 1.3rem;
-                margin-bottom: 15px;
-            }
-
-            .partners-text {
-                font-size: 0.9rem;
-                margin-bottom: 25px;
-            }
-        }
-
-
-
-        @media (max-width: 600px) {
-            .about-hero {
-                min-height: 100px;
-                padding: 35px 5% 25px;
-            }
-
-            .about-hero h1 {
-                font-size: 1.4rem;
-            }
-
-            .section-title {
-                font-size: 1.3rem;
-            }
-
-            .about-section {
-                padding: 35px 18px;
-            }
-
-            .platform-mission {
-                padding: 20px 15px;
-            }
-
-            .platform-title {
-                font-size: 1.2rem;
-            }
-
-            .consultant-profile {
-                padding: 20px 15px;
-            }
-
-            .consultant-info h2 {
-                font-size: 1.3rem;
-            }
-
-            .quote-section {
-                padding: 45px 18px;
-            }
-
-            .quote-text {
-                font-size: 1.05rem;
-            }
-
-            .cta-section {
-                padding: 40px 18px;
-            }
-
-            .cta-content h2 {
-                font-size: 1.5rem;
-            }
-
-            .partner-logos {
-                gap: 12px;
-            }
-
-            .partner-logo {
-                min-width: 150px;
-                font-size: 0.8rem;
-                padding: 10px 16px;
-            }
-
-            /* Timeline icons EVEN MORE LEFT for small mobile */
-            .timeline::before {
-                left: 12px;
-            }
-
-            .timeline-icon {
-                left: -6px !important;
-                width: 36px;
-                height: 36px;
-            }
-        }
-    </style>
-
-
-
-    <!-- Hero Section -->
-    <section class="about-hero">
-        <div class="about-hero-content">
-            <% const breadcrumbs=[ { name: 'Home' , url: '/' }, { name: 'About Us' , url: '' } ]; %>
-                <%- include('partials/breadcrumbs', { breadcrumbs: breadcrumbs }) %>
-
-                    <h1>About Us</h1>
-                    <p class="about-hero-subtitle">Empowering students to achieve their academic dreams through expert
-                        guidance
-                        and personalized support.</p>
-        </div>
-    </section>
-
-
-
-    <!-- Platform Mission Section with Schema.org AboutPage markup -->
-    <section class="about-section" itemscope itemtype="http://schema.org/AboutPage">
-        <div class="section-header">
-            <h2 class="section-title" itemprop="name">UniPick's Mission - Connecting Students with Best-Fit Universities
-            </h2>
-            <p class="section-subtitle" itemprop="description">Transforming how students discover and choose their ideal
-                universities through expert university admissions guidance</p>
-        </div>
-
-        <div class="platform-mission">
-            <h3 class="platform-title">What is UniPick?</h3>
-            <p class="platform-description" itemprop="about">
-                UniPick is India's most comprehensive and transparent university selection platform, designed to empower
-                students
-                and parents with the information and guidance needed to make confident higher education decisions. We
-                bridge the
-                gap between aspirations and opportunities through verified data, expert insights, and personalized
-                university admissions help.
-            </p>
-
-            <p class="platform-description">
-                Unlike traditional admission consultancies, we prioritize long-term student success over commissions,
-                providing
-                unbiased recommendations based on academic fit, career prospects, and individual goals with our expert
-                education consultant team.
-            </p>
-
-            <div class="platform-highlights">
-                <div class="platform-highlight">
-                    <i class="fas fa-database highlight-icon"></i>
-                    <div class="highlight-content">
-                        <h4 class="highlight-title">Data-Driven Decisions</h4>
-                        <p class="highlight-text">Compare universities using verified placement records, ROI analysis,
-                            and real student outcomes</p>
-                    </div>
-                </div>
-
-                <div class="platform-highlight">
-                    <i class="fas fa-user-check highlight-icon"></i>
-                    <div class="highlight-content">
-                        <h4 class="highlight-title">Expert Verification</h4>
-                        <p class="highlight-text">Every university listing verified by experienced education consultants
-                            and industry professionals</p>
-                    </div>
-                </div>
-
-                <div class="platform-highlight">
-                    <i class="fas fa-chart-line highlight-icon"></i>
-                    <div class="highlight-content">
-                        <h4 class="highlight-title">Career-Focused Approach</h4>
-                        <p class="highlight-text">We evaluate programs based on future employability and industry
-                            alignment, not just rankings</p>
-                    </div>
-                </div>
-
-                <div class="platform-highlight">
-                    <i class="fas fa-handshake highlight-icon"></i>
-                    <div class="highlight-content">
-                        <h4 class="highlight-title">Direct University Access</h4>
-                        <p class="highlight-text">Connect directly with verified university representatives through our
-                            trusted network</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Consultant Profile Section with Schema.org Person markup -->
-    <section class="about-section">
-        <div class="section-header">
-            <h2 class="section-title">Meet Our Education Consultant - Your Expert Guide</h2>
-        </div>
-
-        <div class="consultant-profile" itemscope itemtype="http://schema.org/Person">
-            <div class="consultant-image">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=600&fit=crop"
-                    alt="Ravi Vajendla, UniPick Founder and Lead University Admissions Consultant" itemprop="image"
-                    loading="lazy">
-            </div>
-
-            <div class="consultant-info">
-                <h2 itemprop="name">Ravi Vajendla</h2>
-                <p class="consultant-title" itemprop="jobTitle">Chartered Accountant & Senior University Admissions
-                    Consultant</p>
-                <meta itemprop="worksFor" content="UniPick Education Consultancy">
-                <meta itemprop="alumniOf" content="Institute of Chartered Accountants of India">
-
-                <p class="consultant-description" itemprop="description">
-                    With over 15 years of experience spanning finance and education consulting, Ravi brings a unique
-                    analytical
-                    lens to university admissions. As a qualified Chartered Accountant, he understands the financial
-                    implications
-                    and return on investment of education decisions—ensuring families make choices that are both
-                    academically sound
-                    and financially sustainable through expert university admissions help.
+    }
+</style>
+
+<div class="about-container">
+    <!-- Breadcrumbs -->
+    <% const breadcrumbs=[ { name: 'Home' , url: '/' }, { name: 'About Us' , url: '' } ]; %>
+    <%- include('partials/breadcrumbs', { breadcrumbs: breadcrumbs }) %>
+    <div style="margin-bottom: 30px;"></div>
+
+    <div class="about-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="about-sidebar">
+            <h2 class="sidebar-title">About Us</h2>
+            <nav class="sidebar-nav" id="about-nav">
+                <a href="#mission" class="sidebar-link active">UniPick's Mission <i class="fas fa-chevron-right"></i></a>
+                <a href="#consultant" class="sidebar-link">Education Consultant <i class="fas fa-chevron-right"></i></a>
+                <a href="#impact" class="sidebar-link">Impact in Numbers <i class="fas fa-chevron-right"></i></a>
+                <a href="#values" class="sidebar-link">Our Core Values <i class="fas fa-chevron-right"></i></a>
+                <a href="#journey" class="sidebar-link">Professional Journey <i class="fas fa-chevron-right"></i></a>
+                <a href="#network" class="sidebar-link">University Network <i class="fas fa-chevron-right"></i></a>
+                <a href="#cta" class="sidebar-link">Begin Your Journey <i class="fas fa-chevron-right"></i></a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="about-content">
+            <!-- Mission Section -->
+            <section id="mission" class="content-block" itemscope itemtype="http://schema.org/AboutPage">
+                <h2 class="section-title" itemprop="name">UniPick's Mission - Connecting Students with Best-Fit Universities</h2>
+                <p class="section-subtitle" itemprop="description">Transforming how students discover and choose their ideal universities through expert university admissions guidance</p>
+
+                <p class="body-text" itemprop="about">
+                    UniPick is India's most comprehensive and transparent university selection platform, designed to empower students and parents with the information and guidance needed to make confident higher education decisions. We bridge the gap between aspirations and opportunities through verified data, expert insights, and personalized university admissions help.
+                </p>
+                <p class="body-text">
+                    Unlike traditional admission consultancies, we prioritize long-term student success over commissions, providing unbiased recommendations based on academic fit, career prospects, and individual goals with our expert education consultant team.
                 </p>
 
-                <p class="consultant-description">
-                    His transition from corporate finance to education consulting was driven by witnessing the impact of
-                    ill-informed
-                    admission decisions on students' careers. Having personally guided over 800 students with a 97%
-                    success rate,
-                    Ravi specializes in matching student profiles with institutions where they can genuinely
-                    thrive—considering
-                    academic excellence, cultural fit, and long-term career trajectories.
+                <div class="platform-highlights">
+                    <div class="platform-highlight">
+                        <i class="fas fa-database highlight-icon"></i>
+                        <div>
+                            <h4 class="highlight-title">Data-Driven Decisions</h4>
+                            <p class="highlight-text">Compare universities using verified placement records, ROI analysis, and real student outcomes.</p>
+                        </div>
+                    </div>
+                    <div class="platform-highlight">
+                        <i class="fas fa-user-check highlight-icon"></i>
+                        <div>
+                            <h4 class="highlight-title">Expert Verification</h4>
+                            <p class="highlight-text">Every university listing verified by experienced education consultants and industry professionals.</p>
+                        </div>
+                    </div>
+                    <div class="platform-highlight">
+                        <i class="fas fa-chart-line highlight-icon"></i>
+                        <div>
+                            <h4 class="highlight-title">Career-Focused Approach</h4>
+                            <p class="highlight-text">We evaluate programs based on future employability and industry alignment, not just rankings.</p>
+                        </div>
+                    </div>
+                    <div class="platform-highlight">
+                        <i class="fas fa-handshake highlight-icon"></i>
+                        <div>
+                            <h4 class="highlight-title">Direct University Access</h4>
+                            <p class="highlight-text">Connect directly with verified university representatives through our trusted network.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Consultant Section -->
+            <section id="consultant" class="content-block" itemscope itemtype="http://schema.org/Person">
+                <h2 class="section-title">Meet Our Education Consultant - Your Expert Guide</h2>
+                
+                <div class="consultant-layout">
+                    <div class="consultant-image">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=600&fit=crop"
+                            alt="Ravi Vajendla, UniPick Founder and Lead University Admissions Consultant" itemprop="image"
+                            loading="lazy">
+                    </div>
+                    <div class="consultant-info">
+                        <h3 itemprop="name">Ravi Vajendla</h3>
+                        <p class="consultant-job-title" itemprop="jobTitle">Chartered Accountant & Senior University Admissions Consultant</p>
+                        
+                        <meta itemprop="worksFor" content="UniPick Education Consultancy">
+                        <meta itemprop="alumniOf" content="Institute of Chartered Accountants of India">
+
+                        <p class="body-text" itemprop="description">
+                            With over 15 years of experience spanning finance and education consulting, Ravi brings a unique analytical lens to university admissions. As a qualified Chartered Accountant, he understands the financial implications and return on investment of education decisions—ensuring families make choices that are both academically sound and financially sustainable through expert university admissions help.
+                        </p>
+                        <p class="body-text">
+                            His transition from corporate finance to education consulting was driven by witnessing the impact of ill-informed admission decisions on students' careers. Having personally guided over 800 students with a 97% success rate, Ravi specializes in matching student profiles with institutions where they can genuinely thrive—considering academic excellence, cultural fit, and long-term career trajectories.
+                        </p>
+
+                        <div class="expertise-tags">
+                            <span class="expertise-tag" itemprop="knowsAbout">University Selection Strategy</span>
+                            <span class="expertise-tag" itemprop="knowsAbout">ROI & Financial Analysis</span>
+                            <span class="expertise-tag" itemprop="knowsAbout">Career Path Planning</span>
+                            <span class="expertise-tag" itemprop="knowsAbout">Education Financing</span>
+                            <span class="expertise-tag" itemprop="knowsAbout">Admission Process Management</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Metrics Section -->
+            <section id="impact" class="content-block">
+                <h2 class="section-title">Our Impact in Numbers</h2>
+                <p class="section-subtitle">Measurable success built on trust and expert university admissions guidance</p>
+
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-number">800+</div>
+                        <div class="metric-label">Students Guided</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-number">97%</div>
+                        <div class="metric-label">Success Rate</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-number">15+</div>
+                        <div class="metric-label">Years Experience</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-number">50+</div>
+                        <div class="metric-label">Partner Universities</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Values -->
+            <section id="values" class="content-block">
+                <h2 class="section-title">Our Core Values</h2>
+                <p class="section-subtitle">The principles that guide every student interaction at our university admissions consultant practice</p>
+
+                <div class="values-grid">
+                    <div class="value-item">
+                        <i class="fas fa-balance-scale value-icon"></i>
+                        <div>
+                            <h4 class="value-title">Transparency First</h4>
+                            <p class="value-description">Complete disclosure of all university metrics and performance data</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-graduation-cap value-icon"></i>
+                        <div>
+                            <h4 class="value-title">Student-Centric</h4>
+                            <p class="value-description">Recommendations tailored to individual goals and circumstances</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-chart-pie value-icon"></i>
+                        <div>
+                            <h4 class="value-title">Data-Driven Insights</h4>
+                            <p class="value-description">Decisions based on verified statistics and ROI analysis</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-shield-alt value-icon"></i>
+                        <div>
+                            <h4 class="value-title">Ethical Practice</h4>
+                            <p class="value-description">Zero commission-based recommendations, only merit-based guidance</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-award value-icon"></i>
+                        <div>
+                            <h4 class="value-title">Quality Excellence</h4>
+                            <p class="value-description">Partnerships only with verified, high-performing institutions</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-lightbulb value-icon"></i>
+                        <div>
+                            <h4 class="value-title">Innovation Focus</h4>
+                            <p class="value-description">Technology-enabled matching and personalized counseling</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Professional Journey -->
+            <section id="journey" class="content-block">
+                <h2 class="section-title">Professional Journey</h2>
+                <p class="section-subtitle">From Chartered Accountant to Education Innovation Leader</p>
+
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2005-2009</div>
+                        <h3 class="timeline-title">CA Qualification & Early Career</h3>
+                        <p class="body-text">
+                            Qualified as Chartered Accountant from ICAI with distinction, developing strong analytical foundations and financial assessment expertise through rigorous training.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2010-2015</div>
+                        <h3 class="timeline-title">Corporate Finance & Audit</h3>
+                        <p class="body-text">
+                            5+ years in corporate finance and institutional audit for leading educational organizations, gaining deep insights into university operations, financial sustainability, and quality metrics.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2016-2017</div>
+                        <h3 class="timeline-title">Transition to Education Consulting</h3>
+                        <p class="body-text">
+                            Recognized critical gaps in transparent admission guidance. Began consulting part-time while maintaining CA practice, helping students make data-informed university choices.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2018-Present</div>
+                        <h3 class="timeline-title">UniPick Platform Launch</h3>
+                        <p class="body-text">
+                            Founded UniPick to democratize access to quality admission guidance at scale. Platform now serves hundreds of students annually with technology-enabled personalized counseling and verified university data.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Partner Universities -->
+            <section id="network" class="content-block">
+                <h2 class="section-title">Our University Network</h2>
+                <p class="body-text">
+                    We maintain strategic partnerships with carefully vetted universities across India that meet rigorous standards for academic quality, faculty credentials, infrastructure excellence, and documented student success.
                 </p>
 
-                <div class="expertise-tags">
-                    <span class="expertise-tag" itemprop="knowsAbout">University Selection Strategy</span>
-                    <span class="expertise-tag" itemprop="knowsAbout">ROI & Financial Analysis</span>
-                    <span class="expertise-tag" itemprop="knowsAbout">Career Path Planning</span>
-                    <span class="expertise-tag" itemprop="knowsAbout">Education Financing</span>
-                    <span class="expertise-tag" itemprop="knowsAbout">Admission Process Management</span>
+                <div class="partner-logos">
+                    <div class="partner-logo">Swarrnim University</div>
+                    <div class="partner-logo">Sanskriti University</div>
+                    <div class="partner-logo">MIT World Peace University</div>
+                    <div class="partner-logo">Lovely Professional University</div>
+                    <div class="partner-logo">Chandigarh University</div>
+                    <div class="partner-logo">Amity University</div>
+                    <div class="partner-logo">SRM Institute of Science</div>
+                    <div class="partner-logo">VIT University</div>
+                    <div class="partner-logo">Manipal University</div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-
-
-    <!-- Success Metrics -->
-    <section class="metrics-section">
-        <div class="section-header">
-            <h2 class="section-title">Our Impact in Numbers</h2>
-            <p class="section-subtitle">Measurable success built on trust and expert university admissions guidance</p>
-        </div>
-
-        <div class="metrics-grid">
-            <div class="metric-box">
-                <div class="metric-number">800+</div>
-                <div class="metric-label">Students Guided</div>
-            </div>
-
-            <div class="metric-box">
-                <div class="metric-number">97%</div>
-                <div class="metric-label">Success Rate</div>
-            </div>
-
-            <div class="metric-box">
-                <div class="metric-number">15+</div>
-                <div class="metric-label">Years Experience</div>
-            </div>
-
-            <div class="metric-box">
-                <div class="metric-number">50+</div>
-                <div class="metric-label">Partner Universities</div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Core Values - 6 items only -->
-    <section class="about-section">
-        <div class="section-header">
-            <h2 class="section-title">Our Core Values</h2>
-            <p class="section-subtitle">The principles that guide every student interaction at our university admissions
-                consultant practice</p>
-        </div>
-
-        <div class="values-grid">
-            <div class="value-item">
-                <i class="fas fa-balance-scale value-icon"></i>
-                <div class="value-content">
-                    <h4 class="value-title">Transparency First</h4>
-                    <p class="value-description">Complete disclosure of all university metrics and performance data</p>
+            <!-- CTA Section with Quote -->
+            <section id="cta" class="content-block">
+                <!-- Quote Block -->
+                <div class="editorial-quote">
+                    <blockquote class="quote-text">
+                        "Education is an investment, not an expense. Our role is to help you make the smartest investment decision that will yield returns throughout your lifetime—academically, professionally, and personally."
+                    </blockquote>
+                    <div class="quote-author">
+                        — Ravi Vajendla, CA & Founder, UniPick
+                    </div>
                 </div>
-            </div>
 
-            <div class="value-item">
-                <i class="fas fa-graduation-cap value-icon"></i>
-                <div class="value-content">
-                    <h4 class="value-title">Student-Centric</h4>
-                    <p class="value-description">Recommendations tailored to individual goals and circumstances</p>
+                <h2 class="section-title" style="margin-top: 40px;">Ready to Begin Your Journey?</h2>
+                <p class="body-text">Schedule a personalized consultation with Ravi Vajendla, our lead education consultant, and discover the universities that align perfectly with your academic goals and career aspirations.</p>
+                <div class="cta-buttons">
+                    <a href="/contact" class="cta-btn-primary">
+                        <i class="fas fa-calendar-check"></i> Book Your Consultation
+                    </a>
+                    <a href="/universities" class="cta-btn-primary">
+                        <i class="fas fa-university"></i> Explore Universities
+                    </a>
                 </div>
-            </div>
+            </section>
+        </main>
+    </div>
+</div>
 
-            <div class="value-item">
-                <i class="fas fa-chart-pie value-icon"></i>
-                <div class="value-content">
-                    <h4 class="value-title">Data-Driven Insights</h4>
-                    <p class="value-description">Decisions based on verified statistics and ROI analysis</p>
-                </div>
-            </div>
+<script>
+    // Dynamic Tab Interface for Sidebar Navigation
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.content-block');
+        const navLinks = document.querySelectorAll('.sidebar-link');
+        
+        // Hide all sections except the first one initially
+        sections.forEach((section, index) => {
+            if (index !== 0) {
+                section.style.display = 'none';
+            }
+        });
 
-            <div class="value-item">
-                <i class="fas fa-shield-alt value-icon"></i>
-                <div class="value-content">
-                    <h4 class="value-title">Ethical Practice</h4>
-                    <p class="value-description">Zero commission-based recommendations, only merit-based guidance</p>
-                </div>
-            </div>
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Hide all sections
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show target section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    
+                    // Smooth scroll to top of content area on mobile so user sees the new content
+                    if (window.innerWidth <= 1024) {
+                        const offset = 80;
+                        const topPos = document.querySelector('.about-content').getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top: topPos, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    });
+</script>
 
-            <div class="value-item">
-                <i class="fas fa-award value-icon"></i>
-                <div class="value-content">
-                    <h4 class="value-title">Quality Excellence</h4>
-                    <p class="value-description">Partnerships only with verified, high-performing institutions</p>
-                </div>
-            </div>
-
-            <div class="value-item">
-                <i class="fas fa-lightbulb value-icon"></i>
-                <div class="value-content">
-                    <h4 class="value-title">Innovation Focus</h4>
-                    <p class="value-description">Technology-enabled matching and personalized counseling</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Professional Journey Timeline -->
-    <section class="about-section">
-        <div class="section-header">
-            <h2 class="section-title">Professional Journey</h2>
-            <p class="section-subtitle">From Chartered Accountant to Education Innovation Leader</p>
-        </div>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-date">2005-2009</div>
-                    <h3 class="timeline-title">CA Qualification & Early Career</h3>
-                    <p class="timeline-text">
-                        Qualified as Chartered Accountant from ICAI with distinction, developing strong analytical
-                        foundations and financial assessment expertise through rigorous training.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-icon">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-date">2010-2015</div>
-                    <h3 class="timeline-title">Corporate Finance & Audit</h3>
-                    <p class="timeline-text">
-                        5+ years in corporate finance and institutional audit for leading educational organizations,
-                        gaining deep insights into university operations, financial sustainability, and quality metrics.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-date">2016-2017</div>
-                    <h3 class="timeline-title">Transition to Education Consulting</h3>
-                    <p class="timeline-text">
-                        Recognized critical gaps in transparent admission guidance. Began consulting part-time while
-                        maintaining CA practice, helping students make data-informed university choices.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <div class="timeline-content">
-                    <div class="timeline-date">2018-Present</div>
-                    <h3 class="timeline-title">UniPick Platform Launch</h3>
-                    <p class="timeline-text">
-                        Founded UniPick to democratize access to quality admission guidance at scale. Platform now
-                        serves
-                        hundreds of students annually with technology-enabled personalized counseling and verified
-                        university data.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Partner Universities -->
-    <section class="partners-section">
-        <h3 class="partners-title">Our University Network</h3>
-        <p class="partners-text">
-            We maintain strategic partnerships with carefully vetted universities across India that meet rigorous
-            standards for academic quality, faculty credentials, infrastructure excellence, and documented student
-            success.
-        </p>
-
-        <div class="partner-logos-wrapper">
-            <div class="partner-logos">
-                <div class="partner-logo">Swarrnim University</div>
-                <div class="partner-logo">Sanskriti University</div>
-                <div class="partner-logo">MIT World Peace University</div>
-                <div class="partner-logo">Lovely Professional University</div>
-                <div class="partner-logo">Chandigarh University</div>
-                <div class="partner-logo">Amity University</div>
-                <div class="partner-logo">SRM Institute of Science</div>
-                <div class="partner-logo">VIT University</div>
-                <div class="partner-logo">Manipal University</div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Quote Section -->
-    <section class="quote-section">
-        <div class="quote-content">
-            <blockquote class="quote-text">
-                Education is an investment, not an expense. Our role is to help you make the smartest investment
-                decision that will yield returns throughout your lifetime—academically, professionally, and personally.
-            </blockquote>
-            <div class="quote-author">
-                — Ravi Vajendla, CA & Founder, UniPick
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2>Ready to Begin Your Journey?</h2>
-            <p>Schedule a personalized consultation with Ravi Vajendla, our lead education consultant, and discover the
-                universities that align perfectly with your academic goals and career aspirations</p>
-            <div class="cta-buttons">
-                <a href="/contact" class="cta-btn-primary">
-                    <i class="fas fa-calendar-check"></i> Book Your Consultation
-                </a>
-                <a href="/universities" class="cta-btn-primary">
-                    <i class="fas fa-university"></i> Explore Universities
-                </a>
-            </div>
-        </div>
-    </section>
-
-
-
-    <%- include('partials/footer') %>
+<%- include('partials/footer') %>

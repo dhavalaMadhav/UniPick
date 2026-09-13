@@ -155,7 +155,7 @@
             overflow: hidden;
             background: #000000;
             padding: 4rem 5%;
-            min-height: 700px;
+            min-height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -195,7 +195,7 @@
         }
 
         .hero-content h1 {
-            font-size: 2.4rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
             color: #FFFFFF;
             font-weight: 700;
@@ -212,10 +212,10 @@
         }
 
         .hero-content p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 2rem;
-            max-width: 600px;
+            margin-bottom: 2.5rem;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
             font-weight: 400;
@@ -227,7 +227,7 @@
             display: flex;
             gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .btn-primary,
@@ -244,6 +244,7 @@
             gap: 0.5rem;
             border-radius: 25px;
             box-shadow: none;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -296,7 +297,7 @@
 
         .stats-section {
             padding: 2.5rem 5%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+            background: #FFFFFF;
             position: relative;
             z-index: 2;
         }
@@ -334,11 +335,10 @@
 
         .stat-number,
         .stat-number-text {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            /* Increased Desktop Font Size */
-            font-weight: 800;
-            color: var(--text-primary);
+            font-family: var(--font-heading), serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: #002b5e;
             display: inline-block;
             line-height: 1.1;
         }
@@ -355,11 +355,11 @@
         }
 
         .stat-label {
-            font-size: 1rem;
-            color: var(--text-muted);
+            font-size: 1.05rem;
+            color: #4a5568;
             margin-top: 0.5rem;
-            font-weight: 600;
-            font-family: var(--font-simple);
+            font-weight: 500;
+            font-family: var(--font-body), sans-serif;
         }
 
         /* ========================================
@@ -995,11 +995,12 @@
    ======================================== */
 
         .cta-section {
-            padding: 4.5rem 5%;
-            background: var(--bg-surface);
+            padding: 90px 5%;
+            background-color: #F7FAFC;
             text-align: center;
             position: relative;
             z-index: 2;
+            border-top: 1px solid #E5E7EB;
         }
 
         .cta-content {
@@ -1008,18 +1009,22 @@
         }
 
         .cta-content h2 {
-            font-size: 1.95rem;
-            margin-bottom: 0.9rem;
-            color: var(--text-primary);
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
+            color: #002b5e;
+            font-weight: 300;
             text-decoration: none;
-            font-family: var(--font-heading);
+            font-family: var(--font-heading), serif;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
         }
 
         .cta-content p {
-            font-size: 1rem;
-            color: var(--text-body);
-            margin-bottom: 2rem;
-            font-family: var(--font-simple);
+            font-size: 1.15rem;
+            color: #4a5568;
+            margin-bottom: 2.5rem;
+            font-family: var(--font-body), sans-serif;
+            line-height: 1.6;
         }
 
         .cta-buttons {
@@ -1515,25 +1520,221 @@
         }
     </style>
 
-    <!-- Hero Section - CLEAN (NO UNIVERSITY NAME BOXES) -->
-    <section class="hero" itemscope itemtype="http://schema.org/LocalBusiness">
-        <div class="hero-background"></div>
+    <style>
+/* ========================================
+   NEW INSTITUTIONAL HERO (NAIT STYLE)
+======================================== */
+.inst-hero-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 420px;
+}
 
-        <div class="hero-content">
-            <h1 itemprop="name">Discover Your Academic Future with UniPick</h1>
-            <div class="university-title">UniPick University Partners</div>
-            <p>Connect with premier universities and shape your career with expert guidance tailored to your aspirations
-            </p>
-            <div class="hero-buttons">
-                <button class="btn-primary" onclick="window.location.href='/quiz'"
-                    style="padding: 0.8rem 1.8rem; min-width: 180px; justify-content: center;">
-                    <i class="fas fa-clipboard-list"></i> Take Career Quiz
-                </button>
-                <button class="btn-bright-blue text-uppercase" onclick="window.location.href='/contact'"
-                    style="color: #FFFFFF; border-color: #FFFFFF; padding: 0.8rem 1.8rem; min-width: 180px; justify-content: center; font-size: 0.95rem;">
-                    <i class="fas fa-user-graduate"></i> Talk to Advisor
-                </button>
+.inst-hero-image {
+    width: 60%;
+    height: 100%;
+}
+
+.inst-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.inst-hero-panel {
+    width: 40%;
+    background-color: #008FD3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 75px;
+    color: #FFFFFF;
+}
+
+.inst-hero-panel h1 {
+    font-size: clamp(2.3rem, 3vw, 2.875rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    font-family: var(--font-heading), serif;
+    letter-spacing: -0.5px;
+}
+
+.inst-hero-panel p {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 35px;
+    color: #FFFFFF;
+    font-family: var(--font-body), sans-serif;
+}
+
+.inst-hero-cta {
+    background-color: #FFFFFF;
+    color: #008FD3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    font-family: var(--font-body), sans-serif;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+    width: max-content;
+}
+
+.inst-hero-cta:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-2px);
+    color: #0077b3;
+}
+
+.inst-hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.inst-hero-secondary-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.inst-hero-secondary-link:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   DISCOVERY / SEARCH AREA
+======================================== */
+.inst-discovery-area {
+    background-color: #002b5e; /* Deep Navy */
+    background-image: 
+        linear-gradient(30deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+        linear-gradient(150deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+        linear-gradient(30deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+        linear-gradient(150deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+        linear-gradient(60deg, rgba(0,0,0,0.05) 25%, transparent 25.5%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05)),
+        linear-gradient(60deg, rgba(0,0,0,0.05) 25%, transparent 25.5%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05));
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #001f44;
+}
+
+.inst-discovery-area h2 {
+    color: #FFFFFF;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    font-family: var(--font-heading), sans-serif;
+    letter-spacing: normal;
+}
+
+.inst-quick-actions {
+    display: flex;
+    gap: 50px;
+    margin-top: 10px;
+}
+
+.inst-quick-actions a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: var(--font-body), sans-serif;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.inst-quick-actions a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.inst-quick-actions a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+@media (max-width: 992px) {
+    .inst-hero-container {
+        flex-direction: column;
+        height: auto;
+    }
+    .inst-hero-image {
+        width: 100%;
+        height: 350px;
+    }
+    .inst-hero-panel {
+        width: 100%;
+        padding: 50px 30px;
+    }
+    .inst-search-wrapper {
+        width: 90%;
+    }
+}
+@media (max-width: 576px) {
+    .inst-hero-panel {
+        padding: 40px 20px;
+    }
+    .inst-hero-panel h1 {
+        font-size: 2rem;
+    }
+    .inst-discovery-area h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .inst-quick-actions {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+}
+    </style>
+
+    <!-- NEW INSTITUTIONAL HERO -->
+    <section class="inst-hero-container">
+        <div class="inst-hero-image">
+            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&q=80" alt="Students walking on university campus">
+        </div>
+        <div class="inst-hero-panel">
+            <h1>Find the right university for your future</h1>
+            <p>Explore universities, discover courses and get personalized admission guidance to make the right choice for your future.</p>
+            <div class="inst-hero-buttons">
+                <a href="/universities" class="inst-hero-cta">Explore Universities</a>
+                <a href="/contact" class="inst-hero-secondary-link">Talk to an Advisor &rarr;</a>
             </div>
+        </div>
+    </section>
+
+    <!-- DISCOVERY / CTA AREA -->
+    <section class="inst-discovery-area">
+        <h2>What Would You Like to Do?</h2>
+        
+        <div class="inst-quick-actions">
+            <a href="/universities">Explore Universities</a>
+            <a href="/courses">Browse Courses</a>
+            <a href="/quiz">Take Career Quiz</a>
         </div>
     </section>
 
@@ -1566,279 +1767,530 @@
         </div>
     </section>
 
-    <!-- Why Choose Us Section -->
-    <section class="why-choose-us">
-        <div class="section-header">
-            <h2 class="section-title" style="font-size: 2.2rem;">Why Choose UniPick</h2>
-            <p class="section-subtitle">Your trusted partner in university admissions and career success through expert
-                admission guidance</p>
-        </div>
+    <!-- NEW INSTITUTIONAL WHY CHOOSE UNIPICK -->
+    <style>
+        .inst-why-choose {
+            background-color: #FFFFFF;
+            padding: 90px 0;
+            font-family: var(--font-body), sans-serif;
+            border-top: 1px solid #E5E7EB;
+        }
 
-        <div class="why-choose-grid">
-            <div class="why-choose-item">
-                <div class="why-choose-icon"><i class="fas fa-user-tie"></i></div>
-                <div class="why-choose-text">
-                    <h3>Expert Counselors</h3>
-                    <p>Dedicated academic advisors with years of experience guiding students to their ideal
-                        universities.</p>
-                </div>
+        .inst-why-choose-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .inst-why-choose-header {
+            text-align: left;
+            margin-bottom: 60px;
+            max-width: 900px;
+        }
+
+        .inst-why-choose-header h2 {
+            font-family: var(--font-heading), serif;
+            font-size: 2.6rem;
+            color: #002b5e; /* Dark navy */
+            font-weight: 300; /* Lightweight / semi-light */
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .inst-why-choose-header p {
+            font-size: 1.15rem;
+            color: #4a5568;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .inst-features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+        }
+
+        .inst-feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .inst-feature-icon {
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .inst-feature-item h3 {
+            font-size: 1.65rem;
+            color: #002b5e;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .inst-feature-item p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            flex-grow: 1;
+            max-width: 290px;
+        }
+
+        .inst-feature-btn {
+            background-color: #008FD3;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 4px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+            font-family: var(--font-body), sans-serif;
+            border: none;
+        }
+
+        .inst-feature-btn:hover {
+            background-color: #0077b3;
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .inst-features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 60px 40px;
+            }
+            .inst-feature-item p {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .inst-why-choose {
+                padding: 70px 0;
+            }
+            .inst-features-grid {
+                grid-template-columns: 1fr;
+                gap: 70px;
+            }
+            .inst-why-choose-header h2 {
+                font-size: 2.1rem;
+            }
+            .inst-why-choose-container {
+                padding: 0 25px;
+            }
+        }
+    </style>
+
+    <section class="inst-why-choose">
+        <div class="inst-why-choose-container">
+            <div class="inst-why-choose-header">
+                <h2>Why Choose UniPick</h2>
+                <p>Expert guidance and trusted resources to help you make confident decisions about your education and career.</p>
             </div>
-            <div class="why-choose-item">
-                <div class="why-choose-icon"><i class="fas fa-graduation-cap"></i></div>
-                <div class="why-choose-text">
+
+            <div class="inst-features-grid">
+                <!-- Feature 1 -->
+                <div class="inst-feature-item">
+                    <div class="inst-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="32" cy="20" r="12" stroke="#008FD3" stroke-width="1.5"/>
+                          <path d="M10 54v-6a16 16 0 0 1 16-16h12a16 16 0 0 1 16 16v6" />
+                          <circle cx="48" cy="14" r="4" fill="#38A169" stroke="none" />
+                        </svg>
+                    </div>
+                    <h3>Expert Counselors</h3>
+                    <p>Dedicated academic advisors with years of experience guiding students to their ideal universities.</p>
+                    <a href="/contact" class="inst-feature-btn">Talk to an Advisor</a>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="inst-feature-item">
+                    <div class="inst-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M32 4L6 18v38h52V18L32 4z" stroke="#008FD3" stroke-width="1.5"/>
+                          <path d="M22 56V36h20v20" />
+                          <path d="M14 28h8M42 28h8M14 40h4M46 40h4" />
+                          <circle cx="32" cy="14" r="4" fill="#38A169" stroke="none" />
+                        </svg>
+                    </div>
                     <h3>Verified Universities</h3>
                     <p>Access to carefully vetted institutions known for academic excellence and student success.</p>
+                    <a href="/universities" class="inst-feature-btn">Explore Universities</a>
                 </div>
-            </div>
-            <div class="why-choose-item">
-                <div class="why-choose-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="why-choose-text">
+
+                <!-- Feature 3 -->
+                <div class="inst-feature-item">
+                    <div class="inst-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="32" cy="32" r="26" stroke="#008FD3" stroke-width="1.5"/>
+                          <circle cx="32" cy="32" r="12" />
+                          <path d="M32 6v6M32 52v6M6 32h6M52 32h6" />
+                          <circle cx="48" cy="16" r="4" fill="#38A169" stroke="none"/>
+                        </svg>
+                    </div>
                     <h3>Career-Focused Approach</h3>
                     <p>Programs aligned with industry demands ensuring strong placement opportunities.</p>
+                    <a href="/quiz" class="inst-feature-btn">Take Career Quiz</a>
                 </div>
-            </div>
-            <div class="why-choose-item">
-                <div class="why-choose-icon"><i class="fas fa-shield-alt"></i></div>
-                <div class="why-choose-text">
-                    <h3>Transparent Process</h3>
-                    <p>Clear communication about fees, eligibility, and admission procedures with no hidden costs.</p>
-                </div>
-            </div>
-            <div class="why-choose-item">
-                <div class="why-choose-icon"><i class="fas fa-hands-helping"></i></div>
-                <div class="why-choose-text">
+
+                <!-- Feature 4 -->
+                <div class="inst-feature-item">
+                    <div class="inst-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" fill="none" stroke="#002b5e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M32 10v44" stroke="#008FD3" stroke-width="1.5"/>
+                          <path d="M12 24l20-10 20 10v20l-20 10-20-10V24z" />
+                          <circle cx="32" cy="32" r="4" fill="#38A169" stroke="none" />
+                        </svg>
+                    </div>
                     <h3>End-to-End Support</h3>
                     <p>Comprehensive assistance from application to enrollment and beyond.</p>
-                </div>
-            </div>
-            <div class="why-choose-item">
-                <div class="why-choose-icon"><i class="fas fa-clock"></i></div>
-                <div class="why-choose-text">
-                    <h3>Timely Process</h3>
-                    <p>Streamlined admission process with timely submission of all applications and documents.</p>
+                    <a href="/contact" class="inst-feature-btn">Get Admission Help</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Universities - 3 CARDS PER SECTION ON DESKTOP -->
-    <section class="featured-universities">
-        <div class="section-header">
-            <h2 class="section-title" style="font-size: 2.2rem;">Our Partner Universities</h2>
-            <p class="section-subtitle">UniPick carefully selects partner universities to provide the best admission
-                guidance for your academic journey</p>
-        </div>
 
-        <p class="featured-description">
-            <!-- Text removed as per request -->
-        </p>
 
-        <div class="university-logos-container">
-            <div class="university-logos-carousel" id="universityCarousel">
-                <% universities.forEach(university=> { %>
-                    <div class="university-logo-item"
-                        onclick="window.location.href='/university/<%= university._id %>'">
-                        <div class="university-card-content">
-                            <span class="admission-badge">ADMISSION OPEN</span>
+    <!-- NEW INSTITUTIONAL STUDENT SUCCESS STORIES -->
+    <style>
+        .inst-stories-section {
+            background-color: #FFFFFF;
+            padding: 90px 0;
+            font-family: var(--font-body), sans-serif;
+            border-top: 1px solid #E5E7EB;
+        }
 
-                            <div class="university-card-header">
-                                <div class="university-text-info">
-                                    <div class="university-location-text">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= university.location || 'India' %>
-                                    </div>
-                                    <h3 class="university-name-large">
-                                        <%= university.name %>
-                                    </h3>
-                                </div>
+        .inst-stories-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
 
-                                <div class="university-logo-box">
-                                    <img src="<%= university.logo %>"
-                                        alt="University Logo - <%= university.name %> - Top university for admission guidance"
-                                        loading="lazy">
-                                </div>
-                            </div>
+        .inst-stories-header {
+            text-align: left;
+            margin-bottom: 60px;
+            max-width: 900px;
+        }
 
-                            <div class="university-card-footer">
-                                <div class="footer-item">
-                                    <h4>Annual Tuition</h4>
-                                    <p>
-                                        <%= university.fees || '₹23 lakhs/year' %>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <% }) %>
+        .inst-stories-header h2 {
+            font-family: var(--font-heading), serif;
+            font-size: 2.6rem;
+            color: #002b5e; /* Dark navy */
+            font-weight: 300;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .inst-stories-header p {
+            font-size: 1.15rem;
+            color: #4a5568;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .inst-story-card {
+            background: #FFFFFF;
+            border: 1px solid #D9DDE3;
+            border-radius: 4px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: none; /* No shadow */
+            margin: 15px; /* for carousel spacing */
+            box-sizing: border-box;
+        }
+
+        .inst-story-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #E5E7EB;
+            padding-bottom: 20px;
+        }
+
+        .inst-story-student-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inst-story-name {
+            font-size: 1.2rem;
+            color: #008FD3;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-family: var(--font-heading), sans-serif;
+        }
+
+        .inst-story-course, .inst-story-univ {
+            font-size: 0.95rem;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+
+        .inst-story-img-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid #E5E7EB;
+        }
+
+        .inst-story-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .inst-story-review {
+            font-size: 0.95rem;
+            color: #2d3748;
+            line-height: 1.5;
+            font-style: normal;
+        }
+
+        @media (max-width: 600px) {
+            .inst-stories-section { padding: 70px 0; }
+            .inst-stories-header h2 { font-size: 2.1rem; }
+            .inst-stories-container { padding: 0 25px; }
+            .inst-story-card { padding: 25px; margin: 10px; }
+        }
+    </style>
+
+    <section id="stories" class="inst-stories-section">
+        <div class="inst-stories-container">
+            <div class="inst-stories-header">
+                <h2>Student Success Stories</h2>
+                <p>Hear from students who achieved their dreams with our university admissions consultant services and career guidance.</p>
             </div>
-        </div>
 
-        <!-- Dots Navigation for Universities - INSIDE featured-universities section -->
-        <div class="carousel-dots" id="universityDots"></div>
-
-        <div style="text-align: center;">
-            <button class="view-more-btn" onclick="window.location.href='/universities'">
-                explore more <i class="fas fa-arrow-right animated-arrow"></i>
-            </button>
-        </div>
-    </section>
-
-    <!-- Student Success Stories - 3 CARDS PER SECTION ON DESKTOP -->
-    <section id="stories" class="student-stories">
-        <div class="section-header">
-            <h2 class="section-title" style="font-size: 2.2rem;">Student Success Stories</h2>
-            <p class="section-subtitle">Hear from students who achieved their dreams with our university admissions
-                consultant services and career guidance</p>
-        </div>
-
-        <div class="stories-container">
             <div class="stories-carousel" id="testimonialsCarousel">
                 <% testimonials.forEach(testimonial=> { %>
-                    <div class="story-card" itemscope itemtype="http://schema.org/Review">
-                        <div class="story-card-top">
-                            <div class="student-info-left">
-                                <!-- Rating Stars -->
-                                <div class="student-rating" itemprop="reviewRating" itemscope
-                                    itemtype="http://schema.org/Rating">
-                                    <% for(let i=1; i <=5; i++) { %>
-                                        <% if(i <=Math.floor(testimonial.rating || 5)) { %>
-                                            <span class="star">★</span>
-                                            <% } else if(i===Math.ceil(testimonial.rating || 5) && (testimonial.rating
-                                                || 5) % 1 !==0) { %>
-                                                <span class="star half">☆</span>
-                                                <% } else { %>
-                                                    <span class="star empty">☆</span>
-                                                    <% } %>
-                                                        <% } %>
-                                                            <span class="rating-text">
-                                                                <meta itemprop="ratingValue"
-                                                                    content="<%= (testimonial.rating || 5).toFixed(1) %>">
-                                                                <%= (testimonial.rating || 5).toFixed(1) %>
-                                                            </span>
-                                </div>
-
-                                <!-- Student Details -->
-                                <div class="student-details">
-                                    <div class="student-name" itemprop="author">
-                                        <%= testimonial.name %>
-                                    </div>
-                                    <div class="student-course">
-                                        <%= testimonial.course %>
-                                    </div>
-                                    <div class="student-university">
-                                        <%= testimonial.university %>
-                                    </div>
-                                </div>
+                    <div class="inst-story-card" itemscope itemtype="http://schema.org/Review">
+                        <div class="inst-story-top">
+                            <div class="inst-story-student-info">
+                                <div class="inst-story-name" itemprop="author"><%= testimonial.name %></div>
+                                <div class="inst-story-course"><%= testimonial.course %></div>
+                                <div class="inst-story-univ"><%= testimonial.university %></div>
                             </div>
-
-                            <!-- Student Image -->
-                            <div class="student-image">
-                                <img src="<%= testimonial.image || 'https://via.placeholder.com/70' %>"
-                                    alt="Student Success Story - <%= testimonial.name %> - University admissions testimonial"
-                                    loading="lazy">
+                            <div class="inst-story-img-container">
+                                <img src="<%= testimonial.image || 'https://via.placeholder.com/70' %>" alt="Student <%= testimonial.name %>" loading="lazy">
                             </div>
                         </div>
-
-                        <!-- Review Text -->
-                        <div class="story-card-bottom">
-                            <p class="review-text" itemprop="reviewBody">"<%= testimonial.review %>"</p>
+                        <div class="inst-story-review" itemprop="reviewBody">
+                            "<%= testimonial.review %>"
                         </div>
                     </div>
-                    <% }) %>
-            </div>
-        </div>
-
-        <!-- Dots Navigation for Testimonials - INSIDE student-stories section -->
-        <div class="carousel-dots" id="testimonialDots"></div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="section-header">
-            <h2 class="section-title" style="font-size: 2.2rem;">Frequently Asked Questions</h2>
-            <p class="section-subtitle">Find answers to common questions about our services and process</p>
-        </div>
-
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h3>How does UniPick select its partner universities?</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>We conduct thorough evaluations of universities based on academic reputation, faculty quality,
-                        placement records, infrastructure, and student support services. Our university admissions
-                        consultants ensure only institutions meeting our rigorous standards for quality admission
-                        guidance are included in our network.</p>
-                </div>
+                <% }) %>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h3>What services are included in your counseling?</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Our comprehensive counseling includes career assessment, university selection guidance,
-                        application assistance, documentation support, interview preparation, and post-admission
-                        guidance. We provide end-to-end support throughout your admission journey.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h3>Are there any hidden fees or charges?</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>No, we believe in complete transparency. All fees and charges are clearly communicated upfront.
-                        Our counseling service fee is separate from university tuition, and we'll help you understand
-                        all costs involved before you commit.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h3>How long does the admission process typically take?</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>The timeline varies by university and program, but typically ranges from 2-6 weeks from
-                        application submission to admission decision. We ensure all applications are submitted well
-                        before deadlines to maximize your chances of acceptance.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFAQ(this)">
-                    <h3>Can I apply to multiple universities through UniPick?</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes, we encourage applying to multiple universities to increase your options. Our counselors will
-                        help you create a strategic application plan with reach, match, and safety schools tailored to
-                        your profile and preferences.</p>
-                </div>
-            </div>
+            <!-- Dots Navigation for Testimonials -->
+            <div class="carousel-dots" id="testimonialDots"></div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2>Ready to Start Your Academic Journey?</h2>
-            <p>Take the first step towards your dream university with expert admission guidance from UniPick's
-                university admissions consultants</p>
-            <div class="cta-buttons">
-                <button class="btn-primary large" onclick="window.location.href='/contact'">
-                    <i class="fas fa-comments"></i> Schedule Free Consultation
-                </button>
-                <button class="btn-secondary large" onclick="window.location.href='/universities'">
-                    <i class="fas fa-search"></i> Explore Universities
-                </button>
+    <!-- NEW INSTITUTIONAL FAQ SECTION -->
+    <style>
+        .inst-faq-section {
+            background-color: #F7FAFC; /* Light gray background */
+            padding: 90px 0;
+            font-family: var(--font-body), sans-serif;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .inst-faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .inst-faq-header {
+            text-align: left;
+            margin-bottom: 60px;
+        }
+
+        .inst-faq-header h2 {
+            font-family: var(--font-heading), serif;
+            font-size: 2.6rem;
+            color: #002b5e;
+            font-weight: 300;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .inst-faq-header p {
+            font-size: 1.15rem;
+            color: #4a5568;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .inst-faq-list {
+            border-top: 1px solid #D9DDE3;
+        }
+
+        .inst-faq-item {
+            border-bottom: 1px solid #D9DDE3;
+        }
+
+        .inst-faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .inst-faq-question h3 {
+            font-size: 1.15rem;
+            color: #002b5e;
+            font-weight: 500;
+            margin: 0;
+            line-height: 1.4;
+            transition: color 0.2s ease;
+        }
+
+        .inst-faq-question i {
+            color: #008FD3;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .inst-faq-question:hover h3 {
+            color: #008FD3;
+        }
+
+        /* Active/Open State */
+        .inst-faq-item.active .inst-faq-question h3 {
+            color: #008FD3;
+        }
+
+        .inst-faq-item.active .inst-faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .inst-faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0;
+        }
+
+        .inst-faq-item.active .inst-faq-answer {
+            max-height: 500px;
+            padding-bottom: 25px;
+        }
+
+        .inst-faq-answer p {
+            font-size: 1.05rem;
+            color: #4a5568;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .inst-faq-section { padding: 70px 0; }
+            .inst-faq-header h2 { font-size: 2.1rem; }
+            .inst-faq-container { padding: 0 25px; }
+        }
+    </style>
+
+    <section class="inst-faq-section">
+        <div class="inst-faq-container">
+            <div class="inst-faq-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our services and process.</p>
+            </div>
+
+            <div class="inst-faq-list">
+                <div class="inst-faq-item">
+                    <div class="inst-faq-question" onclick="toggleInstFAQ(this)">
+                        <h3>How does UniPick select its partner universities?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="inst-faq-answer">
+                        <p>We conduct thorough evaluations of universities based on academic reputation, faculty quality, placement records, infrastructure, and student support services. Our university admissions consultants ensure only institutions meeting our rigorous standards for quality admission guidance are included in our network.</p>
+                    </div>
+                </div>
+
+                <div class="inst-faq-item">
+                    <div class="inst-faq-question" onclick="toggleInstFAQ(this)">
+                        <h3>What services are included in your counseling?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="inst-faq-answer">
+                        <p>Our comprehensive counseling includes career assessment, university selection guidance, application assistance, documentation support, interview preparation, and post-admission guidance. We provide end-to-end support throughout your admission journey.</p>
+                    </div>
+                </div>
+
+                <div class="inst-faq-item">
+                    <div class="inst-faq-question" onclick="toggleInstFAQ(this)">
+                        <h3>Are there any hidden fees or charges?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="inst-faq-answer">
+                        <p>No, we believe in complete transparency. All fees and charges are clearly communicated upfront. Our counseling service fee is separate from university tuition, and we'll help you understand all costs involved before you commit.</p>
+                    </div>
+                </div>
+
+                <div class="inst-faq-item">
+                    <div class="inst-faq-question" onclick="toggleInstFAQ(this)">
+                        <h3>How long does the admission process typically take?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="inst-faq-answer">
+                        <p>The timeline varies by university and program, but typically ranges from 2-6 weeks from application submission to admission decision. We ensure all applications are submitted well before deadlines to maximize your chances of acceptance.</p>
+                    </div>
+                </div>
+                
+                <div class="inst-faq-item">
+                    <div class="inst-faq-question" onclick="toggleInstFAQ(this)">
+                        <h3>Can I apply to multiple universities through UniPick?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="inst-faq-answer">
+                        <p>Yes, we encourage applying to multiple universities to increase your options. Our counselors will help you create a strategic application plan with reach, match, and safety schools tailored to your profile and preferences.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <script>
+        function toggleInstFAQ(element) {
+            const item = element.parentElement;
+            const icon = element.querySelector('i');
+            
+            if (item.classList.contains('active')) {
+                item.classList.remove('active');
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            } else {
+                item.classList.add('active');
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            }
+        }
+    </script>
+
+
 
     <script>
         // Stats Counter Animation

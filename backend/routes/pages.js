@@ -4,6 +4,20 @@ const University = require('../models/University');
 const Lead = require('../models/Lead');
 const { authenticateToken, checkAuthenticated } = require('../middleware/auth');
 
+// Helper function to send either JSON or rendered EJS based on request headers
+function sendPageResponse(req, res, viewName, data) {
+    const isJsonRequest = req.originalUrl.startsWith('/api') || 
+                          req.xhr || 
+                          (req.headers.accept && req.headers.accept.includes('application/json')) || 
+                          req.query.format === 'json';
+    
+    if (isJsonRequest) {
+        return res.json(data);
+    } else {
+        return res.render(viewName, { req, ...data });
+    }
+}
+
 // Homepage
 router.get('/', async (req, res) => {
     try {
@@ -39,8 +53,7 @@ router.get('/', async (req, res) => {
             }
         ];
         
-        res.render('index', { 
-            req,
+        sendPageResponse(req, res, 'index', { 
             universities,
             testimonials,
             title: 'UniPick - Your Trusted University Admissions Consultant'
@@ -53,8 +66,7 @@ router.get('/', async (req, res) => {
 
 // Quiz page
 router.get('/quiz', (req, res) => {
-    res.render('quiz', {
-        req,
+    sendPageResponse(req, res, 'quiz', {
         title: 'Career Assessment Quiz - UniPick'
     });
 });
@@ -62,21 +74,19 @@ router.get('/quiz', (req, res) => {
 // Quiz results page with database recommendations
 router.get('/quiz-results', async (req, res) => {
     try {
-        // Get quiz data from query params or session if you want
-        // For now, we'll fetch top universities from database
         const universities = await University.find()
             .limit(5)
-            .sort({ createdAt: -1 }); // You can add your own sorting logic
+            .sort({ createdAt: -1 }); 
         
-        console.log(`📊 Fetched ${universities.length} universities for quiz results`);
-        
-        res.render('quiz-results', {
-            req,
+        sendPageResponse(req, res, 'quiz-results', {
             title: 'Your Career Guidance Results - UniPick',
             universities: universities
         });
     } catch (error) {
         console.error('❌ Error loading quiz results:', error);
+        if (req.xhr || req.headers.accept?.includes('application/json')) {
+            return res.status(500).json({ error: 'Unable to load quiz results' });
+        }
         res.status(500).render('error.ejs', {
             title: 'Error',
             message: 'Unable to load quiz results'
@@ -87,18 +97,17 @@ router.get('/quiz-results', async (req, res) => {
 // Universities listing page
 router.get('/universities', async (req, res) => {
     try {
-        // Fetch all universities from database
         const universities = await University.find();
         
-        console.log(`📚 Fetched ${universities.length} universities from database`);
-        
-        res.render('universities', {
-            req,
+        sendPageResponse(req, res, 'universities', {
             title: 'Universities - UniPick',
             universities: universities
         });
     } catch (error) {
         console.error('❌ Error fetching universities:', error);
+        if (req.xhr || req.headers.accept?.includes('application/json')) {
+            return res.status(500).json({ error: 'Unable to load universities' });
+        }
         res.status(500).render('error.ejs', {
             title: 'Error',
             message: 'Unable to load universities'
@@ -109,24 +118,34 @@ router.get('/universities', async (req, res) => {
 // University detail page
 router.get('/university/:slug', async (req, res) => {
     try {
-        const university = await University.findOne({ slug: req.params.slug });
+        const slug = req.params.slug;
+        let university = await University.findOne({ slug: slug });
+        if (!university && slug.match(/^[0-9a-fA-F]{24}$/)) {
+            university = await University.findById(slug);
+        }
+        if (!university) {
+            university = await University.findOne({ slug: new RegExp(`^${slug}$`, 'i') });
+        }
         
         if (!university) {
+            if (req.xhr || req.headers.accept?.includes('application/json')) {
+                return res.status(404).json({ error: 'University not found' });
+            }
             return res.status(404).render('error.ejs', {
                 title: 'Not Found',
                 message: 'University not found'
             });
         }
         
-        console.log('✅ Loaded university:', university.name);
-        
-        res.render('university-detail', {
-            req,
+        sendPageResponse(req, res, 'university-detail', {
             title: university.name,
             university: university
         });
     } catch (error) {
         console.error('❌ Error loading university:', error);
+        if (req.xhr || req.headers.accept?.includes('application/json')) {
+            return res.status(500).json({ error: 'Error loading university details' });
+        }
         res.status(500).render('error.ejs', {
             title: 'Error',
             message: 'Error loading university details'
@@ -136,28 +155,26 @@ router.get('/university/:slug', async (req, res) => {
 
 // GET /about - About Page
 router.get('/about', (req, res) => {
-    res.render('about', { 
-        req,
+    sendPageResponse(req, res, 'about', { 
         title: 'About -Ravi Vajendla | CA & Admission Consultant',
         page: 'about'
     });
 });
 
 router.get('/loading', (req, res) => {
-    res.render('loading', { req });
+    sendPageResponse(req, res, 'loading', {});
 });
 
 // Contact page
 router.get('/contact', (req, res) => {
-    res.render('contact', {
+    sendPageResponse(req, res, 'contact', {
         title: 'Contact Us - UniPick'
     });
 });
 
 // Admin login page
 router.get('/admin', checkAuthenticated, (req, res) => {
-    res.render('admin/login', {
-        req,
+    sendPageResponse(req, res, 'admin/login', {
         title: 'Admin Login - UniPick',
         error: null
     });
@@ -178,8 +195,7 @@ router.get('/admin/dashboard', authenticateToken, async (req, res) => {
             converted: await Lead.countDocuments({ status: 'converted' })
         };
         
-        res.render('admin/dashboard', {
-            req,
+        sendPageResponse(req, res, 'admin/dashboard', {
             title: 'Admin Dashboard - UniPick',
             leads,
             stats
@@ -193,6 +209,9 @@ router.get('/admin/dashboard', authenticateToken, async (req, res) => {
 // Admin logout
 router.get('/admin/logout', (req, res) => {
     res.clearCookie('adminToken');
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: true, redirect: '/admin' });
+    }
     res.redirect('/admin');
 });
 
@@ -205,7 +224,6 @@ router.get('/sitemap.xml', async (req, res) => {
         let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
         xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
         
-        // Static pages
         const staticPages = ['', '/universities', '/about', '/contact', '/quiz'];
         staticPages.forEach(page => {
             xml += '  <url>\n';
@@ -215,7 +233,6 @@ router.get('/sitemap.xml', async (req, res) => {
             xml += '  </url>\n';
         });
         
-        // Dynamic university pages
         universities.forEach(uni => {
             if (uni.slug) {
                 xml += '  <url>\n';

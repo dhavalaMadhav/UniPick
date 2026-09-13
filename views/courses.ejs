@@ -44,46 +44,26 @@
         }
 
 
-        /* Hero Section - Matching Quiz Page Style */
+        /* Hero Section - Institutional Design */
         .courses-hero {
             position: relative;
             width: 100%;
-            min-height: 200px;
             overflow: hidden;
-            background: #000000;
-            padding: 80px 5% 50px;
+            background-color: #002b5e; /* Deep Navy */
+            background-image: 
+                linear-gradient(30deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+                linear-gradient(150deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+                linear-gradient(30deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+                linear-gradient(150deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+                linear-gradient(60deg, rgba(0,0,0,0.05) 25%, transparent 25.5%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05)),
+                linear-gradient(60deg, rgba(0,0,0,0.05) 25%, transparent 25.5%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            padding: 30px 5%;
             display: flex;
             align-items: center;
-            border-bottom: none;
-        }
-
-
-        /* Background Image */
-        .courses-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: 0;
-        }
-
-
-        /* Black Overlay */
-        .courses-hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.70);
-            z-index: 1;
+            border-bottom: 2px solid #001f44;
+            min-height: 120px;
         }
 
 
@@ -142,13 +122,13 @@
 
 
         .courses-hero h1 {
-            font-family: var(--font-heading);
+            font-family: var(--font-heading), serif;
             font-size: 2.8rem;
-            font-weight: 700;
+            font-weight: 300;
             margin-bottom: 0;
             color: #FFFFFF;
-            line-height: 1.3;
-            letter-spacing: -0.01em;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
             text-decoration: none;
         }
 
@@ -701,7 +681,7 @@
                 </div>
 
 
-                <div class="course-item" onclick="window.location.href='/courses/management/business'" itemscope
+                <div class="course-item" onclick="window.location.href='/courses/management/business-administration'" itemscope
                     itemtype="https://schema.org/Course">
                     <div class="course-item-title">
                         <h3 itemprop="name"
@@ -752,7 +732,7 @@
                 </div>
 
 
-                <div class="course-item" onclick="window.location.href='/courses/management/hr'" itemscope
+                <div class="course-item" onclick="window.location.href='/courses/management/human-resources'" itemscope
                     itemtype="https://schema.org/Course">
                     <div class="course-item-title">
                         <h3 itemprop="name"
@@ -917,7 +897,7 @@
                 </div>
 
 
-                <div class="course-item" onclick="window.location.href='/courses/commerce/banking'" itemscope
+                <div class="course-item" onclick="window.location.href='/courses/commerce/banking-finance'" itemscope
                     itemtype="https://schema.org/Course">
                     <div class="course-item-title">
                         <h3 itemprop="name"

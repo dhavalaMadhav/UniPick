@@ -28,49 +28,26 @@
         }
 
 
-        /* Hero Section - Background Image with Black Overlay - IMPROVED */
+        /* Hero Section - Institutional Design */
         .course-hero {
             position: relative;
             width: 100%;
-            min-height: 400px;
             overflow: hidden;
-            background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8d 100%);
-            padding: 120px 5% 60px;
+            background-color: #002b5e; /* Deep Navy */
+            background-image: 
+                linear-gradient(30deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+                linear-gradient(150deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+                linear-gradient(30deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+                linear-gradient(150deg, rgba(255,255,255,0.03) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.03) 87.5%, rgba(255,255,255,0.03)),
+                linear-gradient(60deg, rgba(0,0,0,0.05) 25%, transparent 25.5%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05)),
+                linear-gradient(60deg, rgba(0,0,0,0.05) 25%, transparent 25.5%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            padding: 30px 5%;
             display: flex;
             align-items: center;
-            border-bottom: 2px solid #000000;
-        }
-
-
-        /* Background Image - Multiple fallbacks */
-        .course-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-            z-index: 0;
-        }
-
-
-        /* Black Overlay - Darker for better text contrast */
-        .course-hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom,
-                    rgba(0, 0, 0, 0.7) 0%,
-                    rgba(0, 0, 0, 0.75) 100%);
-            z-index: 1;
+            border-bottom: 2px solid #001f44;
+            min-height: 120px;
         }
 
 
@@ -157,13 +134,13 @@
 
         /* Hero Title - No underline, left-aligned */
         .course-hero h1 {
-            font-family: var(--font-heading);
+            font-family: var(--font-heading), serif;
             font-size: 2.4rem;
-            font-weight: 700;
+            font-weight: 300;
             margin-bottom: 20px;
             color: #FFFFFF;
-            line-height: 1.3;
-            letter-spacing: -0.01em;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
             position: relative;
             display: block;
             padding-bottom: 0;
@@ -450,9 +427,9 @@
 
 
         .cta-content h2 {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: var(--font-heading), serif;
             font-size: 1.6rem;
-            font-weight: 600;
+            font-weight: 300;
             color: #1B1F24;
             margin-bottom: 16px;
             line-height: 1.3;
@@ -489,7 +466,7 @@
 
         .cta-btn-primary,
         .cta-btn-secondary {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: var(--font-body), sans-serif;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -499,7 +476,7 @@
             text-decoration: none;
             cursor: pointer;
             transition: all 0.25s ease;
-            border-radius: 24px;
+            border-radius: 4px;
             border: none;
         }
 
@@ -807,7 +784,7 @@
         <% if (universities && universities.length> 0) { %>
             <div class="top-picks-grid">
                 <% universities.forEach((university, index)=> { %>
-                    <div class="top-pick-card" onclick="window.location.href='/university/<%= university._id %>'"
+                    <div class="top-pick-card" onclick="window.location.href='/university/<%= university.slug %>'"
                         itemscope itemtype="http://schema.org/EducationalOrganization">
                         <div class="top-pick-image">
                             <img src="<%= university.bannerImage || 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&h=600&fit=crop&auto=format' %>"
@@ -879,7 +856,7 @@
                             </div>
 
                             <!-- Hidden Schema.org properties -->
-                            <meta itemprop="url" content="https://unipick.org/university/<%= university._id %>">
+                            <meta itemprop="url" content="https://unipick.org/university/<%= university.slug %>">
                             <link itemprop="provider" href="http://schema.org/EducationalOrganization">
                         </div>
                     </div>

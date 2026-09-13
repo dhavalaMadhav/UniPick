@@ -322,6 +322,43 @@ const coursesData = {
 };
 
 
+// Helper function to send either JSON or rendered EJS based on request headers
+function sendCourseResponse(req, res, viewName, data) {
+    const isJsonRequest = req.originalUrl.startsWith('/api') || 
+                          req.xhr || 
+                          (req.headers.accept && req.headers.accept.includes('application/json')) || 
+                          req.query.format === 'json';
+    
+    if (isJsonRequest) {
+        return res.json(data);
+    } else {
+        return res.render(viewName, { req, ...data });
+    }
+}
+
+// Category mapping helper
+function resolveCategory(catParam) {
+    const cat = (catParam || '').toLowerCase();
+    if (coursesData[cat]) return cat;
+    if (cat === 'science-arts') return 'science';
+    if (cat === 'health-commerce') return 'health';
+    if (cat === 'medical') return 'health';
+    if (cat === 'business') return 'management';
+    return cat;
+}
+
+// Helper to find course anywhere in coursesData
+function findCourseAnywhere(slugParam) {
+    const targetSlug = (slugParam || '').toLowerCase();
+    for (const cat of Object.keys(coursesData)) {
+        const found = coursesData[cat].find(c => c.slug === targetSlug || c.slug.replace(/-/g, '') === targetSlug.replace(/-/g, ''));
+        if (found) {
+            return { course: found, category: cat };
+        }
+    }
+    return null;
+}
+
 // GET /courses - Main courses listing page
 router.get('/', async (req, res) => {
     try {
@@ -336,39 +373,63 @@ router.get('/', async (req, res) => {
             });
         });
         
-        res.render('courses', { 
+        sendCourseResponse(req, res, 'courses', { 
             courses: allCourses,
             title: 'Explore Courses - Unipick'
         });
     } catch (error) {
         console.error('Error loading courses:', error);
-        res.status(500).send('Error loading courses: ' + error.message);
+        res.status(500).json({ error: 'Error loading courses: ' + error.message });
     }
 });
 
 
-// GET /courses/:category - Display courses by category
+// GET /courses/:category - Display courses by category or single course fallback
 router.get('/:category', async (req, res) => {
     try {
-        const category = req.params.category.toLowerCase();
+        const rawCat = req.params.category.toLowerCase();
+        const category = resolveCategory(rawCat);
         
-        if (!coursesData[category]) {
-            return res.status(404).send('Category not found');
+        if (coursesData[category]) {
+            const courses = coursesData[category].map(course => ({
+                ...course,
+                category: category,
+                categoryName: category.charAt(0).toUpperCase() + category.slice(1)
+            }));
+            
+            return sendCourseResponse(req, res, 'courses', { 
+                courses: courses,
+                title: `${category.charAt(0).toUpperCase() + category.slice(1)} Courses - Unipick`
+            });
         }
         
-        const courses = coursesData[category].map(course => ({
-            ...course,
-            category: category,
-            categoryName: category.charAt(0).toUpperCase() + category.slice(1)
-        }));
+        // If category is not in coursesData, check if it's a direct course slug!
+        const result = findCourseAnywhere(rawCat);
+        if (result) {
+            const { course, category: foundCat } = result;
+            let universities = await University.find({
+                programmes: { $in: [course.programmeType, course.programmeType + 's', 'sciences', 'engineering', 'management', 'computer', 'medical', 'pharmacy', 'commerce'] }
+            })
+            .sort({ rating: -1 })
+            .limit(12);
+            
+            if (!universities || universities.length === 0) {
+                universities = await University.find().limit(12);
+            }
+            
+            return sendCourseResponse(req, res, 'course-detail', {
+                course: course,
+                category: foundCat,
+                categoryName: foundCat.charAt(0).toUpperCase() + foundCat.slice(1),
+                universities: universities,
+                title: `${course.name} - Unipick`
+            });
+        }
         
-        res.render('courses', { 
-            courses: courses,
-            title: `${category.charAt(0).toUpperCase() + category.slice(1)} Courses - Unipick`
-        });
+        return res.status(404).json({ error: 'Category or Course not found' });
     } catch (error) {
         console.error('Error loading category:', error);
-        res.status(500).send('Error loading category');
+        res.status(500).json({ error: 'Error loading category' });
     }
 });
 
@@ -376,28 +437,51 @@ router.get('/:category', async (req, res) => {
 // GET /courses/:category/:slug - Display individual course details
 router.get('/:category/:slug', async (req, res) => {
     try {
-        const category = req.params.category.toLowerCase();
+        const rawCat = req.params.category.toLowerCase();
         const slug = req.params.slug.toLowerCase();
         
-        if (!coursesData[category]) {
-            return res.status(404).send('Category not found');
-        }
+        let category = resolveCategory(rawCat);
+        let course = coursesData[category] ? coursesData[category].find(c => c.slug === slug) : null;
         
-        const course = coursesData[category].find(c => c.slug === slug);
+        // Robust fallback: If course not found in specified category, search across ALL categories
+        if (!course) {
+            const fallbackResult = findCourseAnywhere(slug);
+            if (fallbackResult) {
+                course = fallbackResult.course;
+                category = fallbackResult.category;
+            }
+        }
         
         if (!course) {
-            return res.status(404).send('Course not found');
+            return res.status(404).json({ error: 'Course not found' });
         }
         
-        // Fetch ONLY FEATURED universities offering this course
-        const universities = await University.find({
-            programmes: course.programmeType,
+        // Fetch universities offering this programmeType (with fallbacks)
+        const progSearch = [course.programmeType];
+        if (course.programmeType === 'science') progSearch.push('sciences');
+        if (course.programmeType === 'sciences') progSearch.push('science');
+        if (course.programmeType === 'medical') progSearch.push('health');
+        
+        let universities = await University.find({
+            programmes: { $in: progSearch },
             featured: true
         })
         .sort({ rating: -1 })
         .limit(12);
         
-        res.render('course-detail', { 
+        if (!universities || universities.length === 0) {
+            universities = await University.find({
+                programmes: { $in: progSearch }
+            })
+            .sort({ rating: -1 })
+            .limit(12);
+        }
+
+        if (!universities || universities.length === 0) {
+            universities = await University.find().sort({ rating: -1 }).limit(12);
+        }
+        
+        sendCourseResponse(req, res, 'course-detail', { 
             course: course,
             category: category,
             categoryName: category.charAt(0).toUpperCase() + category.slice(1),
@@ -406,7 +490,7 @@ router.get('/:category/:slug', async (req, res) => {
         });
     } catch (error) {
         console.error('Error loading course:', error);
-        res.status(500).send('Error loading course');
+        res.status(500).json({ error: 'Error loading course' });
     }
 });
 

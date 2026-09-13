@@ -1,422 +1,312 @@
 <!-- partials/footer.ejs -->
-<footer class="academic-footer">
-    <div class="footer-container">
-        <div class="footer-grid">
-            <div class="footer-column footer-brand">
-                <h3 class="footer-logo">UniPick</h3>
-                <p class="footer-brand-text">Your trusted partner in making informed university admission decisions.
-                    Expert guidance backed by data and transparency.</p>
-                <div class="footer-social">
-                    <a href="https://www.facebook.com/profile.php?id=61587079312741" class="social-icon"
-                        aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://x.com/ravi_vejendla2" class="social-icon" aria-label="Twitter"><i
-                            class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/in/unipick/" class="social-icon" aria-label="LinkedIn"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a href="https://www.instagram.com/ravivajendhla/" class="social-icon" aria-label="Instagram"><i
-                            class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-column">
-                <h4 class="footer-title">Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="/" class="footer-link">Home</a></li>
-                    <li><a href="/courses" class="footer-link">Courses</a></li>
-                    <li><a href="/universities" class="footer-link">Universities</a></li>
-                    <li><a href="/quiz" class="footer-link">Career Quiz</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h4 class="footer-title">Company</h4>
-                <ul class="footer-links">
-                    <li><a href="/about" class="footer-link">About Us</a></li>
-                    <li><a href="/contact" class="footer-link">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column footer-contact-column">
-                <h4 class="footer-title">Contact Info</h4>
-                <ul class="footer-contact">
-                    <li>
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+919160064204" class="footer-link">+91 9160064204</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:unipick.org@gmail.com" class="footer-link">unipick.org@gmail.com</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="footer-text">Vijayawada, Andhra Pradesh</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <p class="footer-copyright">© 2026 UniPick. All rights reserved.</p>
-                <div class="footer-legal">
-                    <a href="#" class="footer-legal-link">Privacy Policy</a>
-                    <span class="footer-divider">•</span>
-                    <a href="#" class="footer-legal-link">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
 <style>
     /* ========================================
-   FOOTER - ACADEMIC THEME
-========================================= */
-
-    .academic-footer {
-        background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
-        color: #FFFFFF;
-        padding: 60px 5% 0;
+       FOOTER - INSTITUTIONAL REDESIGN
+    ========================================= */
+    :root {
+        --footer-deep-navy: #063B82;
+        --footer-darker-navy: #032E68;
+        --footer-bright-blue: #0099D8;
+        --footer-text: #FFFFFF;
+        --footer-text-secondary: rgba(255, 255, 255, 0.85);
+        --footer-border: rgba(255, 255, 255, 0.15);
     }
 
-    .footer-container {
+    .inst-footer {
+        font-family: var(--font-body), sans-serif;
+        color: var(--footer-text);
+        background-color: var(--footer-deep-navy);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .inst-footer-container {
         max-width: 1400px;
         margin: 0 auto;
+        padding: 0 40px;
+        width: 100%;
     }
 
-    .footer-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1.5fr;
-        gap: 50px;
-        padding-bottom: 50px;
+    /* Top Utility Bar */
+    .inst-footer-top {
+        background-color: var(--footer-darker-navy);
+        padding: 15px 0;
     }
 
-    /* Brand Column */
-    .footer-brand {
-        padding-right: 20px;
-    }
-
-    .footer-logo {
-        font-family: 'Libre Baskerville', Georgia, serif;
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #FFFFFF;
-        margin-bottom: 15px;
-        letter-spacing: -0.01em;
-    }
-
-    .footer-brand-text {
-        font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 25px;
-    }
-
-    .footer-social {
-        display: flex;
-        gap: 12px;
-    }
-
-    .social-icon {
-        width: 38px;
-        height: 38px;
-        background: transparent !important;
-        color: rgba(255, 255, 255, 0.7);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    .social-icon:hover {
-        background: transparent !important;
-        border-color: transparent !important;
-        color: #007BFF !important;
-        /* Make icon blue on hover */
-        transform: translateY(-3px);
-        /* Removed box-shadow as requested */
-        box-shadow: none;
-    }
-
-    /* Footer Columns */
-    .footer-column h4.footer-title {
-        font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #FFFFFF;
-        margin-bottom: 18px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .footer-links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .footer-links li {
-        margin-bottom: 12px;
-    }
-
-    .footer-link {
-        font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.7);
-        text-decoration: none;
-        transition: all 0.2s ease;
-        display: inline-block;
-    }
-
-    .footer-link:hover {
-        color: #FFFFFF;
-        padding-left: 5px;
-    }
-
-    /* Contact Info Column */
-    .footer-contact {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .footer-contact li {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        margin-bottom: 15px;
-        font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.7);
-    }
-
-    .footer-contact li i {
-        font-size: 0.85rem;
-        color: #2C5F8D;
-        margin-top: 3px;
-        flex-shrink: 0;
-    }
-
-    .footer-contact .footer-link {
-        color: rgba(255, 255, 255, 0.7);
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-
-    .footer-contact .footer-link:hover {
-        color: #FFFFFF;
-        padding-left: 0;
-    }
-
-    .footer-text {
-        color: rgba(255, 255, 255, 0.7);
-    }
-
-    /* Footer Bottom */
-    .footer-bottom {
-        padding: 25px 0;
-    }
-
-    .footer-bottom-content {
+    .inst-footer-top .inst-footer-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
-        gap: 15px;
     }
 
-    .footer-copyright {
-        font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.85rem;
-        color: rgba(255, 255, 255, 0.6);
+    .inst-footer-utils {
+        color: var(--footer-text);
+        font-size: 1.4rem;
+        font-weight: 500;
         margin: 0;
+        font-family: var(--font-heading), serif;
     }
 
-    .footer-legal {
+    .inst-footer-btn {
+        background-color: var(--footer-bright-blue);
+        color: #FFFFFF;
+        text-decoration: none;
+        padding: 12px 28px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        border-radius: 4px;
+        transition: background-color 0.2s, transform 0.2s;
+        display: inline-block;
+        border: none;
+    }
+
+    .inst-footer-btn:hover {
+        background-color: #007bb0;
+        color: #FFFFFF;
+        transform: translateY(-2px);
+        text-decoration: none;
+    }
+
+    /* Main Footer Body */
+    .inst-footer-main {
+        padding: 40px 0;
+    }
+
+    .inst-footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1.5fr 1.5fr;
+        gap: 60px;
+    }
+
+    .inst-footer-col h3 {
+        color: #FFFFFF;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 25px;
+        font-family: var(--font-heading), serif;
+    }
+
+    /* Column 1: Brand */
+    .inst-footer-brand-desc {
+        color: var(--footer-text-secondary);
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        max-width: 90%;
+    }
+
+    .inst-footer-address {
+        font-style: normal;
+        color: var(--footer-text-secondary);
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .inst-footer-map-btn {
+        display: inline-block;
+        color: var(--footer-text);
+        text-decoration: none;
+        border: 1px solid var(--footer-text);
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        margin-bottom: 30px;
+    }
+
+    .inst-footer-map-btn:hover {
+        background-color: var(--footer-text);
+        color: var(--footer-deep-navy);
+        text-decoration: none;
+    }
+
+    /* Column 2 & 3: Lists */
+    .inst-footer-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid var(--footer-border);
+    }
+
+    .inst-footer-list li {
+        border-bottom: 1px solid var(--footer-border);
+    }
+
+    .inst-footer-list a {
         display: flex;
         align-items: center;
-        gap: 12px;
+        padding: 10px 0;
+        color: var(--footer-bright-blue);
+        text-decoration: none;
+        font-size: 1.05rem;
+        font-weight: 500;
+        transition: padding-left 0.2s ease, color 0.2s ease;
     }
 
-    .footer-legal-link {
-        font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-        font-size: 0.85rem;
-        color: rgba(255, 255, 255, 0.6);
-        text-decoration: none;
+    .inst-footer-list a i {
+        margin-right: 12px;
+        width: 20px;
+        text-align: center;
+        color: var(--footer-text-secondary);
         transition: color 0.2s ease;
     }
 
-    .footer-legal-link:hover {
+    .inst-footer-list a:hover {
+        padding-left: 8px;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .inst-footer-list a:hover i {
         color: #FFFFFF;
     }
 
-    .footer-divider {
-        color: rgba(255, 255, 255, 0.3);
-        font-size: 0.85rem;
+    /* Bottom Legal Bar */
+    .inst-footer-bottom {
+        background-color: var(--footer-darker-navy);
+        border-top: 1px solid var(--footer-border);
+        padding: 20px 0;
     }
 
-    /* Responsive Design */
+    .inst-footer-bottom .inst-footer-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .inst-footer-legal {
+        display: flex;
+        gap: 25px;
+    }
+
+    .inst-footer-legal a {
+        color: var(--footer-text-secondary);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+    }
+
+    .inst-footer-legal a:hover {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .inst-footer-copyright {
+        color: var(--footer-text-secondary);
+        font-size: 0.95rem;
+        margin: 0;
+    }
+
+    /* Responsive */
     @media (max-width: 1024px) {
-        .footer-grid {
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
+        .inst-footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .inst-footer-col:first-child {
+            grid-column: 1 / -1;
         }
     }
 
     @media (max-width: 768px) {
-        .academic-footer {
-            padding: 50px 5% 0;
-        }
-
-        .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 35px;
-            padding-bottom: 40px;
-        }
-
-        .footer-brand {
-            padding-right: 0;
-            padding-bottom: 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
-
-        .footer-brand-text {
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-
-        .social-icon {
-            width: 36px;
-            height: 36px;
-            font-size: 0.85rem;
-        }
-
-        .footer-column h4.footer-title {
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-
-        .footer-link {
-            font-size: 0.85rem;
-        }
-
-        .footer-contact li {
-            font-size: 0.85rem;
-        }
-
-        .footer-bottom-content {
+        .inst-footer-top .inst-footer-container {
             flex-direction: column;
+            gap: 20px;
             align-items: flex-start;
-            gap: 12px;
         }
-
-        .footer-copyright {
-            font-size: 0.8rem;
-        }
-
-        .footer-legal {
+        .inst-footer-utils {
             flex-wrap: wrap;
+            gap: 15px 25px;
         }
-
-        .footer-legal-link {
-            font-size: 0.8rem;
+        .inst-footer-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
         }
-    }
-
-    @media (max-width: 600px) {
-        .academic-footer {
-            padding: 40px 18px 0;
+        .inst-footer-bottom .inst-footer-container {
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
         }
-
-        .footer-grid {
-            gap: 30px;
-            padding-bottom: 35px;
+        .inst-footer-legal {
+            flex-wrap: wrap;
+            gap: 15px;
         }
-
-        .footer-brand {
-            padding-bottom: 20px;
+        .inst-footer-container {
+            padding: 0 25px;
         }
-
-        .footer-logo {
-            font-size: 1.4rem;
-        }
-
-        .footer-brand-text {
-            font-size: 0.8rem;
-        }
-
-        .social-icon {
-            width: 34px;
-            height: 34px;
-            font-size: 0.8rem;
-        }
-
-        .footer-column h4.footer-title {
-            font-size: 0.85rem;
-            margin-bottom: 12px;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-link {
-            font-size: 0.8rem;
-        }
-
-        .footer-contact li {
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-        }
-
-        .footer-bottom {
-            padding: 20px 0;
+        .inst-footer-main {
+            padding: 30px 0;
         }
     }
 </style>
 
-<script src="/js/main.js"></script>
-<script src="/js/script.js"></script>
+<footer class="inst-footer">
+    <!-- Top Utility Bar -->
+    <div class="inst-footer-top">
+        <div class="inst-footer-container">
+            <h3 class="inst-footer-utils">Ready to start your academic journey?</h3>
+            <a href="/contact" class="inst-footer-btn">Schedule Free Consultation</a>
+        </div>
+    </div>
 
-<!-- Chat Widget JS -->
-<script src="/js/chat-widget.js"></script>
-<!-- Callback Widget JS -->
-<script src="/js/callback-widget.js"></script>
+    <!-- Main Footer Body -->
+    <div class="inst-footer-main">
+        <div class="inst-footer-container">
+            <div class="inst-footer-grid">
+                
+                <!-- Column 1: Brand -->
+                <div class="inst-footer-col">
+                    <img src="/images/unipick-logo.png" alt="UniPick Logo" style="height: 45px; margin-bottom: 25px; filter: brightness(0) invert(1);">
+                    <p class="inst-footer-brand-desc">
+                        Your trusted partner in making informed university admission decisions. Expert guidance backed by data and transparency.
+                    </p>
+                    <address class="inst-footer-address">
+                        Vijayawada, Andhra Pradesh<br>
+                        India
+                    </address>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122550.00757367375!2d80.56942944641974!3d16.510372864387825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35eff9482d944b%3A0x939b7e84ab4a0265!2sVijayawada%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1709230000000!5m2!1sen!2sin" width="100%" height="150" style="border:0; border-radius: 4px; margin-bottom: 30px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
 
-<script>
-    // Toggle mobile menu
-    function toggleMobileMenu() {
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenu.classList.toggle('active');
-    }
+                <!-- Column 2: Contact Us -->
+                <div class="inst-footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="inst-footer-list">
+                        <li><a href="/#faq"><i class="fas fa-question-circle"></i> Frequently Asked Questions</a></li>
+                        <li><a href="/contact"><i class="fas fa-comments"></i> Talk to an Advisor</a></li>
+                        <li><a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                        <li><a href="mailto:unipick.org@gmail.com"><i class="fas fa-at"></i> Email UniPick</a></li>
+                        <li><a href="tel:+919160064204"><i class="fas fa-phone-alt"></i> Call Us</a></li>
+                    </ul>
+                </div>
 
-    // Mobile dropdown functionality
-    document.addEventListener('DOMContentLoaded', function () {
-        const mobileDropdowns = document.querySelectorAll('.mobile-dropdown > a');
-        mobileDropdowns.forEach(dropdown => {
-            dropdown.addEventListener('click', function (e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const content = this.nextElementSibling;
-                    content.classList.toggle('show');
-                    this.querySelector('i').classList.toggle('fa-chevron-down');
-                    this.querySelector('i').classList.toggle('fa-chevron-up');
-                }
-            });
-        });
-    });
-</script>
-</body>
+                <!-- Column 3: Connect With Us -->
+                <div class="inst-footer-col">
+                    <h3>Connect With Us</h3>
+                    <ul class="inst-footer-list">
+                        <li><a href="https://www.instagram.com/ravivajendhla/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=61587079312741" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="https://www.linkedin.com/in/unipick/" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+                        <li><a href="https://x.com/ravi_vejendla2" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-</html>
+    <!-- Bottom Legal Bar -->
+    <div class="inst-footer-bottom">
+        <div class="inst-footer-container">
+            <div class="inst-footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Cookie Policy</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <p class="inst-footer-copyright">
+                &copy; 2026 UniPick. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>
