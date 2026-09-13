@@ -1003,8 +1003,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 43, 94, 0.5);
-            backdrop-filter: blur(3px);
+            background: rgba(0, 43, 94, 0.55);
+            backdrop-filter: blur(4px);
             z-index: 1099;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -1021,13 +1021,13 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 310px;
+            width: 320px;
             max-width: 85vw;
             height: 100vh;
             background: #FFFFFF;
             z-index: 1100;
             padding: 70px 20px 30px;
-            box-shadow: -4px 0 25px rgba(0, 0, 0, 0.15);
+            box-shadow: -4px 0 30px rgba(0, 0, 0, 0.18);
             transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
             justify-content: flex-start;
@@ -1043,14 +1043,13 @@
             top: 18px;
             right: 18px;
             background: #F1F5F9 !important;
-            border: none !important;
-            font-size: 1.25rem;
+            border: 1px solid #E2E8F0 !important;
+            font-size: 1.1rem;
             color: #002b5e;
             cursor: pointer;
-            padding: 8px;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px; /* Slight border radius matching menu button */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1061,6 +1060,7 @@
         .mobile-menu-close:hover {
             background: #008FD3 !important;
             color: #FFFFFF !important;
+            border-color: #008FD3 !important;
         }
 
         .mobile-menu ul {
@@ -1078,18 +1078,21 @@
         }
 
         .mobile-menu ul li > a {
-            display: block;
-            padding: 14px 10px;
+            display: flex;
+            align-items: center;
+            height: 50px;
+            padding: 0 12px;
             color: #002b5e;
             font-family: var(--font-body), sans-serif;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             text-decoration: none;
             transition: all 0.2s ease;
         }
 
         .mobile-menu ul li > a:hover {
             color: #008FD3;
+            background: #F8FAFC;
             padding-left: 16px;
         }
 
@@ -1098,29 +1101,32 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            padding: 14px 10px;
+            height: 50px;
+            padding: 0 12px;
             color: #002b5e;
             font-family: var(--font-body), sans-serif;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             width: 100%;
             background: transparent;
             border: none;
-            transition: color 0.2s ease;
+            transition: color 0.2s ease, background 0.2s ease;
             text-align: left;
         }
 
         .mobile-dropdown-toggle:hover,
         .mobile-dropdown-toggle.active {
             color: #008FD3;
+            background: #F8FAFC;
         }
 
         .mobile-dropdown-content {
             display: none;
-            padding: 5px 0 10px 10px;
+            padding: 8px;
             background: #F8FAFC;
-            border-radius: 6px;
-            margin-bottom: 8px;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            margin: 6px 0 12px;
         }
 
         .mobile-dropdown-content.show {
@@ -1132,15 +1138,17 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            padding: 10px 12px;
+            height: 42px;
+            padding: 0 12px;
             color: #1E293B;
             font-family: var(--font-body), sans-serif;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             width: 100%;
             background: transparent;
             border: none;
-            border-bottom: 1px dashed #E2E8F0;
+            border-bottom: 1px solid #EDF2F7;
+            border-radius: 6px;
             transition: all 0.2s ease;
             text-align: left;
         }
@@ -1148,11 +1156,12 @@
         .mobile-category-toggle:hover,
         .mobile-category-toggle.active {
             color: #008FD3;
+            background: #EDF2F7;
         }
 
         .mobile-programs-content {
             display: none;
-            padding: 4px 0 6px 14px;
+            padding: 4px 0 6px;
         }
 
         .mobile-programs-content.show {
@@ -1160,23 +1169,27 @@
         }
 
         .mobile-programs-content a {
-            display: block;
-            padding: 7px 10px;
+            display: flex;
+            align-items: center;
+            height: 36px;
+            padding: 0 12px 0 24px;
             color: #475569;
             font-family: var(--font-body), sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             font-weight: 500;
             text-decoration: none;
+            border-radius: 6px;
             transition: all 0.2s ease;
         }
 
         .mobile-programs-content a:hover {
             color: #008FD3;
-            padding-left: 16px;
+            background: #EDF2F7;
+            padding-left: 28px;
         }
 
         .mobile-view-all-container {
-            padding: 12px 10px 6px;
+            padding: 10px 4px 4px;
         }
 
         .mobile-view-all-btn {
@@ -1184,22 +1197,25 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            height: 42px;
             font-family: var(--font-body), sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
             color: #FFFFFF !important;
             background: #008FD3;
             text-decoration: none !important;
-            padding: 10px 16px;
-            border-radius: 6px;
-            transition: background 0.2s ease;
+            padding: 0 16px;
+            border-radius: 8px;
+            transition: background 0.2s ease, transform 0.1s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             width: 100%;
+            border: none;
         }
 
         .mobile-view-all-btn:hover {
             background: #0077b3;
+            transform: translateY(-1px);
         }
             
 
