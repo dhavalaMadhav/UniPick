@@ -404,6 +404,39 @@ export default function UniversityDetail() {
         'Accenture': 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg',
         'Intel': 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Intel_logo_%282020%29.svg',
         'Samsung': 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg',
+        'Tata Motors': 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg',
+        'Mahindra': 'https://upload.wikimedia.org/wikipedia/commons/7/77/Mahindra_Rise_logo.svg',
+        'Bosch': 'https://upload.wikimedia.org/wikipedia/commons/1/16/Bosch-logo.svg',
+        'Siemens': 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Siemens-logo.svg',
+        'Ashok Leyland': 'https://upload.wikimedia.org/wikipedia/commons/6/6c/Ashok_Leyland_logo.svg',
+        'DLF': 'https://upload.wikimedia.org/wikipedia/commons/4/4f/DLF_logo.svg',
+        'NTPC': 'https://upload.wikimedia.org/wikipedia/commons/8/86/NTPC_Logo.svg',
+        'Power Grid': 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Power_Grid_Corporation_of_India_logo.svg',
+        'Qualcomm': 'https://upload.wikimedia.org/wikipedia/commons/7/71/Qualcomm-Logo.svg',
+        'Texas Instruments': 'https://upload.wikimedia.org/wikipedia/commons/3/36/Texas_Instruments_logo.svg',
+        'Broadcom': 'https://upload.wikimedia.org/wikipedia/commons/2/29/Broadcom_Logo.svg',
+        'Analog Devices': 'https://upload.wikimedia.org/wikipedia/commons/1/14/Analog_Devices_logo.svg',
+        'McKinsey': 'https://upload.wikimedia.org/wikipedia/commons/7/7b/McKinsey_%26_Company_logo.svg',
+        'BCG': 'https://upload.wikimedia.org/wikipedia/commons/7/73/Boston_Consulting_Group_logo.svg',
+        'Bain': 'https://upload.wikimedia.org/wikipedia/commons/b/b8/Bain_%26_Company_logo.svg',
+        'Goldman Sachs': 'https://upload.wikimedia.org/wikipedia/commons/6/61/Goldman_Sachs.svg',
+        'KPMG': 'https://upload.wikimedia.org/wikipedia/commons/9/9d/KPMG_logo.svg',
+        'HDFC Bank': 'https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg',
+        'Morgan Stanley': 'https://upload.wikimedia.org/wikipedia/commons/3/34/Morgan_Stanley_Logo_2019.svg',
+        'JP Morgan': 'https://upload.wikimedia.org/wikipedia/commons/a/af/J_P_Morgan_Logo_2008.svg',
+        'Axis Bank': 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Axis_Bank_logo.svg',
+        'Unilever': 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Unilever.svg',
+        'P&G': 'https://upload.wikimedia.org/wikipedia/commons/8/85/Procter_%26_Gamble_logo.svg',
+        'Flipkart': 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Flipkart_logo.svg',
+        'Facebook': 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
+        'ISRO': 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Indian_Space_Research_Organisation_Logo.svg',
+        'DRDO': 'https://upload.wikimedia.org/wikipedia/commons/9/9c/DRDO_logo.svg',
+        'Cipla': 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Cipla_logo.svg',
+        'Dr. Reddy\'s': 'https://upload.wikimedia.org/wikipedia/commons/8/87/Dr._Reddy%27s_Laboratories_logo.svg',
+        'Lupin': 'https://upload.wikimedia.org/wikipedia/commons/7/72/Lupin_Limited_logo.svg',
+        'Pfizer': 'https://upload.wikimedia.org/wikipedia/commons/5/57/Pfizer_logo.svg',
+        'SBI': 'https://upload.wikimedia.org/wikipedia/commons/c/cc/State_Bank_of_India_logo.svg',
+        'Kotak Mahindra': 'https://upload.wikimedia.org/wikipedia/commons/0/07/Kotak_Mahindra_Bank_logo.svg',
         'Pharma Majors': '/images/recruiters/pharma-majors.png',
         'Tech & IT Firms': '/images/recruiters/tech-it-firms.png',
         'Government & Private Hospitals': '/images/recruiters/hospitals.png',
@@ -815,56 +848,58 @@ export default function UniversityDetail() {
                         gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
                         gap: '16px'
                     }}>
-                        {activeRecruiters.map((recruiter, idx) => (
-                            <div key={idx} style={{
-                                background: '#FFFFFF',
-                                border: '1px solid #E2E8F0',
-                                padding: '12px 14px',
-                                borderRadius: 0,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                height: '95px',
-                                gap: '6px',
-                                transition: 'all 0.2s ease',
-                                boxShadow: '0 1px 4px rgba(0,0,0,0.03)'
-                            }}>
-                                {recruiter.logo ? (
+                        {activeRecruiters.map((recruiter, idx) => {
+                            const name = recruiter.name || 'Company';
+                            const initials = name
+                                .split(' ')
+                                .map(w => w[0])
+                                .filter(Boolean)
+                                .join('')
+                                .slice(0, 3)
+                                .toUpperCase();
+                            const fallbackSvg = `data:image/svg+xml;utf8,${encodeURIComponent(
+                                `<svg xmlns="http://www.w3.org/2000/svg" width="110" height="40" viewBox="0 0 110 40">
+                                    <rect width="110" height="40" rx="4" fill="#002B5E"/>
+                                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="12" font-weight="bold">${initials}</text>
+                                </svg>`
+                            )}`;
+                            const logoSrc = recruiter.logo || companyLogoMap[name] || fallbackSvg;
+
+                            return (
+                                <div key={idx} style={{
+                                    background: '#FFFFFF',
+                                    border: '1px solid #E2E8F0',
+                                    padding: '12px 14px',
+                                    borderRadius: 0,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    height: '95px',
+                                    gap: '6px',
+                                    transition: 'all 0.2s ease',
+                                    boxShadow: '0 1px 4px rgba(0,0,0,0.03)'
+                                }}>
                                     <img 
-                                        src={recruiter.logo} 
-                                        alt={recruiter.name} 
+                                        src={logoSrc} 
+                                        alt={name} 
                                         style={{ maxHeight: '42px', maxWidth: '110px', objectFit: 'contain' }} 
                                         onError={(e) => {
-                                            e.target.style.display = 'none';
+                                            e.target.src = fallbackSvg;
                                         }}
                                     />
-                                ) : (
-                                    <div style={{
-                                        width: '38px',
-                                        height: '38px',
-                                        borderRadius: '50%',
-                                        background: 'rgba(0, 123, 255, 0.08)',
-                                        color: '#007BFF',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '1rem'
+                                    <span style={{ 
+                                        fontWeight: 700, 
+                                        fontSize: '0.78rem', 
+                                        color: '#475569',
+                                        textAlign: 'center',
+                                        lineHeight: 1.15
                                     }}>
-                                        <i className="fas fa-building"></i>
-                                    </div>
-                                )}
-                                <span style={{ 
-                                    fontWeight: 700, 
-                                    fontSize: '0.78rem', 
-                                    color: '#475569',
-                                    textAlign: 'center',
-                                    lineHeight: 1.15
-                                }}>
-                                    {recruiter.name}
-                                </span>
-                            </div>
-                        ))}
+                                        {name}
+                                    </span>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
