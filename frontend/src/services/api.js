@@ -7,45 +7,75 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ||
 
 const api = axios.create({
     baseURL: API_BASE_URL,
+    timeout: 60000, // 60s timeout for Render cold-starts
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
     }
 });
 
-// Request interceptor to attach Bearer token if present
+// Request interceptor to attach Bearer token and log requests
 api.interceptors.request.use(
     config => {
         const token = localStorage.getItem('adminToken');
         if (token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
+        console.log(`📡 [API Request]: ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`);
         return config;
     },
-    error => Promise.reject(error)
+    error => {
+        console.error('❌ [API Request Error]:', error);
+        return Promise.reject(error);
+    }
 );
 
-// Response interceptor to fall back between ports 3000 and 5000 in local dev mode
+// Response interceptor with automatic retries for Render cold starts
 api.interceptors.response.use(
-    response => response,
+    response => {
+        console.log(`✅ [API Response Success]: ${response.config.url}`, response.status);
+        return response;
+    },
     async error => {
+        const config = error.config || {};
+        
+        console.error(`❌ [API Response Error]: ${config.url || 'Unknown'}`, {
+            status: error.response?.status,
+            message: error.message,
+            code: error.code
+        });
+
+        // Retry logic for Render cold starts (Network errors, timeouts, 502, 503, 504)
+        const isServerColdStarting = !error.response || [502, 503, 504].includes(error.response?.status) || error.code === 'ECONNABORTED' || error.code === 'ERR_NETWORK';
+        
+        if (isServerColdStarting && (!config._retryCount || config._retryCount < 3)) {
+            config._retryCount = (config._retryCount || 0) + 1;
+            console.warn(`🔄 Render cold-start retry attempt ${config._retryCount}/3 for ${config.url}... Waiting 2.5s`);
+            
+            await new Promise(resolve => setTimeout(resolve, 2500));
+            return api(config);
+        }
+
+        // Local dev port fallback (3000 <-> 5000)
         if (!isProduction && (error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED' || !error.response)) {
-            const originalConfig = error.config;
-            if (!originalConfig._retry) {
-                originalConfig._retry = true;
-                const currentBase = originalConfig.baseURL || API_BASE_URL;
+            if (!config._portRetry) {
+                config._portRetry = true;
+                const currentBase = config.baseURL || API_BASE_URL;
                 const altPort = currentBase.includes('3000') ? '5000' : '3000';
-                originalConfig.baseURL = currentBase.replace(/3000|5000/, altPort);
+                config.baseURL = currentBase.replace(/3000|5000/, altPort);
+                console.warn(`🔄 Retrying dev API on alt port: ${config.baseURL}${config.url}`);
                 try {
-                    return await axios(originalConfig);
+                    return await axios(config);
                 } catch (retryErr) {
                     return Promise.reject(retryErr);
                 }
             }
         }
+
         return Promise.reject(error);
     }
 );
 
 export default api;
+
 

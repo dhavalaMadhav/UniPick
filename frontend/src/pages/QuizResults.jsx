@@ -29,7 +29,7 @@ export default function QuizResults() {
         // If no recommendations in localStorage, fetch top universities as fallback
         api.get('/api/universities')
             .then(res => {
-                const uniList = res.data?.universities || (Array.isArray(res.data) ? res.data : []);
+                const uniList = res.data?.data || res.data?.universities || (Array.isArray(res.data) ? res.data : []);
                 if (uniList.length > 0) {
                     setResults(prev => {
                         if (prev && prev.recommendations && prev.recommendations.length > 0) {

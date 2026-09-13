@@ -5,8 +5,9 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import '../assets/universities.css';
 
 export default function Universities() {
-    const [universities, setUniversities] = useState([]);
+    const [universities, setUniversities] = useState(null); // null = loading/uninitialized
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         document.title = 'Explore Top Universities in India | UniPick';
@@ -30,41 +31,68 @@ export default function Universities() {
         { name: 'Universities', url: '' }
     ];
 
-    useEffect(() => {
+    const extractList = (data) => {
+        if (!data) return null;
+        if (Array.isArray(data.data) && data.data.length > 0) return data.data;
+        if (Array.isArray(data.universities) && data.universities.length > 0) return data.universities;
+        if (Array.isArray(data) && data.length > 0) return data;
+        // Explicit empty arrays returned successfully from API
+        if (Array.isArray(data.data) && data.data.length === 0) return [];
+        if (Array.isArray(data.universities) && data.universities.length === 0) return [];
+        if (Array.isArray(data) && data.length === 0) return [];
+        return null;
+    };
+
+    const fetchUniversitiesData = async () => {
         setLoading(true);
-        // Fetch universities data from /api/universities with fallback
-        api.get('/api/universities')
-            .then(response => {
-                const data = response.data;
-                const list = data?.universities || (Array.isArray(data) ? data : []);
-                if (list.length > 0) {
-                    setUniversities(list);
+        setError(null);
+        try {
+            console.log('📡 [Universities Page] Fetching /api/universities...');
+            const response = await api.get('/api/universities');
+            console.log('✅ [Universities Page] Response:', response.status, response.data);
+            
+            const list = extractList(response.data);
+            if (list !== null) {
+                setUniversities(list);
+                setLoading(false);
+                return;
+            }
+
+            console.warn('⚠️ [Universities Page] /api/universities list empty or invalid format, trying /universities fallback...');
+            const fallbackRes = await api.get('/universities');
+            const fallbackList = extractList(fallbackRes.data);
+            if (fallbackList !== null) {
+                setUniversities(fallbackList);
+            } else {
+                setUniversities([]);
+            }
+            setLoading(false);
+        } catch (err) {
+            console.error('❌ [Universities Page] Primary API error:', err);
+            try {
+                const secondaryRes = await api.get('/universities');
+                const secondaryList = extractList(secondaryRes.data);
+                if (secondaryList !== null) {
+                    setUniversities(secondaryList);
                     setLoading(false);
-                } else {
-                    return api.get('/universities').then(res => {
-                        const fallbackList = res.data?.universities || (Array.isArray(res.data) ? res.data : []);
-                        setUniversities(fallbackList);
-                        setLoading(false);
-                    });
+                    return;
                 }
-            })
-            .catch(error => {
-                console.error("Error fetching /api/universities, trying /universities fallback:", error);
-                api.get('/universities')
-                    .then(res => {
-                        const fallbackList = res.data?.universities || (Array.isArray(res.data) ? res.data : []);
-                        setUniversities(fallbackList);
-                        setLoading(false);
-                    })
-                    .catch(err2 => {
-                        console.error("Fallback /universities failed:", err2);
-                        setLoading(false);
-                    });
-            });
+            } catch (secErr) {
+                console.error('❌ [Universities Page] Secondary API fallback error:', secErr);
+            }
+
+            setError('Unable to load universities. Render backend may be waking up from cold start.');
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchUniversitiesData();
     }, []);
 
     // Filter logic
     const filteredUniversities = useMemo(() => {
+        if (!universities || !Array.isArray(universities)) return [];
         return universities.filter(uni => {
             let visible = true;
             
@@ -275,7 +303,7 @@ export default function Universities() {
                         <div className="page-header-left">
                             <h1>UNIVERSITIES</h1>
                             <p className="page-count">
-                                Showing <span>{loading ? '...' : filteredUniversities.length}</span> of {loading ? '...' : universities.length} Universities
+                                Showing <span>{loading ? '...' : (universities ? filteredUniversities.length : 0)}</span> of {loading ? '...' : (universities ? universities.length : 0)} Universities
                             </p>
                         </div>
                         <div className="page-header-right">
@@ -305,11 +333,30 @@ export default function Universities() {
                     <div className={`universities-${viewMode}`}>
                         {loading ? (
                             /* Skeletons */
-                            Array.from({ length: 4 }).map((_, i) => (
-                                <div className="university-card skeleton-card" key={i} style={{ opacity: 0.7 }}>
-                                    <div className="university-left" style={{ background: '#eee', minHeight: '150px', borderRadius: '8px', animation: 'pulse 1.5s infinite' }}></div>
+                            <div style={{ gridColumn: '1 / -1', width: '100%' }}>
+                                <div style={{ background: '#EBF8FF', border: '1px solid #BEE3F8', padding: '12px 18px', borderRadius: '8px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px', color: '#2B6CB0' }}>
+                                    <i className="fas fa-spinner fa-spin" style={{ fontSize: '1.2rem' }}></i>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Connecting to UniPick Admissions database... Please wait a moment while the backend warms up.</span>
                                 </div>
-                            ))
+                                {Array.from({ length: 4 }).map((_, i) => (
+                                    <div className="university-card skeleton-card" key={i} style={{ opacity: 0.7, marginBottom: '20px' }}>
+                                        <div className="university-left" style={{ background: '#e2e8f0', minHeight: '150px', borderRadius: '8px', animation: 'pulse 1.5s infinite' }}></div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : error && !universities ? (
+                            <div style={{ gridColumn: '1 / -1', width: '100%', textAlign: 'center', padding: '40px 20px', background: '#FFF5F5', borderRadius: '12px', border: '1px solid #FEB2B2', margin: '20px 0' }}>
+                                <i className="fas fa-exclamation-triangle" style={{ fontSize: '2.5rem', color: '#E53E3E', marginBottom: '15px' }}></i>
+                                <h3 style={{ color: '#9B2C2C', marginBottom: '8px', fontSize: '1.25rem' }}>Unable to Connect to Backend</h3>
+                                <p style={{ color: '#742A2A', maxWidth: '480px', margin: '0 auto 20px', fontSize: '0.95rem' }}>{error}</p>
+                                <button 
+                                    className="reset-filters" 
+                                    onClick={fetchUniversitiesData}
+                                    style={{ background: '#008FD3', color: '#FFFFFF', border: 'none', padding: '10px 22px', borderRadius: '6px', fontWeight: 600, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                                >
+                                    <i className="fas fa-sync-alt"></i> Retry Connection
+                                </button>
+                            </div>
                         ) : filteredUniversities.length > 0 ? (
                             filteredUniversities.map(uni => (
                                 <div 

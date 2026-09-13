@@ -132,7 +132,7 @@ export default function Quiz() {
             let universities = [];
             try {
                 const res = await api.get('/api/universities');
-                universities = res.data?.universities || (Array.isArray(res.data) ? res.data : []);
+                universities = res.data?.data || res.data?.universities || (Array.isArray(res.data) ? res.data : []);
             } catch (err) {
                 console.warn('Fallback fetching universities for quiz:', err);
             }
