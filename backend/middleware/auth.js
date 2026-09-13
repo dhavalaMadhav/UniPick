@@ -7,6 +7,9 @@ const authenticateToken = (req, res, next) => {
                   (req.headers.authorization && req.headers.authorization.split(' ')[1]);
     
     if (!token) {
+        if (req.xhr || req.headers.accept?.includes('json') || (req.originalUrl && req.originalUrl.startsWith('/api'))) {
+            return res.status(401).json({ success: false, message: 'Authentication token required' });
+        }
         return res.redirect('/admin');
     }
     
@@ -16,6 +19,9 @@ const authenticateToken = (req, res, next) => {
         next();
     } catch (error) {
         res.clearCookie('adminToken');
+        if (req.xhr || req.headers.accept?.includes('json') || (req.originalUrl && req.originalUrl.startsWith('/api'))) {
+            return res.status(401).json({ success: false, message: 'Invalid or expired token' });
+        }
         return res.redirect('/admin');
     }
 };
@@ -39,3 +45,4 @@ module.exports = {
     authenticateToken,
     checkAuthenticated
 };
+

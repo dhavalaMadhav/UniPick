@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+const isProduction = import.meta.env.PROD || (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1');
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
+    (isProduction ? 'https://unipick-backend.onrender.com' : 'http://localhost:5000');
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -10,11 +13,23 @@ const api = axios.create({
     }
 });
 
-// Response interceptor to fall back between ports 3000 and 5000 if server port changes
+// Request interceptor to attach Bearer token if present
+api.interceptors.request.use(
+    config => {
+        const token = localStorage.getItem('adminToken');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    error => Promise.reject(error)
+);
+
+// Response interceptor to fall back between ports 3000 and 5000 in local dev mode
 api.interceptors.response.use(
     response => response,
     async error => {
-        if (error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED' || !error.response) {
+        if (!isProduction && (error.code === 'ERR_NETWORK' || error.code === 'ECONNREFUSED' || !error.response)) {
             const originalConfig = error.config;
             if (!originalConfig._retry) {
                 originalConfig._retry = true;
@@ -33,3 +48,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+

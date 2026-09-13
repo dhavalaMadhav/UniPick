@@ -13,6 +13,7 @@ import Universities from './pages/Universities';
 import UniversityDetail from './pages/UniversityDetail';
 import Quiz from './pages/Quiz';
 import QuizResults from './pages/QuizResults';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -30,7 +31,9 @@ function App() {
         <Route path="/university/:slug" element={<UniversityDetail />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/quiz-results" element={<QuizResults />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
+
       <Footer />
     </Router>
           </>
