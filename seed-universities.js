@@ -275,40 +275,37 @@ const universities = [
 
 async function seedUniversities() {
     try {
-        console.log('🔄 Connecting to MongoDB...');
-        await mongoose.connect(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 30000 });
-        console.log('Connected to MongoDB');
-        console.log('🔄 Seeding process started...');
+        console.log('🔄 Seeding MongoDB Atlas databases (test & CollegeSarthi)...');
+        const baseUri = 'mongodb+srv://madhavdhavala0_db_user:EGSITZvuJJILWKpw@cluster0.bjmlhzz.mongodb.net';
+        const targetDBs = ['test', 'CollegeSarthi'];
         
-        // Clear ALL existing universities
-        await University.deleteMany({});
-        console.log('🗑️  Removed all existing universities');
-        
-        // Insert new universities with individual save calls to trigger pre-save slugification
-        const universityDocs = universities.map(u => new University(u));
-        const inserted = [];
-        for (const doc of universityDocs) {
-            await doc.save();
-            inserted.push(doc);
+        for (const dbName of targetDBs) {
+            console.log(`\n📡 Connecting to Database: [${dbName}]...`);
+            const conn = await mongoose.createConnection(`${baseUri}/${dbName}?retryWrites=true&w=majority`).asPromise();
+            const UniModel = conn.model('University', University.schema);
+            
+            await UniModel.deleteMany({});
+            console.log(`🗑️  Cleared existing universities in database [${dbName}]`);
+            
+            const inserted = [];
+            for (const uData of universities) {
+                const doc = new UniModel(uData);
+                await doc.save();
+                inserted.push(doc);
+            }
+            
+            console.log(`✅ Seeded ${inserted.length} universities into database [${dbName}]`);
+            inserted.forEach((uni, idx) => {
+                console.log(`   ${idx + 1}. ${uni.name} (${uni.location})`);
+            });
+            
+            await conn.close();
         }
         
-        // Count featured vs non-featured
-        const featuredCount = universities.filter(u => u.featured).length;
-        const nonFeaturedCount = universities.length - featuredCount;
-        
-        console.log('✅ Universities seeded successfully!');
-        console.log(`📊 Total universities added: ${inserted.length}`);
-        console.log(`⭐ Featured universities: ${featuredCount}`);
-        console.log(`📝 Non-featured universities: ${nonFeaturedCount}`);
-        
-        console.log('\n📚 All Universities:');
-        inserted.forEach((uni, index) => {
-            console.log(`${index + 1}. ${uni.name} (Slug: ${uni.slug}) - ${uni.location}`);
-        });
-        
+        console.log('\n🎉 ALL MONGODB ATLAS DATABASES (PRODUCTION & LOCAL) SUCCESSFULLY SEEDED WITH THE 6 UNIVERSITIES!');
         process.exit(0);
     } catch (error) {
-        console.error('❌ Error seeding universities:', error);
+        console.error('❌ Error seeding databases:', error);
         process.exit(1);
     }
 }

@@ -109,10 +109,12 @@ const universitySchema = new mongoose.Schema({
 
 // Generate slug before saving
 universitySchema.pre('save', function(next) {
-    if (this.isModified('name')) {
+    if (this.name && (!this.slug || this.isModified('name'))) {
         this.slug = slugify(this.name, { lower: true, strict: true });
     }
-    next();
+    if (typeof next === 'function') {
+        next();
+    }
 });
 
 module.exports = mongoose.model('University', universitySchema);
