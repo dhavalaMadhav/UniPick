@@ -249,24 +249,126 @@ export default function UniversityDetail() {
         ? university.programmes
         : ['engineering', 'management', 'computer', 'design', 'law'];
 
-    const galleryImages = [
-        [
-            { src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop", alt: "Campus courtyard" },
-            { src: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&auto=format&fit=crop", alt: "Modern campus building" },
-            { src: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop", alt: "Library architecture" },
-            { src: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop", alt: "Lecture hall auditorium" },
-            { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&auto=format&fit=crop", alt: "Study center" },
-            { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop", alt: "Student lounge" }
-        ],
-        [
-            { src: "https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=800&auto=format&fit=crop", alt: "Science lab" },
-            { src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop", alt: "Computer research lab" },
-            { src: "https://images.unsplash.com/photo-1523580846011-5c0b99bc1c87?w=800&auto=format&fit=crop", alt: "Campus green lawn" },
-            { src: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&auto=format&fit=crop", alt: "Sports ground" },
-            { src: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop", alt: "Student cafeteria" },
-            { src: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&auto=format&fit=crop", alt: "Annual campus event" }
-        ]
-    ];
+    const universityMediaMap = {
+        'swarrnim': {
+            videoUrl: 'https://www.youtube.com/embed/3Q9fX8w9188',
+            videoTitle: 'Swarrnim Startup & Innovation University - Official Campus Tour & Incubator Overview',
+            galleryPages: [
+                [
+                    { src: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&auto=format&fit=crop', alt: 'SSIU 75-Acre Main Academic Block' },
+                    { src: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&auto=format&fit=crop', alt: 'Startup Incubation & Co-Working Hub' },
+                    { src: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop', alt: 'Arihant In-Campus Hospital' },
+                    { src: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop', alt: 'Modern Digital Library' },
+                    { src: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop', alt: 'AICTE IDEA Lab & Workshops' },
+                    { src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&auto=format&fit=crop', alt: 'Design & Architecture Studios' }
+                ],
+                [
+                    { src: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&auto=format&fit=crop', alt: 'Sports Complex & Athletic Grounds' },
+                    { src: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop', alt: 'Student Residences & Dining Hall' },
+                    { src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop', alt: 'High-Performance Computing Lab' },
+                    { src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&auto=format&fit=crop', alt: 'Innovation Amphitheatre' }
+                ]
+            ]
+        },
+        'swaminarayan': {
+            videoUrl: 'https://www.youtube.com/embed/jNQXAC9IVRw',
+            videoTitle: 'Swaminarayan University Kalol - Campus Infrastructure & Facilities',
+            galleryPages: [
+                [
+                    { src: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop', alt: 'Swaminarayan University Main Building' },
+                    { src: 'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=800&auto=format&fit=crop', alt: 'Apollo Healthcare Academy Labs' },
+                    { src: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop', alt: '60-Acre Campus Grounds on Hwy' },
+                    { src: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop', alt: 'Central Library & Reading Rooms' },
+                    { src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop', alt: 'Ayurvedic & Physiotherapy Labs' },
+                    { src: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&auto=format&fit=crop', alt: 'Medical College & Hospital Complex' }
+                ],
+                [
+                    { src: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&auto=format&fit=crop', alt: 'Sports Arena & Recreation' },
+                    { src: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop', alt: 'Student Hostels & Food Court' }
+                ]
+            ]
+        },
+        'sankalchand': {
+            videoUrl: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
+            videoTitle: 'Sankalchand Patel University (SPU) Visnagar - Campus & Nootan Hospital Tour',
+            galleryPages: [
+                [
+                    { src: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&auto=format&fit=crop', alt: 'Sankalchand Patel Vidyadham Main Campus' },
+                    { src: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop', alt: 'Nootan Medical College & Hospital' },
+                    { src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop', alt: 'NABL Accredited Molecular Research Lab' },
+                    { src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&auto=format&fit=crop', alt: 'Audio-Visual Studio & Media Center' },
+                    { src: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop', alt: 'Central Knowledge Resource Library' },
+                    { src: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop', alt: 'Biogas Plant & EV Charging Station' }
+                ],
+                [
+                    { src: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&auto=format&fit=crop', alt: 'Multi-Sports Grounds & Gym' },
+                    { src: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop', alt: 'Student Residences & Mess' }
+                ]
+            ]
+        },
+        'tarsadia': {
+            videoUrl: 'https://www.youtube.com/embed/2v9J8xY1kK0',
+            videoTitle: 'Uka Tarsadia University (UTU) Maliba Campus - Virtual Tour',
+            galleryPages: [
+                [
+                    { src: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&auto=format&fit=crop', alt: 'Maliba Campus Main Academic Building' },
+                    { src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop', alt: 'Sophisticated Instrumentation Center' },
+                    { src: 'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=800&auto=format&fit=crop', alt: 'EV Tech & AI Center of Excellence' },
+                    { src: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop', alt: 'Maliba Pharmacy Library Hub' },
+                    { src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&auto=format&fit=crop', alt: 'Architecture & Design Studios' },
+                    { src: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop', alt: 'Eco-Friendly Residential Campus' }
+                ],
+                [
+                    { src: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&auto=format&fit=crop', alt: 'Indoor Stadium & Sports Fields' },
+                    { src: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop', alt: 'Hostel Dining & Food Courts' }
+                ]
+            ]
+        },
+        'ajeenkya': {
+            videoUrl: 'https://www.youtube.com/embed/L_LUpnjgPso',
+            videoTitle: 'Ajeenkya DY Patil University (ADYPU) Pune - Campus & Innovation Facilities Tour',
+            galleryPages: [
+                [
+                    { src: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop', alt: '100+ Acre DY Patil Knowledge City Campus' },
+                    { src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&auto=format&fit=crop', alt: 'School of Design Ateliers & Mac Labs' },
+                    { src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop', alt: 'Makerspaces & 4IR AI Robotics Center' },
+                    { src: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop', alt: 'Film & Media Digital Production Studios' },
+                    { src: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop', alt: 'Finishing School & High-Tech Library' },
+                    { src: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&auto=format&fit=crop', alt: 'School of Engineering Building' }
+                ],
+                [
+                    { src: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&auto=format&fit=crop', alt: 'Sports Arena & Recreation Park' },
+                    { src: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop', alt: 'Luxury Student Residences' }
+                ]
+            ]
+        },
+        'karpaga': {
+            videoUrl: 'https://www.youtube.com/embed/V-_O7nl0IiU',
+            videoTitle: 'Karpaga Vinayaga CET Chengalpattu - Campus Tour & Laboratory Facilities',
+            galleryPages: [
+                [
+                    { src: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&auto=format&fit=crop', alt: 'KVCET Engineering Academic Block' },
+                    { src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop', alt: 'Advanced CSE, AI & Biotech Labs' },
+                    { src: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&auto=format&fit=crop', alt: 'Central Digital Library' },
+                    { src: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&auto=format&fit=crop', alt: 'Soft-Skills & Placement Training Center' },
+                    { src: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&auto=format&fit=crop', alt: 'Mechanical & Electronics Workshops' },
+                    { src: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop', alt: 'Integrated Medical & Dental Group Block' }
+                ],
+                [
+                    { src: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?w=800&auto=format&fit=crop', alt: 'Sports Complex & Athletics Ground' },
+                    { src: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&auto=format&fit=crop', alt: 'On-Campus Hostels & Dining' }
+                ]
+            ]
+        }
+    };
+
+    const currentSlugKey = (university.slug || university.name || '').toLowerCase();
+    const matchedMediaKey = Object.keys(universityMediaMap).find(key => currentSlugKey.includes(key)) || 'swarrnim';
+    const activeMedia = universityMediaMap[matchedMediaKey] || universityMediaMap['swarrnim'];
+
+    const galleryImages = activeMedia.galleryPages;
+    const campusVideoUrl = activeMedia.videoUrl;
+    const campusVideoTitle = activeMedia.videoTitle;
 
     const companyLogoMap = {
         'Wipro': 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg',
@@ -817,6 +919,20 @@ export default function UniversityDetail() {
                                     onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
                                     onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                                 />
+                                <div style={{
+                                    position: 'absolute',
+                                    bottom: 0,
+                                    left: 0,
+                                    width: '100%',
+                                    background: 'linear-gradient(transparent, rgba(15, 23, 42, 0.85))',
+                                    color: '#FFFFFF',
+                                    padding: '12px 10px 8px',
+                                    fontSize: '0.8rem',
+                                    fontWeight: 600,
+                                    boxSizing: 'border-box'
+                                }}>
+                                    {img.alt}
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -826,14 +942,17 @@ export default function UniversityDetail() {
             {/* Virtual Campus Tour Video Section */}
             <div style={{ padding: '50px 5%', background: '#FFFFFF', boxSizing: 'border-box' }}>
                 <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
-                    <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <h2 style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <i className="fas fa-video" style={{ color: '#007BFF' }}></i> Campus Virtual Tour & Highlights
                     </h2>
+                    <p style={{ color: '#64748B', fontSize: '0.95rem', marginBottom: '24px', fontWeight: 500 }}>
+                        {campusVideoTitle}
+                    </p>
                     
-                    <div style={{ width: '100%', height: '420px', background: '#000000', borderRadius: 0, overflow: 'hidden' }}>
+                    <div style={{ width: '100%', height: '440px', background: '#000000', borderRadius: 0, overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
                         <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            title="Campus Tour Video" 
+                            src={campusVideoUrl} 
+                            title={campusVideoTitle} 
                             style={{ width: '100%', height: '100%', border: 'none' }}
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowFullScreen>
