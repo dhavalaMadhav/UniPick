@@ -10008,3 +10008,59 @@ button.view-btn.active {
         border-bottom: 1px solid #E2E8F0 !important;
     }
 }
+
+/* Zero Gap Down Header Across All Pages */
+.university-hero,
+.course-hero,
+.courses-hero,
+.universities-hero,
+.contact-hero,
+.about-container,
+.institutional-container,
+.results-page-container,
+.home-wrapper > section:first-child,
+.inst-hero-container,
+.mobile-breadcrumb-section,
+.universities-page-wrapper,
+.courses-wrapper,
+.course-detail-wrapper {
+    margin-top: 0 !important;
+    padding-top: 16px !important;
+}
+
+.university-hero > *:first-child,
+.course-hero > *:first-child,
+.courses-hero > *:first-child,
+.universities-hero > *:first-child,
+.contact-hero > *:first-child,
+.about-container > *:first-child,
+.institutional-container > *:first-child,
+.results-page-container > *:first-child,
+.mobile-breadcrumb-section > *:first-child {
+    margin-top: 0 !important;
+}
+
+@media (max-width: 992px) {
+    .university-hero,
+    .course-hero,
+    .courses-hero,
+    .universities-hero,
+    .contact-hero,
+    .about-container,
+    .institutional-container,
+    .results-page-container,
+    .home-wrapper > section:first-child,
+    .inst-hero-container,
+    .mobile-breadcrumb-section,
+    .universities-page-wrapper,
+    .courses-wrapper,
+    .course-detail-wrapper {
+        margin-top: 0 !important;
+        padding-top: 12px !important;
+    }
+
+    .mobile-breadcrumb-section {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+    }
+}

@@ -139,7 +139,7 @@ export default function Admin() {
     const admittedLeads = leads.filter(l => (l.status || '') === 'Admitted').length;
 
     return (
-        <div style={{ padding: '50px 5%', maxWidth: '1400px', margin: '0 auto', fontFamily: "'Inter', system-ui, sans-serif", color: '#0F172A', boxSizing: 'border-box' }}>
+        <div style={{ padding: '16px 5% 50px', maxWidth: '1400px', margin: '0 auto', fontFamily: "'Inter', system-ui, sans-serif", color: '#0F172A', boxSizing: 'border-box' }}>
             <Breadcrumbs items={breadcrumbs} />
 
             {!isLoggedIn ? (

@@ -210,7 +210,7 @@ export default function Quiz() {
     const activeQ = questions[currentQuestion];
 
     return (
-        <div className="institutional-container" style={{ padding: '50px 5%', maxWidth: '1400px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div className="institutional-container" style={{ padding: '16px 5% 50px', maxWidth: '1400px', margin: '0 auto', boxSizing: 'border-box' }}>
             <Breadcrumbs items={breadcrumbs} />
 
             <div className="institutional-layout">
