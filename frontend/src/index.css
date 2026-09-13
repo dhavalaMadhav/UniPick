@@ -744,19 +744,13 @@
         ======================================== */
         html, body {
             margin: 0 !important;
-            padding-top: 135px !important;
-        }
-
-        @media (max-width: 992px) {
-            html, body {
-                padding-top: 72px !important;
-            }
+            padding: 0 !important;
         }
 
         .inst-header {
             width: 100%;
             z-index: 1000;
-            position: fixed !important;
+            position: sticky !important;
             top: 0 !important;
             left: 0 !important;
             right: 0 !important;
@@ -10009,23 +10003,36 @@ button.view-btn.active {
     }
 }
 
-/* Zero Gap Down Header Across All Pages */
-.university-hero,
-.course-hero,
-.courses-hero,
-.universities-hero,
-.contact-hero,
-.about-container,
-.institutional-container,
-.results-page-container,
-.home-wrapper > section:first-child,
-.inst-hero-container,
-.mobile-breadcrumb-section,
+/* Zero Gap Header Across All Pages */
+.home-wrapper,
 .universities-page-wrapper,
 .courses-wrapper,
-.course-detail-wrapper {
+.course-detail-wrapper,
+.university-detail-container,
+.about-container,
+.contact-hero,
+.institutional-container,
+.results-page-container {
     margin-top: 0 !important;
-    padding-top: 16px !important;
+    padding-top: 0 !important;
+}
+
+/* Homepage Hero: 0 padding top, sits 100% flush against navigation bar */
+.inst-hero-container,
+.home-wrapper > section:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Page Hero Sections (Universities, Courses, Course Detail, University Detail, Contact) */
+.universities-hero,
+.courses-hero,
+.course-hero,
+.university-hero,
+.contact-hero {
+    margin-top: 0 !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
 }
 
 .university-hero > *:first-child,
@@ -10041,25 +10048,24 @@ button.view-btn.active {
 }
 
 @media (max-width: 992px) {
-    .university-hero,
-    .course-hero,
-    .courses-hero,
-    .universities-hero,
-    .contact-hero,
-    .about-container,
-    .institutional-container,
-    .results-page-container,
-    .home-wrapper > section:first-child,
     .inst-hero-container,
-    .mobile-breadcrumb-section,
-    .universities-page-wrapper,
-    .courses-wrapper,
-    .course-detail-wrapper {
+    .home-wrapper > section:first-child {
         margin-top: 0 !important;
-        padding-top: 12px !important;
+        padding-top: 0 !important;
+    }
+
+    .universities-hero,
+    .courses-hero,
+    .course-hero,
+    .university-hero,
+    .contact-hero {
+        margin-top: 0 !important;
+        padding-top: 14px !important;
+        padding-bottom: 14px !important;
     }
 
     .mobile-breadcrumb-section {
+        margin-top: 0 !important;
         padding-top: 8px !important;
         padding-bottom: 8px !important;
     }
