@@ -268,20 +268,62 @@ export default function UniversityDetail() {
         ]
     ];
 
-    const recruiterLogos = [
-        { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
-        { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
-        { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
-        { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg' },
-        { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg' },
-        { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg' },
-        { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg' },
-        { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg' },
-        { name: 'Intel', logo: 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Intel_logo_%282020%29.svg' },
-        { name: 'Deloitte', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Deloitte.svg' },
-        { name: 'Samsung', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg' },
-        { name: 'Cognizant', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg' }
-    ];
+    const companyLogoMap = {
+        'Wipro': 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg',
+        'Infosys': 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg',
+        'IBM': 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg',
+        'ICICI Bank': 'https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg',
+        'Tech Mahindra': 'https://upload.wikimedia.org/wikipedia/commons/2/29/Tech_Mahindra_New_Logo.svg',
+        'eClinicalWorks': 'https://upload.wikimedia.org/wikipedia/commons/7/7b/EClinicalWorks_Logo.svg',
+        'Cognizant': 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg',
+        "Byju's": 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Byju%27s_logo.svg',
+        'Reliance': 'https://upload.wikimedia.org/wikipedia/commons/9/99/Reliance_Industries_Logo.svg',
+        'Reliance Industries': 'https://upload.wikimedia.org/wikipedia/commons/9/99/Reliance_Industries_Logo.svg',
+        'HCL': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/HCL_Technologies_logo.svg',
+        'HCL Tech': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/HCL_Technologies_logo.svg',
+        'Deloitte': 'https://upload.wikimedia.org/wikipedia/commons/5/56/Deloitte.svg',
+        'Coca-Cola': 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg',
+        'TCS': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg',
+        'Capgemini': 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_2017_logo.svg',
+        'Amazon': 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
+        'Zydus': 'https://upload.wikimedia.org/wikipedia/commons/8/82/Zydus_Lifesciences_logo.svg',
+        'Torrent': 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Torrent_Group_logo.png',
+        'Torrent Pharma': 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Torrent_Group_logo.png',
+        'L&T': 'https://upload.wikimedia.org/wikipedia/commons/e/e5/L%26T.svg',
+        'Sun Pharma': 'https://upload.wikimedia.org/wikipedia/commons/c/c2/Sun_Pharma_logo.svg',
+        'Alembic': 'https://upload.wikimedia.org/wikipedia/commons/0/06/Alembic_Pharmaceuticals_logo.png',
+        'HSBC': 'https://upload.wikimedia.org/wikipedia/commons/a/aa/HSBC_logo_%282018%29.svg',
+        'Tata Technologies': 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg',
+        'TVS Motors': 'https://upload.wikimedia.org/wikipedia/commons/e/e0/TVS_Motor_Company_logo.svg',
+        'Cohesity': 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Cohesity_logo.svg',
+        'Entrata': 'https://upload.wikimedia.org/wikipedia/commons/2/23/Entrata_logo.svg',
+        'Google': 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
+        'Microsoft': 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg',
+        'Accenture': 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg',
+        'Intel': 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Intel_logo_%282020%29.svg',
+        'Samsung': 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg',
+        'Pharma Majors': '/images/recruiters/pharma-majors.png',
+        'Tech & IT Firms': '/images/recruiters/tech-it-firms.png',
+        'Government & Private Hospitals': '/images/recruiters/hospitals.png',
+        'Healthcare Partners': '/images/recruiters/hospitals.png',
+        'Manufacturing Leaders': '/images/recruiters/manufacturing-leaders.png',
+        'Financial & Tech Corporates': '/images/recruiters/fintech-corporates.png',
+        'Transvaal Global Tech': '/images/recruiters/transvaal-tech.png'
+    };
+
+    const rawRecruiters = (university.placements && university.placements.topRecruiters && university.placements.topRecruiters.length > 0)
+        ? university.placements.topRecruiters
+        : ['Wipro', 'Infosys', 'TCS', 'Cognizant', 'Deloitte', 'Tech Mahindra', 'IBM', 'HCL'];
+
+    const activeRecruiters = rawRecruiters.map(item => {
+        if (typeof item === 'string') {
+            return {
+                name: item,
+                logo: companyLogoMap[item] || null
+            };
+        }
+        return item;
+    });
 
     // Data for Pie Charts & Line Growth Chart from views folder EJS logic
     const programsPieData = [
@@ -671,29 +713,52 @@ export default function UniversityDetail() {
                         gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
                         gap: '16px'
                     }}>
-                        {recruiterLogos.map((recruiter, idx) => (
+                        {activeRecruiters.map((recruiter, idx) => (
                             <div key={idx} style={{
                                 background: '#FFFFFF',
                                 border: '1px solid #E2E8F0',
-                                padding: '16px',
+                                padding: '12px 14px',
                                 borderRadius: 0,
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                height: '80px',
-                                transition: 'all 0.2s ease'
+                                height: '95px',
+                                gap: '6px',
+                                transition: 'all 0.2s ease',
+                                boxShadow: '0 1px 4px rgba(0,0,0,0.03)'
                             }}>
-                                <img 
-                                    src={recruiter.logo} 
-                                    alt={recruiter.name} 
-                                    style={{ maxHeight: '38px', maxWidth: '100px', objectFit: 'contain' }} 
-                                    onError={(e) => {
-                                        e.target.style.display = 'none';
-                                        e.target.nextSibling.style.display = 'block';
-                                    }}
-                                />
-                                <span style={{ display: 'none', fontWeight: 700, fontSize: '0.95rem', color: '#0F172A' }}>
+                                {recruiter.logo ? (
+                                    <img 
+                                        src={recruiter.logo} 
+                                        alt={recruiter.name} 
+                                        style={{ maxHeight: '42px', maxWidth: '110px', objectFit: 'contain' }} 
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                        }}
+                                    />
+                                ) : (
+                                    <div style={{
+                                        width: '38px',
+                                        height: '38px',
+                                        borderRadius: '50%',
+                                        background: 'rgba(0, 123, 255, 0.08)',
+                                        color: '#007BFF',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '1rem'
+                                    }}>
+                                        <i className="fas fa-building"></i>
+                                    </div>
+                                )}
+                                <span style={{ 
+                                    fontWeight: 700, 
+                                    fontSize: '0.78rem', 
+                                    color: '#475569',
+                                    textAlign: 'center',
+                                    lineHeight: 1.15
+                                }}>
                                     {recruiter.name}
                                 </span>
                             </div>
